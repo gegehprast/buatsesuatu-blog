@@ -1,0 +1,11 @@
+/* purgecss start ignore */
+@tailwind base;
+
+@tailwind components;
+
+body {
+    @apply font-sans;
+}
+/* purgecss end ignore */
+
+@tailwind utilities;
