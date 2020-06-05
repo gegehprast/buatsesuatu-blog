@@ -5,15 +5,15 @@ import '../styles/inter.css'
 import '../styles/main.css'
 
 type MyNextComponentType = NextComponentType & {
-    getLayout?: React.FC
+    getLayout?: any
 }
 
 type ComponentProps = AppProps & {
     Component?: MyNextComponentType
 }
 
-const MyApp: React.FC<ComponentProps> = ({ Component, pageProps }) => {
-    const getLayout = Component.getLayout || ((page: React.ReactElement) => <SiteLayout>{page}</SiteLayout>)
+const MyApp = ({ Component, pageProps }: ComponentProps): JSX.Element => {
+    const getLayout = Component.getLayout || ((page: any) => <SiteLayout>{page}</SiteLayout>)
 
     return getLayout(<Component {...pageProps} />)
 }

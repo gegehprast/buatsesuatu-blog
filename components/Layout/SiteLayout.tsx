@@ -2,10 +2,10 @@ import Head from 'next/head'
 import Header from '../Header'
 
 interface Props {
-    children: React.FC | React.ReactElement
+    children: React.ReactNode
 }
 
-const SiteLayout: React.FC<Props> = ({ children }) => {
+const SiteLayout = ({ children }: Props): JSX.Element => {
     return (
         <>
             <Head>
@@ -21,7 +21,7 @@ const SiteLayout: React.FC<Props> = ({ children }) => {
     )
 }
 
-export const getLayout: React.FC<React.FC> = (page: React.FC) => {
+export const getLayout = (page: React.ReactNode): JSX.Element => {
     return (
         <SiteLayout>{page}</SiteLayout>
     )
