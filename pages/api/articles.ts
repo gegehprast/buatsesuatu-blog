@@ -1,10 +1,11 @@
+import { NextApiRequest, NextApiResponse } from 'next'
 import articles from '../../mocks/articles'
 
-type Index = (req: any, res: any) => void
+type Index = (req: NextApiRequest, res: NextApiResponse) => void
 
-const index: Index = (req: any, res: any) => {
+const index: Index = (req: NextApiRequest, res: NextApiResponse) => {
     const perPage = 6
-    const activePage = parseInt(req.query.page)
+    const activePage = parseInt(req.query.page as string)
     const total = articles.length
     const from = (activePage - 1) * perPage
     const to = from + perPage
