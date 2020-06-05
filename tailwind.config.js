@@ -35,6 +35,7 @@ module.exports = {
             spacing: {
                 '190-px': '190px',
                 '210-px': '210px',
+                '480-px': '480px',
             },
             maxHeight: {
                 '20': '20rem',
