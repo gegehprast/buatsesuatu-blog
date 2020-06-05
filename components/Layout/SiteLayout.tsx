@@ -1,8 +1,11 @@
-import PropTypes from 'prop-types'
 import Head from 'next/head'
 import Header from '../Header'
 
-const SiteLayout: React.FC = ({ children }) => {
+interface Props {
+    children: React.FC | React.ReactElement
+}
+
+const SiteLayout: React.FC<Props> = ({ children }) => {
     return (
         <>
             <Head>
@@ -16,10 +19,6 @@ const SiteLayout: React.FC = ({ children }) => {
             {children}
         </>
     )
-}
-
-SiteLayout.propTypes = {
-    children: PropTypes.node,
 }
 
 export const getLayout: React.FC<React.FC> = (page: React.FC) => {

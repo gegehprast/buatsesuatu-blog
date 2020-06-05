@@ -1,7 +1,6 @@
 import SiteLayout from '../components/Layout/SiteLayout'
 import { AppProps } from 'next/app'
 import { NextComponentType } from 'next'
-import { ReactElement } from 'react'
 import '../styles/inter.css'
 import '../styles/main.css'
 
@@ -14,7 +13,7 @@ type ComponentProps = AppProps & {
 }
 
 const MyApp: React.FC<ComponentProps> = ({ Component, pageProps }) => {
-    const getLayout = Component.getLayout || ((page: ReactElement) => <SiteLayout>{page}</SiteLayout>)
+    const getLayout = Component.getLayout || ((page: React.ReactElement) => <SiteLayout>{page}</SiteLayout>)
 
     return getLayout(<Component {...pageProps} />)
 }
