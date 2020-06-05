@@ -1,17 +1,18 @@
-import React from 'react'
+import React, { useEffect, useRef, RefObject } from 'react'
 import Link from 'next/link'
 
 const Header: React.FC = () => {
+    
     return (
         <>
-            <div className="fixed w-full border shadow">
-                <div className="flex flex-wrap items-center justify-around w-3/4 p-3 mx-auto">
-                    <div>
-                        <h2 className="text-lg font-bold">Buat Sesuatu</h2>
+            <div className="sticky top-0 z-50 w-full bg-white border-b shadow">
+                <div className="flex flex-wrap items-center justify-center px-3 py-2 mx-auto md:justify-between w-100 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
+                    <div className="w-full py-1 mt-1 text-center lg:mt-0 md:w-auto md:text-left">
+                        <h2 className="text-xl font-bold leading-none lg:text-2xl">Oof!</h2>
                     </div>
 
-                    <div className="flex mt-4 w-100 md:mt-0">
-                        <div className="mx-2">
+                    <div className="flex py-1 mt-1 w-100 lg:mt-0">
+                        <div className="mr-2">
                             <Link href="/" as="/">
                                 <a>Postingan</a>
                             </Link>
@@ -23,7 +24,7 @@ const Header: React.FC = () => {
                             </Link>
                         </div>
 
-                        <div className="mx-2">
+                        <div className="ml-2">
                             <Link href="/page2" as="/page2">
                                 <a>Tentang</a>
                             </Link>
@@ -31,7 +32,6 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
-            <div className="p-8 appearance-none pointer-events-none"></div>
         </>
     )
 }
