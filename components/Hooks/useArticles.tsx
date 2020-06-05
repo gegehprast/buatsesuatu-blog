@@ -2,19 +2,23 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 interface Props {
-    slug: string
+    page: number
 }
 
-type ArticleHook = {
+type ArticlesHook = {
     loading: boolean,
     error: boolean,
-    article: Article,
+    articles: Article[],
+    hasMore: boolean,
+    total: number,
 }
 
-const useArticle = ({ slug }: Props): ArticleHook => {
+const useArticles = ({ page }: Props): ArticlesHook => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
-    const [article, setarticle] = useState<Article | any>({})
+    const [articles, setArticles] = useState<Article[]>([])
+    const [hasMore, setHasMore] = useState(false)
+    const [total, setTotal] = useState(0)
 
     useEffect(() => {
         let cancel: () => void
@@ -25,11 +29,16 @@ const useArticle = ({ slug }: Props): ArticleHook => {
 
         axios({
             method: 'GET',
-            url: `/api/articles/${slug}`,
+            url: '/api/articles',
+            params: { page },
             cancelToken: new axios.CancelToken(c => cancel = c)
         }).then(res => {
-            setarticle(res.data)
-            
+            setArticles(res.data.data)
+
+            setTotal(res.data.total)
+
+            setHasMore(res.data.totalPage > res.data.activePage)
+
             setLoading(false)
         }).catch(e => {
             if (axios.isCancel(e)) return
@@ -40,13 +49,15 @@ const useArticle = ({ slug }: Props): ArticleHook => {
         })
 
         return () => cancel()
-    }, [slug])
+    }, [page])
 
     return {
         loading,
         error,
-        article,
+        articles,
+        hasMore,
+        total
     }
 }
 
-export default useArticle
+export default useArticles
