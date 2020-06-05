@@ -1,14 +1,12 @@
 import Head from 'next/head'
 import Card from '../components/Card'
 import MyPagination from '../components/Pagination'
-import useArticle from '../components/Hooks/useArticle'
+import useArticles from '../components/Hooks/useArticles'
 import { useState } from 'react'
 
-const Home: React.FC = () => {
+const Home = (): React.ReactElement => {
     const [page, setPage] = useState(1)
-    const { articles, loading, total } = useArticle({ page })
-
-    console.log({ articles, loading, total })
+    const { articles, total } = useArticles({ page })
 
     const handlePageChange = (pageNumber: number) => {
         setPage(pageNumber)
@@ -27,12 +25,18 @@ const Home: React.FC = () => {
                 </h1>
 
                 {/* Container */}
-                {!loading && <div className="flex flex-wrap min-h-full mt-6 w-100">
+                <div className="flex flex-wrap min-h-full mt-6 w-100">
                     {/* Cards */}
                     {articles.map((article, i) => (
-                        <Card key={i} title={article.title} cover={article.cover} text={article.text} tags={article.tags} />
+                        <Card key={i} 
+                            title={article.title} 
+                            cover={article.cover} 
+                            text={article.text} 
+                            tags={article.tags} 
+                            link={{ href: '/articles/[slug]', as: `/articles/${article.slug}`}} 
+                        />
                     ))}
-                </div>}
+                </div>
                 
                 {/* Secondary container */}
                 <div className="flex flex-wrap min-h-full mt-6 w-100">
