@@ -1,4 +1,11 @@
-export default [{
+interface Article {
+    title: string,
+    cover: string,
+    text: string,
+    tags: string[]
+}
+
+const articles: Article[] = [{
     title: 'The Anatomy of a Tablist Component in Vanilla JavaScript Versus React',
     cover: 'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg',
     text: 'If you follow the undercurrent of the JavaScript community, there seems to be a divide as of late. It goes back over a decade. Really, this sort of strife has always been. Perhaps it is human nature.',
@@ -134,3 +141,5 @@ export default [{
     text: 'In this post, Sarah Chima walks us through how we can work with browser events, such as clicking, using JavaScript.',
     tags: ['es6', 'javascript', 'browser']
 },]
+
+export default articles
