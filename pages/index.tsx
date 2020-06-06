@@ -9,6 +9,8 @@ import { LoadingProgressContext } from '../components/Context/LoadingProgress'
 import { getArticles } from '../utils/articles'
 import { GetServerSidePropsContext, GetServerSideProps } from 'next'
 
+const limit = 12
+
 interface Props {
     initial: {
         articles: Article[]
@@ -19,7 +21,7 @@ interface Props {
 const Home = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
-    const { articles, total, loading } = useArticles({ page, initial })
+    const { articles, total, loading } = useArticles({ page, limit, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
 
     useEffect(() => {
@@ -35,7 +37,8 @@ const Home = ({ initial }: Props): React.ReactElement => {
     const handlePageChange = (pageNumber: number) => {
         setPageLoading(true)
         pushRouterQueries(router, {
-            params: { page: pageNumber }
+            params: { page: pageNumber },
+            resetScroll: true,
         })
     }
     
@@ -67,7 +70,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                 
                 {/* Secondary container */}
                 <div className="flex flex-wrap min-h-full mt-6 w-100">
-                    <MyPagination onChange={handlePageChange} totalItemsCount={total} activePage={page} itemsCountPerPage={6} />
+                    <MyPagination onChange={handlePageChange} totalItemsCount={total} activePage={page} itemsCountPerPage={limit} />
                 </div>
             </main>
         </div>
@@ -78,6 +81,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
     const res: any = await new Promise(resolve => {
         getArticles({
             page: query.page ? parseInt(query.page as string) : 1,
+            limit,
             onSuccess: (res) => {
                 resolve(res.data)
             },
