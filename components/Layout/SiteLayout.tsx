@@ -19,7 +19,9 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
             <LoadingProgressProvider>
                 <Header />
 
-                {children}
+                <div className="min-h-80-screen">
+                    {children}
+                </div>
 
                 <Footer />
             </LoadingProgressProvider>
