@@ -10,7 +10,7 @@ interface GetArticlesParams {
 export const getArticles = ({ page, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
     Axios({
         method: 'GET',
-        url: '/api/articles',
+        url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
         params: { page },
         cancelToken: cancelToken,
     }).then((res: AxiosResponse) => {
