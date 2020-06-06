@@ -13,7 +13,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
     return (
         <div className="flex w-full px-1 mb-3 w-100 md:w-1/2 lg:w-1/3">
             <div className="relative flex flex-col flex-grow w-full overflow-hidden rounded shadow-lg">
-                <div className="relative w-full h-210-px md:h-190-px lg:h-210-px">
+                <div className="relative w-full h-210-px md:h-190-px lg:h-210-px xxl-4k:h-480-px">
                     {link ?
                         <Link href={link.href} as={link.as} >
                             <a>
