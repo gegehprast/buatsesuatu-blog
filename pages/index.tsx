@@ -2,14 +2,34 @@ import Head from 'next/head'
 import Card from '../components/Card'
 import MyPagination from '../components/Pagination'
 import useArticles from '../components/Hooks/useArticles'
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useRouter } from 'next/dist/client/router'
+import { pushRouterQueries } from '../utils/util'
+import { LoadingProgressContext } from '../components/Context/LoadingProgress'
+import { getArticles } from '../utils/articles'
+import { GetServerSidePropsContext, GetServerSideProps } from 'next'
 
 const Home = (): React.ReactElement => {
-    const [page, setPage] = useState(1)
-    const { articles, total } = useArticles({ page })
+    const router = useRouter()
+    const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
+    const { articles, total, loading } = useArticles({ page })
+    const { setPageLoading } = useContext(LoadingProgressContext)
+
+    useEffect(() => {
+        setPage(router.query.page ? parseInt(router.query.page as string) : 1)
+    }, [router.query.page])
+
+    useEffect(() => {
+        if (!loading) {
+            setPageLoading(false)
+        }
+    }, [loading])
 
     const handlePageChange = (pageNumber: number) => {
-        setPage(pageNumber)
+        setPageLoading(true)
+        pushRouterQueries(router, {
+            params: { page: pageNumber }
+        })
     }
     
     return (
@@ -45,6 +65,22 @@ const Home = (): React.ReactElement => {
             </main>
         </div>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+    const articles = await new Promise(resolve => {
+        getArticles({
+            page: query.page ? parseInt(query.page as string) : 1,
+            onSuccess: (res) => {
+                resolve(res.data.data)
+            },
+            onError: () => {
+                resolve([])
+            }
+        })
+    })
+
+    return { props: { articles } }
 }
 
 export default Home
