@@ -2,16 +2,17 @@ import Axios, { AxiosResponse, CancelToken } from 'axios'
 
 interface GetArticlesParams {
     page: number
+    limit: number
     cancelToken?: CancelToken
     onSuccess: (res: AxiosResponse) => void
     onError: (e: any) => void
 }
 
-export const getArticles = ({ page, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
+export const getArticles = ({ page, limit, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
     Axios({
         method: 'GET',
         url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
-        params: { page },
+        params: { page, limit  },
         cancelToken: cancelToken,
     }).then((res: AxiosResponse) => {
         onSuccess(res)

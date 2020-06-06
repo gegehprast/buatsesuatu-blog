@@ -4,6 +4,7 @@ import { getArticles } from '../../utils/articles'
 
 interface Props {
     page: number
+    limit: number
     initial: {
         articles: Article[]
         total: number
@@ -18,7 +19,7 @@ type ArticlesHook = {
     total: number,
 }
 
-const useArticles = ({ page, initial }: Props): ArticlesHook => {
+const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [articles, setArticles] = useState<Article[]>(initial.articles)
@@ -34,6 +35,7 @@ const useArticles = ({ page, initial }: Props): ArticlesHook => {
 
         getArticles({
             page: page,
+            limit: limit,
             cancelToken: new axios.CancelToken(c => cancel = c),
             onSuccess: (res) => {
                 setArticles(res.data.docs)
