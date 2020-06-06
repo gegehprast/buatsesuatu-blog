@@ -1,5 +1,6 @@
 import Head from 'next/head'
-import Header from '../Header'
+import Header from './Header'
+import Footer from './Footer'
 
 interface Props {
     children: React.ReactNode
@@ -17,6 +18,8 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
             <Header />
 
             {children}
+
+            <Footer />
         </>
     )
 }
