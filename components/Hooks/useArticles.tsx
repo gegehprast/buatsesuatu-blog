@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { getArticles } from '../../utils/articles'
 
 interface Props {
     page: number
@@ -27,25 +28,23 @@ const useArticles = ({ page }: Props): ArticlesHook => {
 
         setError(false)
 
-        axios({
-            method: 'GET',
-            url: '/api/articles',
-            params: { page },
-            cancelToken: new axios.CancelToken(c => cancel = c)
-        }).then(res => {
-            setArticles(res.data.data)
+        getArticles({
+            page: page,
+            cancelToken: new axios.CancelToken(c => cancel = c),
+            onSuccess: (res) => {
+                setArticles(res.data.data)
 
-            setTotal(res.data.total)
+                setTotal(res.data.total)
 
-            setHasMore(res.data.totalPage > res.data.activePage)
+                setHasMore(res.data.totalPage > res.data.activePage)
 
-            setLoading(false)
-        }).catch(e => {
-            if (axios.isCancel(e)) return
+                setLoading(false)
+            },
+            onError: () => {
+                setLoading(false)
 
-            setLoading(false)
-
-            setError(true)
+                setError(true)
+            }
         })
 
         return () => cancel()
@@ -56,7 +55,7 @@ const useArticles = ({ page }: Props): ArticlesHook => {
         error,
         articles,
         hasMore,
-        total
+        total,
     }
 }
 
