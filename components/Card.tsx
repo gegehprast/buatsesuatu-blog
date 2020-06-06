@@ -1,5 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
+import { handleImageError } from '../utils/util'
 
 interface Props {
     title: string
@@ -17,12 +18,12 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
                     {link ?
                         <Link href={link.href} as={link.as} >
                             <a>
-                                <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" />
+                                <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" onError={handleImageError} />
                                 <div className="absolute object-cover w-full h-full bg-black opacity-25" />
                             </a>
                         </Link> :
                         <>
-                            <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" />
+                            <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" onError={handleImageError} />
                             <div className="absolute object-cover w-full h-full bg-black opacity-25" />
                         </>
                     }

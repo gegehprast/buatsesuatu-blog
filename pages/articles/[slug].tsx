@@ -1,10 +1,11 @@
 import Head from 'next/head'
 import useArticle from '../../components/Hooks/useArticle'
 import { useRouter } from 'next/dist/client/router'
+import { handleImageError } from '../../utils/util'
 
 const Article = (): React.ReactElement => {
     const router = useRouter()
-    const { article } = useArticle({ slug: router.query.slug as string})
+    const { article, loading } = useArticle({ slug: router.query.slug as string})
 
     return (
         <div className="w-full">
@@ -21,7 +22,11 @@ const Article = (): React.ReactElement => {
                 {/* Container */}
                 <div className="flex flex-col flex-wrap px-1 mt-6 w-100">
                     <div className="relative w-full min-h-full h-210-px md:h-480-px">
-                        <img className="absolute object-cover w-full h-full" src={article.cover} alt="Sunset in the mountains" />
+                        {loading ? 
+                            <img className="absolute object-cover w-full h-full" src='/images/error.gif' alt={article.title} onError={handleImageError} /> :
+                            <img className="absolute object-cover w-full h-full" src={article.cover} alt={article.title} onError={handleImageError} />
+                        }
+                        
                         <div className="absolute object-cover w-full h-full bg-black opacity-25" />
                     </div>
 
