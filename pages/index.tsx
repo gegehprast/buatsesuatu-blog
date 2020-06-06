@@ -9,10 +9,17 @@ import { LoadingProgressContext } from '../components/Context/LoadingProgress'
 import { getArticles } from '../utils/articles'
 import { GetServerSidePropsContext, GetServerSideProps } from 'next'
 
-const Home = (): React.ReactElement => {
+interface Props {
+    initial: {
+        articles: Article[]
+        total: number
+    }
+}
+
+const Home = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
-    const { articles, total, loading } = useArticles({ page })
+    const { articles, total, loading } = useArticles({ page, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
 
     useEffect(() => {
@@ -68,19 +75,24 @@ const Home = (): React.ReactElement => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-    const articles = await new Promise(resolve => {
+    const res: any = await new Promise(resolve => {
         getArticles({
             page: query.page ? parseInt(query.page as string) : 1,
             onSuccess: (res) => {
-                resolve(res.data.data)
+                resolve(res.data)
             },
             onError: () => {
-                resolve([])
+                resolve({})
             }
         })
     })
 
-    return { props: { articles } }
+    const initial = {
+        articles: res.docs,
+        total: res.total,
+    }
+
+    return { props: { initial } }
 }
 
 export default Home

@@ -4,6 +4,10 @@ import { getArticles } from '../../utils/articles'
 
 interface Props {
     page: number
+    initial: {
+        articles: Article[]
+        total: number
+    }
 }
 
 type ArticlesHook = {
@@ -14,12 +18,12 @@ type ArticlesHook = {
     total: number,
 }
 
-const useArticles = ({ page }: Props): ArticlesHook => {
+const useArticles = ({ page, initial }: Props): ArticlesHook => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
-    const [articles, setArticles] = useState<Article[]>([])
+    const [articles, setArticles] = useState<Article[]>(initial.articles)
     const [hasMore, setHasMore] = useState(false)
-    const [total, setTotal] = useState(0)
+    const [total, setTotal] = useState(initial.total)
 
     useEffect(() => {
         let cancel: () => void
@@ -32,11 +36,11 @@ const useArticles = ({ page }: Props): ArticlesHook => {
             page: page,
             cancelToken: new axios.CancelToken(c => cancel = c),
             onSuccess: (res) => {
-                setArticles(res.data.data)
+                setArticles(res.data.docs)
 
                 setTotal(res.data.total)
 
-                setHasMore(res.data.totalPage > res.data.activePage)
+                setHasMore(res.data.pages > res.data.page)
 
                 setLoading(false)
             },
