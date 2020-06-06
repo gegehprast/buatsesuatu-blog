@@ -6,6 +6,18 @@
 body {
     @apply font-sans;
 }
+
+.pagination-cursor-pointer {
+    @apply cursor-pointer;
+}
+
+.pagination-cursor-default {
+    @apply cursor-default;
+}
+
+.pagination-disabled-item > a {
+    @apply cursor-default;
+}
 /* purgecss end ignore */
 
 @tailwind utilities;
