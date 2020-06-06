@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Header from './Header'
 import Footer from './Footer'
+import { LoadingProgressProvider } from '../Context/LoadingProgress'
 
 interface Props {
     children: React.ReactNode
@@ -15,11 +16,13 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
 
-            <Header />
+            <LoadingProgressProvider>
+                <Header />
 
-            {children}
+                {children}
 
-            <Footer />
+                <Footer />
+            </LoadingProgressProvider>
         </>
     )
 }
