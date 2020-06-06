@@ -45,6 +45,12 @@ export const pushRouterQueries = (router: NextRouter, { params, as = null, reset
     }, asPath, { shallow: true }).then(() => resetScroll && window.scrollTo(0, 0))
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const handleImageError = (e: any): void => {
+    e.target.onerror = null
+    e.target.src = '/images/error.gif'
+}
+
 interface pushRouterQueriesOptions {
     params: any
     as?: string | null | undefined
