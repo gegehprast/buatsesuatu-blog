@@ -35,7 +35,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
                     <div className="mb-2 text-base font-bold lg:text-lg">
                         {link ? 
                             <Link href={link.href} as={link.as} >
-                                <a>{title}</a>
+                                <a className="text-indigo-600 visited:text-indigo-900 hover:text-indigo-800">{title}</a>
                             </Link> :
                             <>{title}</>
                         }
