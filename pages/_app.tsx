@@ -5,7 +5,7 @@ import '../styles/inter.css'
 import '../styles/main.css'
 
 type MyNextComponentType = NextComponentType & {
-    getLayout?: any
+    getLayout?: (page: JSX.Element) => JSX.Element
 }
 
 type ComponentProps = AppProps & {
@@ -13,7 +13,7 @@ type ComponentProps = AppProps & {
 }
 
 const MyApp = ({ Component, pageProps }: ComponentProps): JSX.Element => {
-    const getLayout = Component.getLayout || ((page: any) => <SiteLayout>{page}</SiteLayout>)
+    const getLayout = Component.getLayout || ((page: JSX.Element) => <SiteLayout>{page}</SiteLayout>)
 
     return getLayout(<Component {...pageProps} />)
 }

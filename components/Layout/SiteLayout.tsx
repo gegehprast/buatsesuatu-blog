@@ -29,7 +29,7 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
     )
 }
 
-export const getLayout = (page: React.ReactNode): JSX.Element => {
+export const getLayout = (page: JSX.Element): JSX.Element => {
     return (
         <SiteLayout>{page}</SiteLayout>
     )
