@@ -17,7 +17,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
                 <div className="relative w-full h-210-px md:h-190-px lg:h-210-px xxl-4k:h-480-px">
                     {link ?
                         <Link href={link.href} as={link.as} >
-                            <a>
+                            <a tabIndex={-1}>
                                 <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" onError={handleImageError} />
                                 <div className="absolute object-cover w-full h-full bg-black opacity-25" />
                             </a>
