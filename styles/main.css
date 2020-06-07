@@ -18,6 +18,40 @@ body {
 .pagination-disabled-item > a {
     @apply cursor-default;
 }
+
+.footer-logo {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    transform: scale(1);
+}
+
+@screen md {
+    .footer-logo {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: scale(1.5);
+    }
+}
+
+@screen lg {
+    .footer-logo {
+        position: absolute;
+        top: 0;
+        left: 60%;
+        transform: scale(1.5);
+    }
+}
+
+@screen xl {
+    .footer-logo {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transform: scale(2);
+    }
+}
 /* purgecss end ignore */
 
 @tailwind utilities;
