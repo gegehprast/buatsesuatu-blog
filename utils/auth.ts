@@ -1,4 +1,5 @@
-import Axios, { AxiosResponse } from 'axios'
+import Axios, { AxiosResponse, CancelToken } from 'axios'
+import cookie from 'js-cookie'
 
 interface LoginParams {
     username: string
@@ -26,5 +27,28 @@ export const login = ({ username, password }: LoginParams): Promise<LoginReturn>
                 expires: null,
             })
         })
+    })
+}
+
+interface GetUserParams {
+    cancelToken?: CancelToken
+    onSuccess: onSuccess
+    onError: onError
+}
+
+export const getUser = ({ cancelToken, onSuccess, onError }: GetUserParams): void => {
+    Axios({
+        method: 'GET',
+        url: `${process.env.NEXT_PUBLIC_API_HOST}/auth/user`,
+        cancelToken: cancelToken,
+        headers: {
+            Authorization: cookie.get('loggedinToken')
+        }
+    }).then((res: AxiosResponse) => {
+        onSuccess(res)
+    }).catch((e: any) => {
+        if (Axios.isCancel(e)) return
+
+        onError(e)
     })
 }
