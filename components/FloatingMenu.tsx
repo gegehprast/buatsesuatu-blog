@@ -56,7 +56,7 @@ const FloatingMenu = (): React.ReactElement | null => {
                 </div>
 
                 <div className="flex mt-4">
-                    <Link href="/create" as="/create">
+                    <Link href="/articles/create" as="/articles/create">
                         <a className="p-2 leading-none text-white bg-indigo-700 border rounded hover:bg-indigo-800 active:bg-indigo-900">Create</a>
                     </Link>
                     <button className="p-2 leading-none text-white bg-gray-600 border rounded hover:bg-gray-700 active:bg-gray-500" onClick={handleLogout}>Logout</button>
