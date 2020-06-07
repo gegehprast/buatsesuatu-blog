@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Header from './Header'
 import Footer from './Footer'
 import { LoadingProgressProvider } from '../Context/LoadingProgress'
+import FloatingMenu from '../FloatingMenu'
 
 interface Props {
     children: React.ReactNode
@@ -24,6 +25,8 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
                 </div>
 
                 <Footer />
+
+                <FloatingMenu />
             </LoadingProgressProvider>
         </>
     )
