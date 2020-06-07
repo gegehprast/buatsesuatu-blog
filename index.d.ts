@@ -6,3 +6,7 @@ interface Article {
     content: string
     tags: string[]
 }
+
+type onSuccess = (res: AxiosResponse) => void
+
+type onError = (e: any) => void
