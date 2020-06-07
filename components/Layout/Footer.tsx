@@ -43,7 +43,13 @@ const Footer: React.FC = () => {
                     <div className="w-full h-auto mt-8 xl:w-6/12 sm:mt-0 md:mt-8 xl:mt-0">
                         <div className="mb-1 text-lg text-gray-400 md:text-xl text-sh-300">Kata Bijak</div>
                         <p className="text-sm leading-normal md:text-base">
-                            By and large, language is a tool for concealing the truth.
+                            <p className="leading-loose">So leave the lights on I&apos;m coming home.</p>
+                            <p className="leading-loose">It&apos;s getting darker but I carry on.</p>
+                            <p className="leading-loose">The sun won&apos;t shine here, it never did.</p>
+                            <p className="leading-loose">And when it rains, it fucking pours.</p>
+                            <p className="leading-loose">But I think I like it.</p>
+                            <p className="leading-loose">And you know that I&apos;m love with the pain.</p>
+                            <p className="leading-loose">I think I like it.</p>
                         </p>
                     </div>
                 </div>
