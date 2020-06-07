@@ -2,6 +2,7 @@ interface Article {
     slug: string
     title: string
     cover: string
-    text: string
+    desc: string
+    content: string
     tags: string[]
 }

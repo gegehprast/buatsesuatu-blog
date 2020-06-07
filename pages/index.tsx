@@ -61,7 +61,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                         <Card key={i} 
                             title={article.title} 
                             cover={article.cover} 
-                            text={article.text} 
+                            text={article.desc} 
                             tags={article.tags} 
                             link={{ href: '/articles/[slug]', as: `/articles/${article.slug}`}} 
                         />
@@ -93,7 +93,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
 
     const initial = {
         articles: res.docs,
-        total: res.total,
+        total: res.totalDocs,
     }
 
     return { props: { initial } }

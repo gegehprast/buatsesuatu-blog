@@ -40,9 +40,9 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
             onSuccess: (res) => {
                 setArticles(res.data.docs)
 
-                setTotal(res.data.total)
+                setTotal(res.data.totalDocs)
 
-                setHasMore(res.data.pages > res.data.page)
+                setHasMore(res.data.totalPages > res.data.page)
 
                 setLoading(false)
             },

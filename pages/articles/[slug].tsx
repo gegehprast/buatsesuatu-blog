@@ -32,7 +32,7 @@ const Article = (): React.ReactElement => {
 
                     <div className="mt-8">
                         <p>
-                            {article.text}
+                            {article.content}
                         </p>
                     </div>
                 </div>
