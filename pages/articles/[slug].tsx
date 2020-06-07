@@ -15,7 +15,7 @@ const Article = (): React.ReactElement => {
                 </h1>
 
                 {/* Container */}
-                <div className="flex flex-col flex-wrap px-1 mt-6 w-100">
+                <div className="flex flex-col flex-wrap w-full px-1 mt-6">
                     <div className="relative w-full min-h-full h-210-px md:h-480-px">
                         {loading ? 
                             <img className="absolute object-cover w-full h-full" src='/images/error.gif' alt={article.title} onError={handleImageError} /> :
