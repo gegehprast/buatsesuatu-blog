@@ -67,6 +67,7 @@ module.exports = {
     },
     variants: {
         backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+        textColor: ['responsive', 'hover', 'focus', 'visited'],
     },
     plugins: [
         function({ addUtilities, e, theme, variants }) {
