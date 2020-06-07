@@ -50,7 +50,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                 </h1>
 
                 {/* Container */}
-                <div className="flex flex-wrap min-h-full mt-6 w-100">
+                <div className="flex flex-wrap w-full min-h-full mt-6">
                     {/* Cards */}
                     {articles.map((article, i) => (
                         <Card key={i} 
@@ -64,7 +64,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                 </div>
                 
                 {/* Secondary container */}
-                <div className="flex flex-wrap min-h-full mt-6 w-100">
+                <div className="flex flex-wrap w-full min-h-full mt-6">
                     <MyPagination onChange={handlePageChange} totalItemsCount={total} activePage={page} itemsCountPerPage={limit} />
                 </div>
             </main>
