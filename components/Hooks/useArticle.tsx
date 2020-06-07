@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import { getOneArticle } from '../../utils/articles'
 
 interface Props {
     slug: string
@@ -23,20 +24,19 @@ const useArticle = ({ slug }: Props): ArticleHook => {
 
         setError(false)
 
-        axios({
-            method: 'GET',
-            url: `/api/articles/${slug}`,
-            cancelToken: new axios.CancelToken(c => cancel = c)
-        }).then(res => {
-            setarticle(res.data)
-            
-            setLoading(false)
-        }).catch(e => {
-            if (axios.isCancel(e)) return
+        getOneArticle({
+            slug,
+            cancelToken: new axios.CancelToken(c => cancel = c),
+            onSuccess: (res) => {
+                setarticle(res.data)
 
-            setLoading(false)
+                setLoading(false)
+            },
+            onError: () => {
+                setLoading(false)
 
-            setError(true)
+                setError(true)
+            }
         })
 
         return () => cancel()
