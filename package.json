@@ -15,7 +15,8 @@
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "react-js-pagination": "^3.0.3"
+    "react-js-pagination": "^3.0.3",
+    "react-simplemde-editor": "^4.1.2"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
