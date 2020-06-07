@@ -20,11 +20,11 @@ const Header: React.FC = () => {
                         </Link>
                     </div>
 
-                    <div className="flex w-full py-1 mt-1 lg:mt-0">
+                    <div className="flex py-1 mt-1 w-100 lg:mt-0">
                         <input type="text" className="mr-2 border rounded" onChange={(e) => setSearch(e.target.value)} value={search} />
                     </div>
 
-                    <div className="flex w-full py-1 mt-1 lg:mt-0">
+                    <div className="flex py-1 mt-1 w-100 lg:mt-0">
                         <div className="mr-2">
                             <Link href="/" as="/">
                                 <a>Postingan</a>
