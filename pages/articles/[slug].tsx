@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import useArticle from '../../components/Hooks/useArticle'
 import { useRouter } from 'next/dist/client/router'
 import { handleImageError } from '../../utils/util'
@@ -9,10 +8,6 @@ const Article = (): React.ReactElement => {
 
     return (
         <div className="w-full">
-            <Head>
-                <link rel="icon" href="/favicon.ico" />
-            </Head>
-
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                 {/* Title */}
                 <h1 className="px-1 text-lg font-bold leading-none">
