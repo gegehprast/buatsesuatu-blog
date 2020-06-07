@@ -52,6 +52,13 @@ body {
         transform: scale(2);
     }
 }
+
+/* selected text start */
+::selection {
+    @apply text-white bg-indigo-700;
+}
+
+/* selected text start */
 /* purgecss end ignore */
 
 @tailwind utilities;
