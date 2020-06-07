@@ -59,7 +59,9 @@ module.exports = {
             },
         },
     },
-    variants: {},
+    variants: {
+        backgroundColor: ['responsive', 'hover', 'focus', 'active'],
+    },
     plugins: [
         function({ addUtilities, e, theme, variants }) {
             const colors = flattenColorPalette(theme('borderColor'))
