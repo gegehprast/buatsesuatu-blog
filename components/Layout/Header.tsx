@@ -11,7 +11,7 @@ const Header: React.FC = () => {
             <div className="sticky top-0 z-50 w-full bg-white border-b shadow">
                 {pageLoading && <div className="h-1 bg-indigo-900"></div>}
                 
-                <div className="flex flex-wrap items-center justify-center px-3 py-2 mx-auto md:justify-between w-100 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
+                <div className="flex flex-wrap items-center justify-center w-full px-3 py-2 mx-auto md:justify-between md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                     <div className="w-full py-1 mt-1 text-center lg:mt-0 md:w-auto md:text-left">
                         <h2 className="text-xl font-bold leading-none lg:text-2xl">Oof!</h2>
                     </div>
