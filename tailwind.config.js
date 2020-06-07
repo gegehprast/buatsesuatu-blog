@@ -79,5 +79,6 @@ module.exports = {
     corePlugins: {
         backgroundOpacity: false,
         textOpacity: false,
+        borderOpacity: false,
     }
 }
