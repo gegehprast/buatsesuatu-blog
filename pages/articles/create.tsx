@@ -1,16 +1,24 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import SimpleMDE from 'react-simplemde-editor'
 import { storeArticle } from '../../utils/articles'
 import { AuthContext } from '../../components/Context/AuthContext'
+import { useRouter } from 'next/dist/client/router'
 
 const Create = (): React.ReactElement | null => {
-    const { loggedIn, user } = useContext(AuthContext)
+    const { fetching, loggedIn, user } = useContext(AuthContext)
+    const router = useRouter()
     const [title, seTitle] = useState('')
     const [desc, seDesc] = useState('')
     const [cover, setCover] = useState('')
     const [content, setContent] = useState('')
     const [tags, setTags] = useState('')
     const [submitting, setSubmitting] = useState(false)
+
+    useEffect(() => {
+        if (!fetching && (!loggedIn || !user)) {
+            router.push('/', '/', { shallow: true })
+        }
+    }, [fetching, loggedIn, user])
 
     const handleContentChange = (value: string) => {
         setContent(value)
