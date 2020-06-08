@@ -52,13 +52,13 @@ export const AuthProvider = ({ children }: ProviderProps): JSX.Element => {
         getUser({
             cancelToken: new Axios.CancelToken(c => cancel = c),
             onSuccess: (res) => {
-                setFetching(false)
                 setUser(res.data)
+                setFetching(false)
             },
             onError: () => {
-                setFetching(false)
                 setUser(undefined)
                 setLoggedIn(false)
+                setFetching(false)
                 removeAuthCookies()
             }
         })
