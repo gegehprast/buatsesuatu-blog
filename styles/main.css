@@ -7,6 +7,10 @@ body {
     @apply font-sans;
 }
 
+.markdown-body {
+    @apply font-sans;
+}
+
 .pagination-cursor-pointer {
     @apply cursor-pointer;
 }

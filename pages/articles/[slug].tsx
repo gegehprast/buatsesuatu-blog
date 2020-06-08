@@ -11,20 +11,26 @@ const Article = (): React.ReactElement => {
     return (
         <div className="w-full">
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
-                {/* Title */}
-                <h1 className="px-1 text-lg font-bold leading-none">
-                    {article.title}
-                </h1>
-
                 {/* Container */}
-                <div className="flex flex-col flex-wrap w-full px-1 mt-6">
-                    <div className="relative w-full min-h-full h-210-px md:h-480-px">
-                        {loading ? 
-                            <img className="absolute object-cover w-full h-full bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} /> :
-                            <img className="absolute object-cover w-full h-full bg-white" src={article.cover} alt={article.title} onError={handleImageError} />
-                        }
-                        
-                        <div className="absolute object-cover w-full h-full bg-black opacity-0" />
+                <div className="flex flex-col flex-wrap w-full px-1">
+                    <figure>
+                        <div className="relative w-full min-h-full h-210-px md:h-480-px">
+                            {loading ?
+                                <img className="absolute object-cover w-full h-full bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} /> :
+                                <img className="absolute object-cover w-full h-full bg-white" src={article.cover} alt={article.title} onError={handleImageError} />
+                            }
+
+                            <div className="absolute object-cover w-full h-full bg-black opacity-0" />
+                        </div>
+                        <figcaption className="text-sm text-center text-gray-700">
+                            Photo by JOSHUA COLEMAN on Unsplash
+                        </figcaption>
+                    </figure>
+
+                    <div className="mt-10">
+                        <h1 className="text-xl font-bold leading-tight md:text-2xl">
+                            {article.title}
+                        </h1>
                     </div>
 
                     <div className="mt-8 markdown-body">
