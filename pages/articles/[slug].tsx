@@ -20,11 +20,11 @@ const Article = (): React.ReactElement => {
                 <div className="flex flex-col flex-wrap w-full px-1 mt-6">
                     <div className="relative w-full min-h-full h-210-px md:h-480-px">
                         {loading ? 
-                            <img className="absolute object-cover w-full h-full" src='/images/error.gif' alt={article.title} onError={handleImageError} /> :
-                            <img className="absolute object-cover w-full h-full" src={article.cover} alt={article.title} onError={handleImageError} />
+                            <img className="absolute object-cover w-full h-full bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} /> :
+                            <img className="absolute object-cover w-full h-full bg-white" src={article.cover} alt={article.title} onError={handleImageError} />
                         }
                         
-                        <div className="absolute object-cover w-full h-full bg-black opacity-25" />
+                        <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                     </div>
 
                     <div className="mt-8 markdown-body">

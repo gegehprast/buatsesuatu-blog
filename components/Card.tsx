@@ -4,7 +4,7 @@ import { handleImageError } from '../utils/util'
 
 interface Props {
     title: string
-    cover: string
+    cover?: string
     text: string
     tags: string[]
     link?: { href: string, as: string }
@@ -18,13 +18,13 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
                     {link ?
                         <Link href={link.href} as={link.as} >
                             <a tabIndex={-1}>
-                                <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" onError={handleImageError} />
-                                <div className="absolute object-cover w-full h-full bg-black opacity-25" />
+                                <img className="absolute object-cover w-full h-full bg-white" src={cover ? cover : '/logo-fit.png'} alt="Sunset in the mountains" onError={handleImageError} />
+                                <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                             </a>
                         </Link> :
                         <>
-                            <img className="absolute object-cover w-full h-full" src={cover} alt="Sunset in the mountains" onError={handleImageError} />
-                            <div className="absolute object-cover w-full h-full bg-black opacity-25" />
+                            <img className="absolute object-cover w-full h-full bg-white" src={cover ? cover : '/logo-fit.png'} alt="Sunset in the mountains" onError={handleImageError} />
+                            <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </>
                     }
                     

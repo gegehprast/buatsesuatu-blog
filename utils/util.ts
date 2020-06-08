@@ -48,7 +48,7 @@ export const pushRouterQueries = (router: NextRouter, { params, as = null, reset
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const handleImageError = (e: any): void => {
     e.target.onerror = null
-    e.target.src = '/images/error.gif'
+    e.target.src = '/logo-fit.png'
 }
 
 interface pushRouterQueriesOptions {
