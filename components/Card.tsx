@@ -8,9 +8,10 @@ interface Props {
     text: string
     tags: string[]
     link?: { href: string, as: string }
+    children?: React.ReactChild
 }
 
-const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
+const Card: React.FC<Props> = ({ title, text, cover, tags, link, children }) => {
     return (
         <div className="flex w-full px-1 mb-3 md:w-1/2 lg:w-1/3">
             <div className="relative flex flex-col flex-grow w-full overflow-hidden rounded shadow-lg">
@@ -50,6 +51,10 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link }) => {
                     {tags.map((tag, i) => (
                         <span key={i} className={`inline-block px-3 py-1 ${i !== tags.length - 1 && 'mr-2'} my-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full`}>#{tag}</span>
                     ))}
+                </div>
+
+                <div className="w-full">
+                    {children}
                 </div>
             </div>
         </div>
