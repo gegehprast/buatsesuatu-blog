@@ -12,11 +12,12 @@ interface Props {
 }
 
 type ArticlesHook = {
-    loading: boolean,
-    error: boolean,
-    articles: Article[],
-    hasMore: boolean,
-    total: number,
+    loading: boolean
+    error: boolean
+    articles: Article[]
+    hasMore: boolean
+    total: number
+    removeArticle: (id: string) => void
 }
 
 const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
@@ -56,12 +57,19 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
         return () => cancel()
     }, [page])
 
+    const removeArticle = (id: string) => {
+        const newArticle = articles.filter(article => article._id !== id)
+
+        setArticles(newArticle)
+    }
+
     return {
         loading,
         error,
         articles,
         hasMore,
         total,
+        removeArticle,
     }
 }
 
