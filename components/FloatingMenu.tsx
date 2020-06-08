@@ -29,19 +29,25 @@ const FloatingMenu = (): React.ReactElement | null => {
             },
             onError: () => {
                 setUser(undefined)
+                setLoggedIn(false)
+                removeCookies()
             }
         })
 
         return () => cancel()
     }, [])
 
-    const handleLogout = (): void => {
+    const removeCookies = (): void => {
         cookie.remove('loggedinToken', {
             expires: 1
         })
         cookie.remove('loggedin', {
             expires: 1
         })
+    }
+
+    const handleLogout = (): void => {
+        removeCookies()
     }
 
     if (!loggedIn || !user) {
