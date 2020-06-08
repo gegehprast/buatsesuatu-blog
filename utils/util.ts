@@ -42,7 +42,13 @@ export const pushRouterQueries = (router: NextRouter, { params, as = null, reset
     router.push({
         pathname: router.pathname,
         query: newParams,
-    }, asPath, { shallow: true }).then(() => resetScroll && window.scrollTo(0, 0))
+    }, asPath, { shallow: true }).then(() => {
+        if (resetScroll) {
+            setTimeout(() => {
+                window.scrollTo(0, 0)
+            }, 150)
+        }
+    })
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
