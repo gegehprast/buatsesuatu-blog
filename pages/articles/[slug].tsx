@@ -1,6 +1,8 @@
-import useArticle from '../../components/Hooks/useArticle'
+import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/dist/client/router'
+import useArticle from '../../components/Hooks/useArticle'
 import { handleImageError } from '../../utils/util'
+import CodeBlock from '../../components/CodeBlock'
 
 const Article = (): React.ReactElement => {
     const router = useRouter()
@@ -25,10 +27,10 @@ const Article = (): React.ReactElement => {
                         <div className="absolute object-cover w-full h-full bg-black opacity-25" />
                     </div>
 
-                    <div className="mt-8">
-                        <p>
+                    <div className="mt-8 markdown-body">
+                        <ReactMarkdown renderers={{ code: CodeBlock }}>
                             {article.content}
-                        </p>
+                        </ReactMarkdown>
                     </div>
                 </div>
             </main>
