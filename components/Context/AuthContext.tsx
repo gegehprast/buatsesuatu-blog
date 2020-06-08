@@ -14,6 +14,7 @@ interface ProviderProps {
 }
 
 interface IInitialAuthContext {
+    fetching: boolean
     loggedIn: boolean
     setLoggedIn: React.Dispatch<React.SetStateAction<boolean>>
     user: User | undefined
@@ -21,6 +22,7 @@ interface IInitialAuthContext {
 }
 
 const InitialUserContext: IInitialAuthContext = {
+    fetching: true,
     loggedIn: false,
     setLoggedIn: () => { },
     user: undefined,
@@ -30,6 +32,7 @@ const InitialUserContext: IInitialAuthContext = {
 export const AuthContext = createContext(InitialUserContext)
 
 export const AuthProvider = ({ children }: ProviderProps): JSX.Element => {
+    const [fetching, setFetching] = useState(true)
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState<User | undefined>()
 
@@ -37,7 +40,11 @@ export const AuthProvider = ({ children }: ProviderProps): JSX.Element => {
         const token = cookie.get('loggedinToken')
         let cancel: () => void
 
+        setFetching(true)
+
         if (!token) {
+            setFetching(false)
+
             return
         }
 
@@ -45,9 +52,11 @@ export const AuthProvider = ({ children }: ProviderProps): JSX.Element => {
         getUser({
             cancelToken: new Axios.CancelToken(c => cancel = c),
             onSuccess: (res) => {
+                setFetching(false)
                 setUser(res.data)
             },
             onError: () => {
+                setFetching(false)
                 setUser(undefined)
                 setLoggedIn(false)
                 removeAuthCookies()
@@ -59,6 +68,7 @@ export const AuthProvider = ({ children }: ProviderProps): JSX.Element => {
 
     return (
         <AuthContext.Provider value={{
+            fetching,
             loggedIn,
             user,
             setLoggedIn,
