@@ -1,56 +1,17 @@
-import React, { useState, useEffect } from 'react'
-import { getUser } from '../utils/auth'
-import cookie from 'js-cookie'
-import Axios from 'axios'
+import React, { useContext} from 'react'
+import { removeAuthCookies } from '../utils/auth'
 import Link from 'next/link'
-
-interface User {
-    username: string
-    name: string
-}
+import { AuthContext } from './Context/AuthContext'
 
 const FloatingMenu = (): React.ReactElement | null => {
-    const [loggedIn, setLoggedIn] = useState(false)
-    const [user, setUser] = useState<User | undefined>()
-
-    useEffect(() => {
-        const token = cookie.get('loggedinToken')
-        let cancel: () => void
-
-        if (!token) {
-            return
-        }
-
-        setLoggedIn(true)
-        getUser({
-            cancelToken: new Axios.CancelToken(c => cancel = c),
-            onSuccess: (res) => {
-                setUser(res.data)
-            },
-            onError: () => {
-                setUser(undefined)
-                setLoggedIn(false)
-                removeCookies()
-            }
-        })
-
-        return () => cancel()
-    }, [])
-
-    const removeCookies = (): void => {
-        cookie.remove('loggedinToken', {
-            expires: 1
-        })
-        cookie.remove('loggedin', {
-            expires: 1
-        })
-    }
-
+    const { loggedIn, user, setLoggedIn, setUser } = useContext(AuthContext)
+    
     const handleLogout = (): void => {
-        removeCookies()
+        removeAuthCookies()
          
         setTimeout(() => {
             setLoggedIn(false)
+            setUser(undefined)
         }, 1000)
     }
 
