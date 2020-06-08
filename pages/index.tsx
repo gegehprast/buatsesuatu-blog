@@ -51,6 +51,8 @@ const Home = ({ initial }: Props): React.ReactElement => {
 
                 {/* Container */}
                 <div className="flex flex-wrap w-full min-h-full mt-6">
+                    {articles.length < 1 && <div className="w-full mt-4 text-lg font-bold text-center">Belum ada postingan.</div>}
+                    
                     {/* Cards */}
                     {articles.map((article, i) => (
                         <Card key={i} 
