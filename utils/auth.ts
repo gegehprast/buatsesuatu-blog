@@ -52,3 +52,12 @@ export const getUser = ({ cancelToken, onSuccess, onError }: GetUserParams): voi
         onError(e)
     })
 }
+
+export const removeAuthCookies = (): void => {
+    cookie.remove('loggedinToken', {
+        expires: 1
+    })
+    cookie.remove('loggedin', {
+        expires: 1
+    })
+}
