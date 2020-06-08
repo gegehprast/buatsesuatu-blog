@@ -34,6 +34,10 @@ const Home = ({ initial }: Props): React.ReactElement => {
     }, [loading])
 
     const handlePageChange = (pageNumber: number) => {
+        if (page === pageNumber) {
+            return
+        }
+
         setPageLoading(true)
         pushRouterQueries(router, {
             params: { page: pageNumber },
