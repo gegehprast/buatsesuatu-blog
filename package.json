@@ -8,7 +8,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "@types/next": "^9.0.0",
     "@types/react": "^16.9.35",
     "axios": "^0.19.2",
     "github-markdown-css": "^4.0.0",
