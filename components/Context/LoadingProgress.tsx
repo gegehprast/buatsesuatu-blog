@@ -25,7 +25,6 @@ export const LoadingProgressProvider = ({ children }: ProviderProps): JSX.Elemen
     const [pageLoading, setPageLoading] = useState(false)
     const [pageLoadingProgress, setPageLoadingProgress] = useState(0)
 
-
     return (
         <LoadingProgressContext.Provider value={{
             pageLoading, 
