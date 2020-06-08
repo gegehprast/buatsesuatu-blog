@@ -24,6 +24,10 @@ interface StoreArticleParams {
     tags: string
 }
 
+interface UpdateArticleParams extends StoreArticleParams {
+    id: string
+}
+
 /** Get paginated article list. */
 export const getArticles = ({ page, limit, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
     Axios({
@@ -66,6 +70,39 @@ export const storeArticle = ({ title, desc, cover, content, tags }: StoreArticle
             }
         }).then((res: AxiosResponse) => {
             resolve(res.data)
+        }).catch((e) => {
+            reject(e)
+        })
+    })
+}
+
+export const updateArticle = ({ id, title, desc, cover, content, tags }: UpdateArticleParams): Promise<Article> => {
+    return new Promise((resolve, reject) => {
+        Axios({
+            method: 'PUT',
+            url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/${id}`,
+            data: { title, desc, cover, content, tags },
+            headers: {
+                Authorization: cookie.get('loggedinToken')
+            }
+        }).then((res: AxiosResponse) => {
+            resolve(res.data)
+        }).catch((e) => {
+            reject(e)
+        })
+    })
+}
+
+export const deleteArticle = (id: string): Promise<boolean> => {
+    return new Promise((resolve, reject) => {
+        Axios({
+            method: 'DELETE',
+            url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/${id}`,
+            headers: {
+                Authorization: cookie.get('loggedinToken')
+            }
+        }).then((res: AxiosResponse) => {
+            resolve(res.status === 200)
         }).catch((e) => {
             reject(e)
         })
