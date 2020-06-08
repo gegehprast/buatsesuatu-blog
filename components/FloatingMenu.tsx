@@ -48,6 +48,10 @@ const FloatingMenu = (): React.ReactElement | null => {
 
     const handleLogout = (): void => {
         removeCookies()
+         
+        setTimeout(() => {
+            setLoggedIn(false)
+        }, 1000)
     }
 
     if (!loggedIn || !user) {
