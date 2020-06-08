@@ -9,40 +9,25 @@ const Footer: React.FC = () => {
 
                 <div className="relative z-10 flex flex-col justify-center w-full px-3 py-8 text-white xl:justify-between md:px-4 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3 md:mx-auto xl:flex-row">
                     <div className="w-full h-auto xl:w-3/12">
-                        <div className="mb-1 text-lg text-gray-400 md:text-xl text-sh-300">Halo, pengunjung!</div>
-                        <ul className="leading-normal">
+                        <div className="mb-1 text-lg font-bold md:text-xl">Halo, pengunjung!</div>
+                        <ul className="font-semibold leading-normal">
                             <li className="py-1 text-sm xl:py-2 md:text-base">
                                 <Link href="/about">
-                                    <a className="hover:text-sh-300 transition-color transition-400 transition-ease">Tentang</a>
+                                    <a className="hover:text-indigo-300 transition-color transition-400 transition-ease">Tentang</a>
                                 </Link>
                             </li>
                             <li className="py-1 text-sm xl:py-2 md:text-base">
-                                <a href="#" className="hover:text-sh-300 transition-color transition-400 transition-ease">Kebijakan Privasi</a>
+                                <a href="#" className="hover:text-indigo-300 transition-color transition-400 transition-ease">Kebijakan Privasi</a>
                             </li>
                             <li className="py-1 text-sm xl:py-2 md:text-base">
-                                <a href="https://github.com/gegehprast/shallty" target="_blank" rel="noopener noreferrer" className="hover:text-sh-300 transition-color transition-400 transition-ease">Sumber Terbuka</a>
+                                <a href="https://github.com/gegehprast/buatsesuatu" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-300 transition-color transition-400 transition-ease">Sumber Terbuka</a>
                             </li>
                         </ul>
                     </div>
 
-                    <div className="w-full h-auto mt-8 xl:w-3/12 sm:mt-0 md:mt-8 xl:mt-0">
-                        <div className="mb-1 text-lg text-gray-400 md:text-xl text-sh-300">Kami Bersosial!</div>
-                        <ul className="leading-normal">
-                            <li className="py-1 text-sm xl:py-2 md:text-base">
-                                <a href="http://bit.ly/ShalltyDiscordServer" target="_blank" rel="noopener noreferrer" className="hover:text-sh-300 transition-color transition-400 transition-ease">Discord</a>
-                            </li>
-                            <li className="py-1 text-sm xl:py-2 md:text-base">
-                                <a href="https://www.facebook.com/shalltearbestgurl" target="_blank" rel="noopener noreferrer" className="hover:text-sh-300 transition-color transition-400 transition-ease">Facebook</a>
-                            </li>
-                            <li className="py-1 text-sm xl:py-2 md:text-base">
-                                <a href="http://bit.ly/ShalltyBotInvite" target="_blank" rel="noopener noreferrer" className="hover:text-sh-300 transition-color transition-400 transition-ease">Discord Bot</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="w-full h-auto mt-8 xl:w-6/12 sm:mt-0 md:mt-8 xl:mt-0">
-                        <div className="mb-1 text-lg text-gray-400 md:text-xl text-sh-300">Kata Bijak</div>
-                        <div className="text-sm leading-normal md:text-base">
+                    <div className="w-full h-auto mt-8 xl:w-9/12 sm:mt-0 md:mt-8 xl:mt-0">
+                        <div className="mb-1 text-lg font-bold md:text-xl">Kata Bijak</div>
+                        <div className="text-sm italic leading-normal text-gray-100 md:text-base">
                             <p className="leading-loose">So leave the lights on I&apos;m coming home.</p>
                             <p className="leading-loose">It&apos;s getting darker but I carry on.</p>
                             <p className="leading-loose">The sun won&apos;t shine here, it never did.</p>

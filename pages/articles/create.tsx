@@ -40,7 +40,7 @@ const Create = (): React.ReactElement | null => {
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                 {/* Title */}
                 <h1 className="px-1 text-lg font-bold leading-none">
-                    Hello, {user.name}! Buat Postingan
+                    Buat Postingan
                 </h1>
 
                 {/* Container */}
