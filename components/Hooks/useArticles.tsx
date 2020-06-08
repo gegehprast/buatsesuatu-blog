@@ -8,6 +8,7 @@ interface Props {
     initial: {
         articles: Article[]
         total: number
+        totalPage: number
     }
 }
 
@@ -17,6 +18,7 @@ type ArticlesHook = {
     articles: Article[]
     hasMore: boolean
     total: number
+    totalPage: number
     removeArticle: (id: string) => void
 }
 
@@ -26,6 +28,7 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
     const [articles, setArticles] = useState<Article[]>(initial.articles)
     const [hasMore, setHasMore] = useState(false)
     const [total, setTotal] = useState(initial.total)
+    const [totalPage, setTotalPage] = useState(initial.totalPage)
 
     useEffect(() => {
         let cancel: () => void
@@ -43,9 +46,13 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
 
                 setTotal(res.data.totalDocs)
 
+                setTotalPage(res.data.totalPages)
+
                 setHasMore(res.data.totalPages > res.data.page)
 
-                setLoading(false)
+                setTimeout(() => {
+                    setLoading(false)
+                }, 200)
             },
             onError: () => {
                 setLoading(false)
@@ -69,6 +76,7 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
         articles,
         hasMore,
         total,
+        totalPage,
         removeArticle,
     }
 }
