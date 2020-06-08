@@ -1,4 +1,5 @@
 import Axios, { AxiosResponse, CancelToken } from 'axios'
+import cookie from 'js-cookie'
 
 interface GetArticlesParams {
     page: number
@@ -13,6 +14,14 @@ interface GetOneArticlesParams {
     cancelToken?: CancelToken
     onSuccess: (res: AxiosResponse) => void
     onError: (e: any) => void
+}
+
+interface StoreArticleParams {
+    title: string
+    desc: string 
+    cover: string
+    content: string
+    tags: string
 }
 
 /** Get paginated article list. */
@@ -43,5 +52,22 @@ export const getOneArticle = ({ slug, cancelToken, onSuccess, onError }: GetOneA
         if (Axios.isCancel(e)) return
 
         onError(e)
+    })
+}
+
+export const storeArticle = ({ title, desc, cover, content, tags }: StoreArticleParams): Promise<Article> => {
+    return new Promise((resolve, reject) => {
+        Axios({
+            method: 'POST',
+            url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
+            data: { title, desc, cover, content, tags },
+            headers: {
+                Authorization: cookie.get('loggedinToken')
+            }
+        }).then((res: AxiosResponse) => {
+            resolve(res.data)
+        }).catch((e) => {
+            reject(e)
+        })
     })
 }
