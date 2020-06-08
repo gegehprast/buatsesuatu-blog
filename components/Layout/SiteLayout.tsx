@@ -3,6 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { LoadingProgressProvider } from '../Context/LoadingProgress'
 import FloatingMenu from '../FloatingMenu'
+import { AuthProvider } from '../Context/AuthContext'
 
 interface Props {
     children: React.ReactNode
@@ -33,17 +34,19 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
                 <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
             </Head>
 
-            <LoadingProgressProvider>
-                <Header />
+            <AuthProvider>
+                <LoadingProgressProvider>
+                    <Header />
 
-                <div className="min-h-80-screen">
-                    {children}
-                </div>
+                    <div className="min-h-80-screen">
+                        {children}
+                    </div>
 
-                <Footer />
+                    <Footer />
 
-                <FloatingMenu />
-            </LoadingProgressProvider>
+                    <FloatingMenu />
+                </LoadingProgressProvider>
+            </AuthProvider>
         </>
     )
 }
