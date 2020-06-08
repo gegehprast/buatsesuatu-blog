@@ -3,6 +3,7 @@ import { AppProps } from 'next/app'
 import { NextComponentType } from 'next'
 import 'easymde/dist/easymde.min.css'
 import 'github-markdown-css/github-markdown.css'
+import 'react-placeholder/lib/reactPlaceholder.css'
 import '../styles/inter.css'
 import '../styles/main.css'
 
