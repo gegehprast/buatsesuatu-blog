@@ -5,8 +5,10 @@ import { useState, useEffect, useContext } from 'react'
 import { useRouter } from 'next/dist/client/router'
 import { pushRouterQueries } from '../utils/util'
 import { LoadingProgressContext } from '../components/Context/LoadingProgress'
-import { getArticles } from '../utils/articles'
+import { getArticles, deleteArticle } from '../utils/articles'
 import { GetServerSidePropsContext, GetServerSideProps } from 'next'
+import { AuthContext } from '../components/Context/AuthContext'
+import Link from 'next/link'
 
 const limit = 12
 
@@ -20,8 +22,9 @@ interface Props {
 const Home = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
-    const { articles, total, loading } = useArticles({ page, limit, initial })
+    const { articles, total, loading, removeArticle } = useArticles({ page, limit, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
+    const { user } = useContext(AuthContext)
 
     useEffect(() => {
         setPage(router.query.page ? parseInt(router.query.page as string) : 1)
@@ -44,6 +47,16 @@ const Home = ({ initial }: Props): React.ReactElement => {
             resetScroll: true,
         })
     }
+
+    const handleDeleteArticle = async (id: string) => {
+        if (confirm('Hapus postingan ini?')) {
+            const destroy = await deleteArticle(id)
+
+            if (destroy === true) {
+                removeArticle(id)
+            }
+        }
+    }
     
     return (
         <div className="w-full">
@@ -58,14 +71,25 @@ const Home = ({ initial }: Props): React.ReactElement => {
                     {articles.length < 1 && <div className="w-full mt-4 text-lg font-bold text-center">Belum ada postingan.</div>}
                     
                     {/* Cards */}
-                    {articles.map((article, i) => (
-                        <Card key={i} 
+                    {articles.map((article) => (
+                        <Card key={article._id} 
                             title={article.title} 
                             cover={article.cover} 
                             text={article.desc} 
                             tags={article.tags} 
                             link={{ href: '/articles/[slug]', as: `/articles/${article.slug}`}} 
-                        />
+                        >
+                            <div className="bg-gray-500">
+                                {user && <div className="p-2">
+                                    <div className="flex">
+                                        <Link href="/articles/[slug]/edit" as={`/articles/${article.slug}/edit`}>
+                                            <a className="p-2 leading-none text-white bg-indigo-500 rounded hover:bg-indigo-600 active:bg-indigo-700">Edit</a>
+                                        </Link>
+                                        <button className="p-2 ml-2 leading-none text-white bg-red-600 rounded hover:bg-red-700 active:bg-red-500" onClick={() => handleDeleteArticle(article._id as string)}>Delete</button>
+                                    </div>
+                                </div>}
+                            </div>
+                        </Card>
                     ))}
                 </div>
                 
