@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react'
 import Link from 'next/link'
 import { LoadingProgressContext } from '../Context/LoadingProgress'
 
-const Header: React.FC = () => {
+const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () => void}): React.ReactElement => {
     const [search, setSearch] = useState('')
     const { pageLoading } = useContext(LoadingProgressContext)
 
@@ -24,7 +24,7 @@ const Header: React.FC = () => {
                         <input type="text" className="mr-2 border rounded" onChange={(e) => setSearch(e.target.value)} value={search} />
                     </div>
 
-                    <div className="flex py-1 mt-1 lg:mt-0">
+                    <div className="flex items-center py-1 mt-1 lg:mt-0">
                         <div className="mr-2">
                             <Link href="/" as="/">
                                 <a>Postingan</a>
@@ -41,6 +41,14 @@ const Header: React.FC = () => {
                             <Link href="/page2" as="/page2">
                                 <a>Tentang</a>
                             </Link>
+                        </div>
+
+                        <div className="flex items-end ml-8">
+                            <button className={`darkModeButton ${darkMode ? 'text-white' : 'text-gray-900'}`} onClick={setDarkMode} title="Mode malam">
+                                <svg className="w-6 h-6 leading-none fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <path d="M10 2v16a8 8 0 1 0 0-16zm0 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20z" />
+                                </svg>
+                            </button>
                         </div>
                     </div>
                 </div>
