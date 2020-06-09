@@ -73,6 +73,12 @@ body {
 }
 /* SimpleMDE */
 
+/* Markdown */
+.markdown-body h2 a:hover {
+    @apply no-underline;
+}
+/* Markdown */
+
 /* selected text start */
 ::selection {
     @apply text-white bg-indigo-700;
