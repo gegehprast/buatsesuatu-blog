@@ -23,7 +23,7 @@ type ArticlesHook = {
 }
 
 const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [articles, setArticles] = useState<Article[]>(initial.articles)
     const [hasMore, setHasMore] = useState(false)
@@ -62,7 +62,7 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
         })
 
         return () => cancel()
-    }, [page])
+    }, [page, limit])
 
     const removeArticle = (id: string) => {
         const newArticle = articles.filter(article => article._id !== id)
