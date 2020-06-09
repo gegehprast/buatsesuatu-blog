@@ -29,6 +29,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
             setTitle(article.title || '')
             setDesc(article.desc || '')
             setCover(article.cover || '')
+            setCaption(article.caption || '')
             setContent(article.content || '')
             setTags(article.tags && article.tags.join(',') || '')
         }
@@ -85,7 +86,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
                     tags={tags}
                     setTags={setTags}
                     handleSubmit={handleUpdateArticle}
-                    buttonText="Post"
+                    buttonText="Update"
                     ready={submitting}
                 />
             </main>

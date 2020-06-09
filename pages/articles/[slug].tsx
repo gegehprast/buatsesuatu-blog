@@ -41,7 +41,9 @@ const Article = ({ initial }: Props): React.ReactElement => {
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </div>
                         {article.caption && <figcaption className="text-sm text-center text-gray-700">
-                            {article.caption}
+                            <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading2, link: Anchor }}>
+                                {article.caption}
+                            </ReactMarkdown>
                         </figcaption>}
                     </figure>
 
