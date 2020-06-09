@@ -1,15 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react'
-import SimpleMDE from 'react-simplemde-editor'
 import { storeArticle } from '../../utils/articles'
 import { AuthContext } from '../../components/Context/AuthContext'
 import { useRouter } from 'next/dist/client/router'
+import ArticleForm from '../../components/ArticleForm'
 
 const Create = (): React.ReactElement | null => {
     const { fetching, loggedIn, user } = useContext(AuthContext)
     const router = useRouter()
-    const [title, seTitle] = useState('')
-    const [desc, seDesc] = useState('')
+    const [title, setTitle] = useState('')
+    const [desc, setDesc] = useState('')
     const [cover, setCover] = useState('')
+    const [caption, setCaption] = useState('')
     const [content, setContent] = useState('')
     const [tags, setTags] = useState('')
     const [submitting, setSubmitting] = useState(false)
@@ -52,59 +53,22 @@ const Create = (): React.ReactElement | null => {
                 </h1>
 
                 {/* Container */}
-                <div className="flex flex-wrap w-full min-h-full px-1 mt-6">
-                    <div className="flex flex-col items-center justify-start w-full mb-3">
-                        <div className="w-full">
-                            <label className="font-semibold leading-none">Judul</label>
-                        </div>
-                        <div className="flex w-full mt-1">
-                            <input type="text" name="title" className="w-full p-2 text-lg leading-none border border-gray-400 rounded shadow-md" value={title} onChange={(e) => seTitle(e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-start w-full mb-3">
-                        <div className="w-full">
-                            <label className="font-semibold leading-none">Deskripsi</label>
-                        </div>
-                        <div className="flex w-full mt-1">
-                            <textarea name="desc" className="w-full p-2 text-lg leading-none border border-gray-400 rounded shadow-md resize-none" rows={4}  value={desc} onChange={(e) => seDesc(e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-start w-full mb-3">
-                        <div className="w-full">
-                            <label className="font-semibold leading-none">Gambar Cover</label>
-                        </div>
-                        <div className="flex w-full mt-1">
-                            <input type="text" name="cover" className="w-full p-2 text-lg leading-none border border-gray-400 rounded shadow-md" value={cover} onChange={(e) => setCover(e.target.value)} />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-start w-full mb-3">
-                        <div className="w-full">
-                            <label className="font-semibold leading-none">Konten</label>
-                        </div>
-                        <div className="flex w-full mt-1">
-                            <SimpleMDE id="contentMarkdownEditor" onChange={handleContentChange} value={content} className="w-full rounded shadow-md" />
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-start w-full mb-3">
-                        <div className="w-full">
-                            <label className="font-semibold leading-none">Tags</label>
-                        </div>
-                        <div className="flex flex-wrap w-full mt-1">
-                            <input type="text" name="tags" className="w-full p-2 text-lg leading-none border border-gray-400 rounded shadow-md" value={tags} onChange={(e) => setTags(e.target.value)} />
-                            <small className="mt-1 text-xs italic text-blue-600">Pisah dengan koma (,).</small>
-                        </div>
-                    </div>
-
-                    <div className="flex flex-col items-center justify-start w-full mb-3">
-                        <div className="w-full">
-                            <button className="px-4 py-3 leading-none text-white bg-indigo-700 border rounded hover:bg-indigo-800 active:bg-indigo-900" onClick={handleStoreArticle}>{submitting ? 'Tunggu sebentar...' : 'Post'}</button>
-                        </div>
-                    </div>
-                </div>
+                <ArticleForm title={title} 
+                    setTitle={setTitle} 
+                    desc={desc} 
+                    setDesc={setDesc} 
+                    cover={cover}
+                    setCover={setCover}
+                    caption={caption}
+                    setCaption={setCaption}
+                    content={content}
+                    handleContentChange={handleContentChange}
+                    tags={tags}
+                    setTags={setTags}
+                    handleSubmit={handleStoreArticle}
+                    buttonText="Post"
+                    ready={submitting}
+                />
             </main>
         </div>
     )
