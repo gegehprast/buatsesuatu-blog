@@ -24,10 +24,15 @@ interface Props {
 
 const Home = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
+    const [firstTime, setFirstTime] = useState(true)
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
     const { articles, total, loading, removeArticle, totalPage } = useArticles({ page, limit, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
     const { user } = useContext(AuthContext)
+
+    useEffect(() => {
+        setFirstTime(true)
+    }, [initial])
 
     useEffect(() => {
         setPage(router.query.page ? parseInt(router.query.page as string) : 1)
@@ -44,6 +49,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
             return
         }
 
+        setFirstTime(false)
         setPageLoading(true)
         pushRouterQueries(router, {
             params: { page: pageNumber },
@@ -70,7 +76,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                 </h1>
 
                 {/* Container */}
-                <ReactPlaceholder ready={!loading} customPlaceholder={<CardsPlaceHolder />}>
+                <ReactPlaceholder ready={firstTime || !loading} customPlaceholder={<CardsPlaceHolder />}>
                     <div className="flex flex-wrap w-full min-h-full mt-6">
                         {articles.length < 1 && <div className="w-full mt-4 text-lg font-bold text-center">Belum ada postingan.</div>}
 
@@ -108,6 +114,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+    console.log('server index')
     const res: any = await new Promise(resolve => {
         getArticles({
             page: query.page ? parseInt(query.page as string) : 1,
