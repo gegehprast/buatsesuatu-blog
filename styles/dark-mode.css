@@ -1,0 +1,68 @@
+.dark-mode {
+    @apply text-white bg-gray-900;
+}
+
+.dark-mode input {
+    @apply bg-gray-900;
+}
+
+.dark-mode textarea {
+    @apply bg-gray-900;
+}
+
+.dark-mode .markdown-body {
+    @apply text-white bg-gray-900;
+}
+
+.dark-mode .bg-white {
+    @apply bg-gray-900;
+}
+
+.dark-mode .text-gray-700 {
+    @apply text-gray-200;
+}
+
+.dark-mode .bg-gray-200 {
+    @apply bg-gray-700;
+}
+
+.dark-mode .text-gray-900 {
+    @apply text-gray-200;
+}
+
+.dark-mode .bg-indigo-900 {
+    background-color: #272342;
+}
+
+.dark-mode .border {
+    border-color: #2d3748;
+}
+
+.dark-mode .border-t {
+    border-top-color: #2d3748;
+}
+
+.dark-mode .border-b {
+    border-bottom-color: #2d3748;
+}
+
+.dark-mode .border-r {
+    border-right-color: #2d3748;
+}
+
+.dark-mode .border-l {
+    border-left-color: #2d3748;
+}
+
+.dark-mode .bg-gray-100 {
+    @apply bg-gray-700;
+}
+
+.dark-mode .shadow,
+.dark-mode .shadow-md {
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.60), 0 2px 4px 0 rgba(0, 0, 0, 0.60);
+}
+
+.dark-mode .shadow-lg {
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.20), 0 10px 10px -5px rgba(0, 0, 0, 0.30);
+}
