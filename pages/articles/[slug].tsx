@@ -3,11 +3,13 @@ import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/dist/client/router'
 import useArticle from '../../components/Hooks/useArticle'
 import { handleImageError } from '../../utils/util'
-import CodeBlock from '../../components/CodeBlock'
+import CodeBlock from '../../components/MarkdownRenderes/CodeBlock'
 import ArticlePlaceHolder from '../../components/ArticlePlaceholder'
 import ReactPlaceholder from 'react-placeholder/lib'
 import { getOneArticle } from '../../utils/articles'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
+import Heading2 from '../../components/MarkdownRenderes/Heading2'
+import Anchor from '../../components/MarkdownRenderes/Anchor'
 
 interface Props {
     initial: {
@@ -44,13 +46,13 @@ const Article = ({ initial }: Props): React.ReactElement => {
                     </figure>
 
                     <div className="mt-10">
-                        <h1 className="text-xl font-bold leading-tight md:text-2xl">
+                        <h1 className="text-4xl font-bold leading-tight md:text-6xl">
                             {article.title}
                         </h1>
                     </div>
 
-                    <div className="mt-8 markdown-body">
-                        <ReactMarkdown renderers={{ code: CodeBlock }}>
+                    <div className="w-full mt-8 markdown-body">
+                        <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading2, link: Anchor }}>
                             {article.content}
                         </ReactMarkdown>
                     </div>
