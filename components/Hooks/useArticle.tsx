@@ -4,6 +4,9 @@ import { getOneArticle } from '../../utils/articles'
 
 interface Props {
     slug: string
+    initial: {
+        article: Article
+    }
 }
 
 type ArticleHook = {
@@ -12,10 +15,10 @@ type ArticleHook = {
     article: Article,
 }
 
-const useArticle = ({ slug }: Props): ArticleHook => {
+const useArticle = ({ slug, initial }: Props): ArticleHook => {
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
-    const [article, setarticle] = useState<Article | any>({})
+    const [article, setarticle] = useState<Article>(initial.article)
 
     useEffect(() => {
         let cancel: () => void
@@ -30,7 +33,9 @@ const useArticle = ({ slug }: Props): ArticleHook => {
             onSuccess: (res) => {
                 setarticle(res.data)
 
-                setLoading(false)
+                setTimeout(() => {
+                    setLoading(false)
+                }, 200)
             },
             onError: () => {
                 setLoading(false)
