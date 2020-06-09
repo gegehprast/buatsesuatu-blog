@@ -19,6 +19,7 @@
     "react-markdown": "^4.3.1",
     "react-placeholder": "^4.0.2",
     "react-simplemde-editor": "^4.1.2",
+    "react-slugify": "^2.0.1",
     "react-syntax-highlighter": "^12.2.1"
   },
   "devDependencies": {
