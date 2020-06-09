@@ -29,7 +29,7 @@ const Create = (): React.ReactElement | null => {
         setSubmitting(true)
 
         try {
-            await storeArticle({ title, desc, cover, content, tags })
+            await storeArticle({ title, desc, cover, caption, content, tags })
 
             alert('Berhasil membuat postingan!')
 

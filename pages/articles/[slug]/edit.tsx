@@ -48,7 +48,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
         setSubmitting(true)
 
         try {
-            await updateArticle({ id: article._id as string, title, desc, cover, content, tags })
+            await updateArticle({ id: article._id as string, title, desc, cover, caption, content, tags })
 
             alert('Berhasil memperbarui postingan!')
 
