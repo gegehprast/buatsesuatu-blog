@@ -20,6 +20,7 @@ interface StoreArticleParams {
     title: string
     desc: string 
     cover: string
+    caption: string
     content: string
     tags: string
 }
@@ -59,12 +60,12 @@ export const getOneArticle = ({ slug, cancelToken, onSuccess, onError }: GetOneA
     })
 }
 
-export const storeArticle = ({ title, desc, cover, content, tags }: StoreArticleParams): Promise<Article> => {
+export const storeArticle = ({ title, desc, cover, caption, content, tags }: StoreArticleParams): Promise<Article> => {
     return new Promise((resolve, reject) => {
         Axios({
             method: 'POST',
             url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
-            data: { title, desc, cover, content, tags },
+            data: { title, desc, cover, caption, content, tags },
             headers: {
                 Authorization: cookie.get('loggedinToken')
             }
@@ -76,12 +77,12 @@ export const storeArticle = ({ title, desc, cover, content, tags }: StoreArticle
     })
 }
 
-export const updateArticle = ({ id, title, desc, cover, content, tags }: UpdateArticleParams): Promise<Article> => {
+export const updateArticle = ({ id, title, desc, cover, caption, content, tags }: UpdateArticleParams): Promise<Article> => {
     return new Promise((resolve, reject) => {
         Axios({
             method: 'PUT',
             url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/${id}`,
-            data: { title, desc, cover, content, tags },
+            data: { title, desc, cover, caption, content, tags },
             headers: {
                 Authorization: cookie.get('loggedinToken')
             }
