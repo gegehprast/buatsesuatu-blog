@@ -30,7 +30,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
             setDesc(article.desc || '')
             setCover(article.cover || '')
             setContent(article.content || '')
-            setTags(article.tags.join(',') || '')
+            setTags(article.tags && article.tags.join(',') || '')
         }
     }, [article, loading])
 

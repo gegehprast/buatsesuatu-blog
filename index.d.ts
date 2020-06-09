@@ -2,10 +2,11 @@ interface Article {
     _id?: string
     slug: string
     title: string
-    cover: string
+    cover?: string
+    caption?: string
     desc: string
     content: string
-    tags: string[]
+    tags?: string[]
 }
 
 type onSuccess = (res: AxiosResponse) => void

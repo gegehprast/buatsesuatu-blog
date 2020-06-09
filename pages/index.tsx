@@ -86,7 +86,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                                 title={article.title}
                                 cover={article.cover}
                                 text={article.desc}
-                                tags={article.tags}
+                                tags={article.tags || []}
                                 link={{ href: '/articles/[slug]', as: `/articles/${article.slug}` }}
                             >
                                 <div className="bg-gray-500">
