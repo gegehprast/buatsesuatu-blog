@@ -38,9 +38,9 @@ const Article = ({ initial }: Props): React.ReactElement => {
 
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </div>
-                        <figcaption className="text-sm text-center text-gray-700">
-                            Photo by JOSHUA COLEMAN on Unsplash
-                        </figcaption>
+                        {article.caption && <figcaption className="text-sm text-center text-gray-700">
+                            {article.caption}
+                        </figcaption>}
                     </figure>
 
                     <div className="mt-10">
