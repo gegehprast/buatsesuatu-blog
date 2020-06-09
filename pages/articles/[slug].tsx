@@ -1,18 +1,34 @@
+import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/dist/client/router'
 import useArticle from '../../components/Hooks/useArticle'
 import { handleImageError } from '../../utils/util'
 import CodeBlock from '../../components/CodeBlock'
+import ArticlePlaceHolder from '../../components/ArticlePlaceholder'
+import ReactPlaceholder from 'react-placeholder/lib'
+import { getOneArticle } from '../../utils/articles'
+import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 
-const Article = (): React.ReactElement => {
+interface Props {
+    initial: {
+        article: Article
+    }
+}
+
+const Article = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
-    const { article, loading } = useArticle({ slug: router.query.slug as string})
+    const { article, loading } = useArticle({ slug: router.query.slug as string, initial})
 
     return (
         <div className="w-full">
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                 {/* Container */}
-                <div className="flex flex-col flex-wrap w-full px-1">
+                <ReactPlaceholder ready={!loading} customPlaceholder={<ArticlePlaceHolder />}>
+                    <>   
+                    </>
+                </ReactPlaceholder>
+
+                <div className={`flex flex-col flex-wrap w-full px-1 ${loading && 'hidden'}`}>
                     <figure>
                         <div className="relative w-full min-h-full h-210-px md:h-480-px">
                             {loading ?
@@ -42,6 +58,26 @@ const Article = (): React.ReactElement => {
             </main>
         </div>
     )
+}
+
+export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
+    const res: any = await new Promise(resolve => {
+        getOneArticle({
+            slug: query.slug as string,
+            onSuccess: (res) => {
+                resolve(res.data)
+            },
+            onError: () => {
+                resolve({})
+            }
+        })
+    })
+
+    const initial = {
+        article: res,
+    }
+
+    return { props: { initial } }
 }
 
 export default Article
