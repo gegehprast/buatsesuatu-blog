@@ -6,6 +6,7 @@ import 'github-markdown-css/github-markdown.css'
 import 'react-placeholder/lib/reactPlaceholder.css'
 import '../styles/inter.css'
 import '../styles/main.css'
+import '../styles/dark-mode.css'
 
 type MyNextComponentType = NextComponentType & {
     getLayout?: (page: JSX.Element) => JSX.Element
