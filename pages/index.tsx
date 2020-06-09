@@ -114,7 +114,6 @@ const Home = ({ initial }: Props): React.ReactElement => {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-    console.log('server index')
     const res: any = await new Promise(resolve => {
         getArticles({
             page: query.page ? parseInt(query.page as string) : 1,
