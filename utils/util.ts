@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable no-prototype-builtins */
 
 import { NextRouter } from 'next/dist/client/router'
@@ -5,14 +6,18 @@ import { NextRouter } from 'next/dist/client/router'
 /**
  * Check if something is undefined.
  */
-const isUndefined = (variable: any) => {
+export const isUndefined = (variable: any): boolean => {
     return typeof variable === 'undefined'
 }
+
+export const isServer = (): boolean => {
+    return typeof window === 'undefined'
+} 
 
 /**
  * Make url query parameter from json object.
  */
-const objectToUrlQuery = (object: any, applyArray = true) => {
+export const objectToUrlQuery = (object: {[o: string]: any}, applyArray = true): string => {
     let param = ''
     for (const key in object) {
         if (object.hasOwnProperty(key)) {
