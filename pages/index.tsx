@@ -118,6 +118,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                                 text={article.desc}
                                 tags={article.tags || []}
                                 link={{ href: '/articles/[slug]', as: `/articles/${article.slug}` }}
+                                search={search}
                             >
                                 <div className="bg-gray-500">
                                     {user && <div className="p-2">
