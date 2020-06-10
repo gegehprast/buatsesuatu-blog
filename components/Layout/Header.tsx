@@ -23,6 +23,14 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
         }
     }, [debouncedSearch])
 
+    const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            if (debouncedSearch === '') {
+                router.push('/', '/', { shallow: true })
+            }
+        }
+    }
+
     return (
         <>
             <div className="sticky top-0 z-50 w-full bg-white border-b shadow">
@@ -39,8 +47,9 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
 
                     <div className="flex self-stretch w-full mt-3 mb-2 mr-2 md:w-1/2 md:mb-0 md:mt-1 md:mx-4 lg:mt-0">
                         <input type="text" 
-                            className="w-full px-3 py-1 border-b-4 border-b-gray-300 focus:outline-none focus:border-b-gray-500" 
+                            className="w-full px-3 py-1 border-b-4 border-b-gray-300 focus:outline-none focus:border-b-gray-900" 
                             onChange={(e) => setSearch(e.target.value)} 
+                            onKeyUp={handleKeyUp}
                             value={search} 
                             placeholder="Cari..." 
                         />
