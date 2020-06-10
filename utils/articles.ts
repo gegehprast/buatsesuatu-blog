@@ -1,5 +1,6 @@
 import Axios, { AxiosResponse, CancelToken } from 'axios'
 import cookie from 'js-cookie'
+import { isServer } from './util'
 
 interface GetArticlesParams {
     page: number
@@ -38,6 +39,9 @@ export const getArticles = ({ page, limit, search, tags, cancelToken, onSuccess,
         url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
         params: { page, limit, search, tags  },
         cancelToken: cancelToken,
+        headers: {
+            Authorization: !isServer() ? cookie.get('loggedinToken') : ''
+        }
     }).then((res: AxiosResponse) => {
         onSuccess(res)
     }).catch((e: any) => {
