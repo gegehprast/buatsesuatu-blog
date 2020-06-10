@@ -34,6 +34,10 @@ const Home = ({ initial }: Props): React.ReactElement => {
 
     useEffect(() => {
         setFirstTime(true)
+
+        setTimeout(() => {
+            setFirstTime(false)
+        }, 1000)
     }, [initial])
 
     useEffect(() => {
@@ -58,8 +62,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
         if (page === pageNumber) {
             return
         }
-
-        setFirstTime(false)
+        
         setPageLoading(true)
         pushRouterQueries(router, {
             params: { page: pageNumber },
