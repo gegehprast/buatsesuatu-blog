@@ -10,6 +10,7 @@ import { getOneArticle } from '../../utils/articles'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Heading2 from '../../components/MarkdownRenderes/Heading2'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
+import Link from 'next/link'
 
 interface Props {
     initial: {
@@ -26,7 +27,7 @@ const Article = ({ initial }: Props): React.ReactElement => {
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                 {/* Container */}
                 <ReactPlaceholder ready={!loading} customPlaceholder={<ArticlePlaceHolder />}>
-                    <>   
+                    <>
                     </>
                 </ReactPlaceholder>
 
@@ -57,6 +58,19 @@ const Article = ({ initial }: Props): React.ReactElement => {
                         <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading2, link: Anchor }}>
                             {article.content}
                         </ReactMarkdown>
+                    </div>
+
+                    <div className="flex items-center my-10">
+                        <div className="mr-4 font-semibold">Tags: </div>
+                        <div className="flex flex-wrap">
+                            {article.tags && article.tags.map((tag, i) => (
+                                <Link key={i} href={{ pathname: '/', query: { tags: tag } }} as={`/?tags=${tag}`} shallow={true} >
+                                    <a className={`inline-block px-3 py-1 ${(i < (article.tags as string[]).length) && 'mr-2'} my-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full`}>
+                                        #{tag}
+                                    </a>
+                                </Link>
+                            ))}
+                        </div>
                     </div>
                 </div>
             </main>
