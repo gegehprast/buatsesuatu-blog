@@ -9,8 +9,12 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
     const router = useRouter()
     const [search, setSearch] = useState<string>(router.query.search ? router.query.search as string : '')
     const { pageLoading } = useContext(LoadingProgressContext)
-
     const debouncedSearch = useDebounce(search, 500)
+
+    useEffect(() => {
+        console.log(router.query.search)
+        setSearch(router.query.search ? router.query.search as string : '')
+    }, [router.query.search])
 
     useEffect(() => {
         if (debouncedSearch.length > 0) {
