@@ -5,6 +5,7 @@ import { getArticles } from '../../utils/articles'
 interface Props {
     page: number
     limit: number
+    search: string
     initial: {
         articles: Article[]
         total: number
@@ -22,7 +23,7 @@ type ArticlesHook = {
     removeArticle: (id: string) => void
 }
 
-const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
+const useArticles = ({ page, limit, search, initial }: Props): ArticlesHook => {
     const [loading, setLoading] = useState(false)
     const [error, setError] = useState(false)
     const [articles, setArticles] = useState<Article[]>(initial.articles)
@@ -40,6 +41,7 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
         getArticles({
             page: page,
             limit: limit,
+            search: search,
             cancelToken: new axios.CancelToken(c => cancel = c),
             onSuccess: (res) => {
                 setArticles(res.data.docs)
@@ -62,7 +64,7 @@ const useArticles = ({ page, limit, initial }: Props): ArticlesHook => {
         })
 
         return () => cancel()
-    }, [page, limit])
+    }, [page, limit, search])
 
     const removeArticle = (id: string) => {
         const newArticle = articles.filter(article => article._id !== id)

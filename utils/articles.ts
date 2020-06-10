@@ -4,6 +4,7 @@ import cookie from 'js-cookie'
 interface GetArticlesParams {
     page: number
     limit: number
+    search?: string
     cancelToken?: CancelToken
     onSuccess: (res: AxiosResponse) => void
     onError: (e: any) => void
@@ -30,11 +31,11 @@ interface UpdateArticleParams extends StoreArticleParams {
 }
 
 /** Get paginated article list. */
-export const getArticles = ({ page, limit, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
+export const getArticles = ({ page, limit, search, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
     Axios({
         method: 'GET',
         url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
-        params: { page, limit  },
+        params: { page, limit, search  },
         cancelToken: cancelToken,
     }).then((res: AxiosResponse) => {
         onSuccess(res)

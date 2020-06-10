@@ -1,10 +1,26 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import Link from 'next/link'
 import { LoadingProgressContext } from '../Context/LoadingProgress'
+import useDebounce from '../Hooks/useDebounce'
+import { useRouter } from 'next/dist/client/router'
 
 const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () => void}): React.ReactElement => {
-    const [search, setSearch] = useState('')
+    const router = useRouter()
+    const [search, setSearch] = useState<string>(router.query.search ? router.query.search as string : '')
     const { pageLoading } = useContext(LoadingProgressContext)
+
+    const debouncedSearch = useDebounce(search, 500)
+
+    useEffect(() => {
+        if (debouncedSearch.length > 0) {
+            router.push({
+                pathname: '/',
+                query: { search: debouncedSearch },
+            }, `/?search=${debouncedSearch}`, { shallow: true })
+        } else {
+            router.push('/', '/', { shallow: true })
+        }
+    }, [debouncedSearch])
 
     return (
         <>
@@ -20,29 +36,11 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
                         </Link>
                     </div>
 
-                    <div className="flex py-1 mt-1 lg:mt-0">
-                        <input type="text" className="mr-2 border rounded" onChange={(e) => setSearch(e.target.value)} value={search} />
+                    <div className="flex self-stretch w-full mt-3 mb-2 mr-2 md:w-1/2 md:mb-0 md:mt-1 md:mx-4 lg:mt-0">
+                        <input type="text" className="w-full px-3 py-1 border-b-4 border-b-gray-300 focus:outline-none focus:border-b-gray-500" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Cari..." />
                     </div>
 
-                    <div className="flex items-center py-1 mt-1 lg:mt-0">
-                        <div className="mr-2">
-                            <Link href="/" as="/">
-                                <a>Postingan</a>
-                            </Link>
-                        </div>
-
-                        <div className="mx-2">
-                            <Link href="/page3" as="/page3">
-                                <a>Tutorial</a>
-                            </Link>
-                        </div>
-
-                        <div className="ml-2">
-                            <Link href="/page2" as="/page2">
-                                <a>Tentang</a>
-                            </Link>
-                        </div>
-
+                    <div className="flex items-center py-1 mt-3 mb-2 md:mb-0 md:mt-1 lg:mt-0">
                         <div className="flex items-end ml-8">
                             <button className={`darkModeButton ${darkMode ? 'text-white' : 'text-gray-900'}`} onClick={setDarkMode} title="Mode malam">
                                 <svg className="w-6 h-6 leading-none fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
