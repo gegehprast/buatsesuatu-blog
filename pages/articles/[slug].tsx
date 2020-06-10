@@ -11,6 +11,7 @@ import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Heading2 from '../../components/MarkdownRenderes/Heading2'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
 import Link from 'next/link'
+import { DiscussionEmbed } from 'disqus-react'
 
 interface Props {
     initial: {
@@ -60,7 +61,7 @@ const Article = ({ initial }: Props): React.ReactElement => {
                         </ReactMarkdown>
                     </div>
 
-                    <div className="flex items-center my-10">
+                    <div className="flex items-center mt-10">
                         <div className="mr-4 font-semibold">Tags: </div>
                         <div className="flex flex-wrap">
                             {article.tags && article.tags.map((tag, i) => (
@@ -71,6 +72,18 @@ const Article = ({ initial }: Props): React.ReactElement => {
                                 </Link>
                             ))}
                         </div>
+                    </div>
+
+                    <div className="w-full my-10">
+                        <DiscussionEmbed shortname="buat-sesuatu" 
+                            config={
+                                {
+                                    url: `https://buatsesuatu.dev/${router.pathname}`,
+                                    identifier: article.slug,
+                                    title: article.title,	
+                                }
+                            }
+                        />
                     </div>
                 </div>
             </main>
