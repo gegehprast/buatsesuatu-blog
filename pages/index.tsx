@@ -8,7 +8,7 @@ import useArticles from '../components/Hooks/useArticles'
 import { useRouter } from 'next/dist/client/router'
 import { pushRouterQueries } from '../utils/util'
 import { LoadingProgressContext } from '../components/Context/LoadingProgress'
-import { getArticles, deleteArticle } from '../utils/articles'
+import { getArticles, deleteArticle, updateArticle as updateArticleApi } from '../utils/articles'
 import { AuthContext } from '../components/Context/AuthContext'
 import CardsPlaceHolder from '../components/CardsPlaceHolder'
 
@@ -28,7 +28,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
     const [search, setSearch] = useState<string>(router.query.search ? router.query.search as string : '')
     const [tags, setTags] = useState<string>(router.query.tags ? router.query.tags as string : '')
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
-    const { articles, total, loading, removeArticle, totalPage } = useArticles({ page, limit, search, tags, initial })
+    const { articles, total, loading, removeArticle, totalPage, updateArticle } = useArticles({ page, limit, search, tags, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
     const { user } = useContext(AuthContext)
 
@@ -37,12 +37,10 @@ const Home = ({ initial }: Props): React.ReactElement => {
     }, [initial])
 
     useEffect(() => {
-        console.log(router.query.search)
         setSearch(router.query.search ? router.query.search as string : '')
     }, [router.query.search])
 
     useEffect(() => {
-        console.log(router.query.tags)
         setTags(router.query.tags ? router.query.tags as string : '')
     }, [router.query.tags])
 
@@ -67,6 +65,23 @@ const Home = ({ initial }: Props): React.ReactElement => {
             params: { page: pageNumber },
             resetScroll: true,
         })
+    }
+
+    const handlePublishArticle = async (article: Article, status: 'published' | 'preview') => {
+        if (confirm('Update postingan ini?')) {
+            await updateArticleApi({
+                id: article._id || '',
+                title: article.title, 
+                desc: article.desc, 
+                cover: article.cover || '', 
+                caption: article.caption || '', 
+                content: article.content, 
+                tags: article.tags && article.tags.join(',') || '', 
+                status: status
+            })
+            
+            updateArticle(article._id as string, { status })
+        }
     }
 
     const handleDeleteArticle = async (id: string) => {
@@ -105,9 +120,29 @@ const Home = ({ initial }: Props): React.ReactElement => {
                                     {user && <div className="p-2">
                                         <div className="flex">
                                             <Link href="/articles/[slug]/edit" as={`/articles/${article.slug}/edit`}>
-                                                <a className="p-2 leading-none text-white bg-indigo-500 rounded hover:bg-indigo-600 active:bg-indigo-700">Edit</a>
+                                                <a className="p-2 leading-none text-white bg-indigo-500 rounded hover:bg-indigo-600 active:bg-indigo-700">
+                                                    Edit
+                                                </a>
                                             </Link>
-                                            <button className="p-2 ml-2 leading-none text-white bg-red-600 rounded hover:bg-red-700 active:bg-red-500" onClick={() => handleDeleteArticle(article._id as string)}>Delete</button>
+                                            
+                                            <button 
+                                                className={
+                                                    `p-2 ml-2 leading-none text-white rounded ${
+                                                        article.status === 'published' ? 
+                                                            'bg-orange-500 hover:bg-orange-600 active:bg-orange-700' : 
+                                                            'bg-green-500 hover:bg-green-600 active:bg-green-700'
+                                                    }`
+                                                }
+                                                onClick={() => handlePublishArticle(article, article.status === 'published' ? 'preview' : 'published')}
+                                            >
+                                                {article.status === 'published' ? 'Unpublish' : 'Publish'}
+                                            </button>
+
+                                            <button className="p-2 ml-2 leading-none text-white bg-red-600 rounded hover:bg-red-700 active:bg-red-500" 
+                                                onClick={() => handleDeleteArticle(article._id as string)}
+                                            >
+                                                Delete
+                                            </button>
                                         </div>
                                     </div>}
                                 </div>

@@ -21,6 +21,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
     const [caption, setCaption] = useState('')
     const [content, setContent] = useState('')
     const [tags, setTags] = useState('')
+    const [status, setStatus] = useState<'published' | 'preview'>('preview')
     const [submitting, setSubmitting] = useState(false)
     const { article, loading } = useArticle({ slug: router.query.slug as string, initial })
 
@@ -32,6 +33,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
             setCaption(article.caption || '')
             setContent(article.content || '')
             setTags(article.tags && article.tags.join(',') || '')
+            setStatus(article.status || 'preview')
         }
     }, [article, loading])
 
@@ -49,7 +51,7 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
         setSubmitting(true)
 
         try {
-            await updateArticle({ id: article._id as string, title, desc, cover, caption, content, tags })
+            await updateArticle({ id: article._id as string, title, desc, cover, caption, content, tags, status })
 
             alert('Berhasil memperbarui postingan!')
 
@@ -85,6 +87,8 @@ const Create = ({ initial }: Props): React.ReactElement | null => {
                     handleContentChange={handleContentChange}
                     tags={tags}
                     setTags={setTags}
+                    status={status}
+                    setStatus={setStatus}
                     handleSubmit={handleUpdateArticle}
                     buttonText="Update"
                     ready={submitting}

@@ -13,6 +13,7 @@ const Create = (): React.ReactElement | null => {
     const [caption, setCaption] = useState('')
     const [content, setContent] = useState('')
     const [tags, setTags] = useState('')
+    const [status, setStatus] = useState<'published' | 'preview'>('preview')
     const [submitting, setSubmitting] = useState(false)
 
     useEffect(() => {
@@ -29,7 +30,7 @@ const Create = (): React.ReactElement | null => {
         setSubmitting(true)
 
         try {
-            await storeArticle({ title, desc, cover, caption, content, tags })
+            await storeArticle({ title, desc, cover, caption, content, tags, status })
 
             alert('Berhasil membuat postingan!')
 
@@ -65,6 +66,8 @@ const Create = (): React.ReactElement | null => {
                     handleContentChange={handleContentChange}
                     tags={tags}
                     setTags={setTags}
+                    status={status}
+                    setStatus={setStatus}
                     handleSubmit={handleStoreArticle}
                     buttonText="Post"
                     ready={submitting}

@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { getArticles } from '../../utils/articles'
@@ -22,6 +23,7 @@ type ArticlesHook = {
     total: number
     totalPage: number
     removeArticle: (id: string) => void
+    updateArticle: (id: string, params: { [p: string]: string | string[] | 'published' | 'preview' }) => void
 }
 
 const useArticles = ({ page, limit, search, tags, initial }: Props): ArticlesHook => {
@@ -74,6 +76,47 @@ const useArticles = ({ page, limit, search, tags, initial }: Props): ArticlesHoo
         setArticles(newArticle)
     }
 
+    const updateArticle = (id: string, params: { [p: string]: string | string[] | 'published' | 'preview'}) => {
+        const newArticles = [...articles]
+        const index = newArticles.findIndex(article => article._id === id)
+
+        if (index === -1) {
+            return
+        }
+
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                switch (key) {
+                case 'title':
+                    newArticles[index].title = params[key] as string
+                    break
+
+                case 'cover':
+                    newArticles[index].cover = params[key] as string
+                    break
+
+                case 'caption':
+                    newArticles[index].caption = params[key] as string
+                    break
+
+                case 'desc':
+                    newArticles[index].desc = params[key] as string
+                    break
+
+                case 'tags':
+                    newArticles[index].tags = params[key] as string[]
+                    break
+
+                case 'status':
+                    newArticles[index].status = params[key] as 'published' | 'preview'
+                    break
+                }
+            }
+        }
+
+        setArticles(newArticles)
+    }
+
     return {
         loading,
         error,
@@ -82,6 +125,7 @@ const useArticles = ({ page, limit, search, tags, initial }: Props): ArticlesHoo
         total,
         totalPage,
         removeArticle,
+        updateArticle,
     }
 }
 

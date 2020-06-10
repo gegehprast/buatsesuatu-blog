@@ -7,6 +7,7 @@ interface Article {
     desc: string
     content: string
     tags?: string[]
+    status?: 'published' | 'preview'
 }
 
 type onSuccess = (res: AxiosResponse) => void

@@ -26,6 +26,7 @@ interface StoreArticleParams {
     caption: string
     content: string
     tags: string
+    status: string
 }
 
 interface UpdateArticleParams extends StoreArticleParams {
@@ -66,12 +67,12 @@ export const getOneArticle = ({ slug, cancelToken, onSuccess, onError }: GetOneA
     })
 }
 
-export const storeArticle = ({ title, desc, cover, caption, content, tags }: StoreArticleParams): Promise<Article> => {
+export const storeArticle = ({ title, desc, cover, caption, content, tags, status }: StoreArticleParams): Promise<Article> => {
     return new Promise((resolve, reject) => {
         Axios({
             method: 'POST',
             url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
-            data: { title, desc, cover, caption, content, tags },
+            data: { title, desc, cover, caption, content, tags, status },
             headers: {
                 Authorization: cookie.get('loggedinToken')
             }
@@ -83,12 +84,12 @@ export const storeArticle = ({ title, desc, cover, caption, content, tags }: Sto
     })
 }
 
-export const updateArticle = ({ id, title, desc, cover, caption, content, tags }: UpdateArticleParams): Promise<Article> => {
+export const updateArticle = ({ id, title, desc, cover, caption, content, tags, status }: UpdateArticleParams): Promise<Article> => {
     return new Promise((resolve, reject) => {
         Axios({
             method: 'PUT',
             url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/${id}`,
-            data: { title, desc, cover, caption, content, tags },
+            data: { title, desc, cover, caption, content, tags, status },
             headers: {
                 Authorization: cookie.get('loggedinToken')
             }
