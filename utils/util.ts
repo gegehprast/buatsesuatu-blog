@@ -58,7 +58,7 @@ export const handleImageError = (e: any): void => {
 }
 
 interface pushRouterQueriesOptions {
-    params: any
+    params: {[p: string]: string | number | boolean}
     as?: string | null | undefined
     resetScroll?: boolean
 }
