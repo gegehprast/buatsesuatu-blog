@@ -12,7 +12,6 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
     const debouncedSearch = useDebounce(search, 500)
 
     useEffect(() => {
-        console.log(router.query.search)
         setSearch(router.query.search ? router.query.search as string : '')
     }, [router.query.search])
 
