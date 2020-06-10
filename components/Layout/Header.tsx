@@ -17,8 +17,6 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
                 pathname: '/',
                 query: { search: debouncedSearch },
             }, `/?search=${debouncedSearch}`, { shallow: true })
-        } else {
-            router.push('/', '/', { shallow: true })
         }
     }, [debouncedSearch])
 
