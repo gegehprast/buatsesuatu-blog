@@ -49,7 +49,11 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link, children }) => 
                 
                 <div className="flex flex-wrap px-5 py-3">
                     {tags.map((tag, i) => (
-                        <span key={i} className={`inline-block px-3 py-1 ${i !== tags.length - 1 && 'mr-2'} my-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full`}>#{tag}</span>
+                        <Link key={i} href={{ pathname: '/', query: { tags: tag } }} as={`/?tags=${tag}`} >
+                            <a className={`inline-block px-3 py-1 ${(i !== tags.length - 1) && 'mr-2'} my-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full`}>
+                                #{tag}
+                            </a>
+                        </Link>
                     ))}
                 </div>
 

@@ -26,8 +26,9 @@ const Home = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
     const [firstTime, setFirstTime] = useState(true)
     const [search, setSearch] = useState<string>(router.query.search ? router.query.search as string : '')
+    const [tags, setTags] = useState<string>(router.query.tags ? router.query.tags as string : '')
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
-    const { articles, total, loading, removeArticle, totalPage } = useArticles({ page, limit, search, initial })
+    const { articles, total, loading, removeArticle, totalPage } = useArticles({ page, limit, search, tags, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
     const { user } = useContext(AuthContext)
 
@@ -36,8 +37,14 @@ const Home = ({ initial }: Props): React.ReactElement => {
     }, [initial])
 
     useEffect(() => {
+        console.log(router.query.search)
         setSearch(router.query.search ? router.query.search as string : '')
     }, [router.query.search])
+
+    useEffect(() => {
+        console.log(router.query.tags)
+        setTags(router.query.tags ? router.query.tags as string : '')
+    }, [router.query.tags])
 
     useEffect(() => {
         setPage(router.query.page ? parseInt(router.query.page as string) : 1)
@@ -123,6 +130,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }: GetServe
         getArticles({
             page: query.page ? parseInt(query.page as string) : 1,
             search: query.search ? query.search as string : '',
+            tags: query.tags ? query.tags as string : '',
             limit,
             onSuccess: (res) => {
                 resolve(res.data)
