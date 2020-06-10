@@ -27,7 +27,7 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
     return (
         <>
             <Head>
-                <title key="title">Hello World</title>
+                <title key="title">Buat Sesuatu</title>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                 <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />

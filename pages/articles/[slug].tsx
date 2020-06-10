@@ -12,6 +12,7 @@ import Heading2 from '../../components/MarkdownRenderes/Heading2'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
 import Link from 'next/link'
 import { DiscussionEmbed } from 'disqus-react'
+import Head from 'next/head'
 
 interface Props {
     initial: {
@@ -25,6 +26,9 @@ const Article = ({ initial }: Props): React.ReactElement => {
 
     return (
         <div className="w-full">
+            <Head>
+                <title key="title">{article.title} | Buat Sesuatu</title>
+            </Head>
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                 {/* Container */}
                 <ReactPlaceholder ready={!loading} customPlaceholder={<ArticlePlaceHolder />}>
