@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { LoadingProgressContext } from '../Context/LoadingProgress'
 import useDebounce from '../Hooks/useDebounce'
 import { useRouter } from 'next/dist/client/router'
+import { pushRouterQueries } from '../../utils/util'
 
 const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () => void}): React.ReactElement => {
     const router = useRouter()
@@ -17,6 +18,8 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
                 pathname: '/',
                 query: { search: debouncedSearch },
             }, `/?search=${debouncedSearch}`, { shallow: true })
+        } else {
+            pushRouterQueries(router, { params: { search: '' } })
         }
     }, [debouncedSearch])
 
@@ -35,7 +38,12 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
                     </div>
 
                     <div className="flex self-stretch w-full mt-3 mb-2 mr-2 md:w-1/2 md:mb-0 md:mt-1 md:mx-4 lg:mt-0">
-                        <input type="text" className="w-full px-3 py-1 border-b-4 border-b-gray-300 focus:outline-none focus:border-b-gray-500" onChange={(e) => setSearch(e.target.value)} value={search} placeholder="Cari..." />
+                        <input type="text" 
+                            className="w-full px-3 py-1 border-b-4 border-b-gray-300 focus:outline-none focus:border-b-gray-500" 
+                            onChange={(e) => setSearch(e.target.value)} 
+                            value={search} 
+                            placeholder="Cari..." 
+                        />
                     </div>
 
                     <div className="flex items-center py-1 mt-3 mb-2 md:mb-0 md:mt-1 lg:mt-0">
