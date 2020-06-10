@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { LoadingProgressContext } from '../Context/LoadingProgress'
 import useDebounce from '../Hooks/useDebounce'
 import { useRouter } from 'next/dist/client/router'
-import { pushRouterQueries } from '../../utils/util'
 
 const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () => void}): React.ReactElement => {
     const router = useRouter()
@@ -21,8 +20,6 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
                 pathname: '/',
                 query: { search: debouncedSearch },
             }, `/?search=${debouncedSearch}`, { shallow: true })
-        } else {
-            pushRouterQueries(router, { params: { search: '' } })
         }
     }, [debouncedSearch])
 
