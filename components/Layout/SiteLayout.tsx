@@ -34,7 +34,6 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
                 <meta key="description" name="description" content={process.env.NEXT_PUBLIC_DESCRIPTION} />
                 <meta key="keywords" name="keywords" content={process.env.NEXT_PUBLIC_KEYWORDS} />
                 <meta key="author" name="author" content={process.env.NEXT_PUBLIC_AUTHOR} />
-                <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_ANALYTIC} />
 
                 <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png" />
                 <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
