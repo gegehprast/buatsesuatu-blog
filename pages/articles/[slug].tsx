@@ -28,6 +28,16 @@ const Article = ({ initial }: Props): React.ReactElement => {
         <div className="w-full">
             <Head>
                 <title key="title">{article.title} | Buat Sesuatu</title>
+                <meta key="description" name="description" content={article.desc} />
+                {article.tags && <meta key="keywords" name="keywords" content={article.tags.join(',')} />}
+                {article.author && <meta key="author" name="author" content={article.author.name} />}
+                <meta key="og:type" property="og:type" content="article" />
+                <meta key="og:image" property="og:image" content={article.cover} />
+                <meta key="og:image:alt" property="og:image:alt" content={article.caption} />
+                <meta key="og:title" property="og:title" content={`${article.title} | Buat Sesuatu`} />
+                <meta key="og:description" property="og:description" content={article.desc} />
+                <meta key="og:url" property="og:url" content={`${process.env.NEXT_PUBLIC_OG_URL}/articles/${article.slug}`} />
+                <link key="canonical" rel="canonical" href={`${process.env.NEXT_PUBLIC_OG_URL}/articles/${article.slug}`} />
             </Head>
             <main className="p-3 mx-auto mt-3 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                 {/* Container */}

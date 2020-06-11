@@ -8,6 +8,10 @@ interface Article {
     content: string
     tags?: string[]
     status?: 'published' | 'preview'
+    author?: {
+        username: string
+        name: string
+    }
 }
 
 type onSuccess = (res: AxiosResponse) => void
