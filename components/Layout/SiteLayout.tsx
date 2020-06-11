@@ -5,6 +5,7 @@ import { LoadingProgressProvider } from '../Context/LoadingProgress'
 import FloatingMenu from '../FloatingMenu'
 import { AuthProvider } from '../Context/AuthContext'
 import { useState, useEffect } from 'react'
+import ToTop from '../ToTop'
 
 interface Props {
     children: React.ReactNode
@@ -78,6 +79,8 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
                         <FloatingMenu />
                     </LoadingProgressProvider>
                 </AuthProvider>
+
+                <ToTop />
             </div>
         </>
     )
