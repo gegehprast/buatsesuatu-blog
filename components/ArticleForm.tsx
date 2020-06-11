@@ -41,6 +41,7 @@ const ArticleForm = (
         ready, 
         handleSubmit 
     }: Props): React.ReactElement => {
+        
     const handleSubmitForm = (e: any) => {
         e.preventDefault()
         handleSubmit()
