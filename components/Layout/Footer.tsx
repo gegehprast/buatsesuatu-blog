@@ -4,7 +4,7 @@ import Link from 'next/link'
 const Footer: React.FC = () => {
     return (
         <>
-            <div className="relative w-full mt-10 bg-indigo-900 min-h-480-px">
+            <div className="relative w-full mt-10 bg-indigo-900 min-h-400-px md:min-h-480-px">
                 <Logo />
 
                 <div className="relative z-10 flex flex-col justify-center w-full px-3 py-8 text-white xl:justify-between md:px-4 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3 md:mx-auto xl:flex-row">
@@ -27,15 +27,15 @@ const Footer: React.FC = () => {
 
                     <div className="w-full h-auto mt-8 xl:w-9/12 sm:mt-0 md:mt-8 xl:mt-0">
                         <div className="mb-1 text-lg font-bold md:text-xl">Kata Bijak</div>
-                        <div className="text-sm italic leading-normal text-gray-100 md:text-base">
-                            <p className="leading-loose">So leave the lights on I&apos;m coming home.</p>
-                            <p className="leading-loose">It&apos;s getting darker but I carry on.</p>
-                            <p className="leading-loose">The sun won&apos;t shine here, it never did.</p>
-                            <p className="leading-loose">And when it rains, it fucking pours.</p>
-                            <p className="leading-loose">But I think I like it.</p>
-                            <p className="leading-loose">And you know that I&apos;m love with the pain.</p>
-                            <p className="leading-loose">I think I like it.</p>
+                        <div className="text-sm italic font-light leading-normal text-gray-100 md:text-base">
+                            <p className="leading-loose">&quot;Waiting doesn&apos;t get you love or help you finding an octopus.&quot; - Sakata Gintoki</p>
                         </div>
+                    </div>
+                </div>
+
+                <div className="absolute bottom-0 z-10 w-full py-8 text-sm text-gray-400">
+                    <div className="w-full px-3 leading-none md:px-4 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3 md:mx-auto">
+                        © {process.env.NEXT_PUBLIC_TITLE}
                     </div>
                 </div>
             </div>
