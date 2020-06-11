@@ -17,9 +17,6 @@ const Footer: React.FC = () => {
                                 </Link>
                             </li>
                             <li className="py-1 text-sm xl:py-2 md:text-base">
-                                <a href="#" className="hover:text-indigo-300 transition-color transition-400 transition-ease">Kebijakan Privasi</a>
-                            </li>
-                            <li className="py-1 text-sm xl:py-2 md:text-base">
                                 <a href="https://github.com/gegehprast/buatsesuatu" target="_blank" rel="noopener noreferrer" className="hover:text-indigo-300 transition-color transition-400 transition-ease">Sumber Terbuka</a>
                             </li>
                         </ul>
