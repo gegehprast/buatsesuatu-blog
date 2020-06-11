@@ -11,7 +11,7 @@ Sedikit latar belakang tentangku, aku adalah seorang *full stack developer* di s
 
 <br/>
 
-Sebenarnya blog ini adalah sebuah proyek `example` saat aku sedang mecoba TypeScript dan MongoDB. Dari situlah muncul ide untuk menjadikan proyek ini menjadi blog sungguhan.
+Sebenarnya blog ini adalah sebuah proyek `example` saat aku sedang mecoba TypeScript dan MongoDB. Dari situlah muncul ide untuk menjadikan proyek ini menjadi blog sungguhan. Sebenarnya aku bukan orang yang jago nulis, but why not? We'll see.
 <br/><br/>
 
 Meskipun di dunia kerja aku lebih banyak berurusan dengan PHP, banyak proyek sampinganku yang kubuat dengan JavaScript (maybe even all of them?). Dan begitulah, blog ini akan menjadi sebuah tempat untukku berbagi pengalamanku dalam perjalanan hidupku bersama JavaScript dengan santai. 
