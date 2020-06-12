@@ -83,7 +83,6 @@ body {
 ::selection {
     @apply text-white bg-indigo-700;
 }
-
 /* selected text start */
 /* purgecss end ignore */
 
