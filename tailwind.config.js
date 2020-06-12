@@ -63,6 +63,9 @@ module.exports = {
                 '480-px': '480px',
                 '80-screen': '80vh',
             },
+            boxShadow: {
+                'bs': '0 0px 15px 0px rgba(0, 0, 0, 0.20), 0 5px 10px 0px rgba(0, 0, 0, 0.20)',
+            }
         },
     },
     variants: {
