@@ -10,9 +10,9 @@ import { getOneArticle } from '../../utils/articles'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Heading2 from '../../components/MarkdownRenderes/Heading2'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
-import Link from 'next/link'
 import { DiscussionEmbed } from 'disqus-react'
 import Head from 'next/head'
+import Tag from '../../components/Tag'
 
 interface Props {
     initial: {
@@ -79,11 +79,7 @@ const Article = ({ initial }: Props): React.ReactElement => {
                         <div className="mr-4 font-semibold">Tags: </div>
                         <div className="flex flex-wrap">
                             {article.tags && article.tags.map((tag, i) => (
-                                <Link key={i} href={{ pathname: '/', query: { tags: tag } }} as={`/?tags=${tag}`} shallow={true} >
-                                    <a className={`inline-block px-3 py-1 ${(i < (article.tags as string[]).length) && 'mr-2'} my-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full`}>
-                                        #{tag}
-                                    </a>
-                                </Link>
+                                <Tag key={i} length={(article.tags as string[]).length} tag={tag} i={i} />
                             ))}
                         </div>
                     </div>

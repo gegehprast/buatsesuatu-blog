@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { handleImageError } from '../utils/util'
 import SearchRenderer from './SearchRenderer'
+import Tag from './Tag'
 
 interface Props {
     title: string
@@ -16,7 +17,7 @@ interface Props {
 const Card: React.FC<Props> = ({ title, text, cover, tags, link, search, children }) => {
     return (
         <div className="flex w-full px-1 mb-3 md:w-1/2 lg:w-1/3">
-            <div className="relative flex flex-col flex-grow w-full overflow-hidden rounded shadow-lg">
+            <div className="relative flex flex-col flex-grow w-full overflow-hidden transition-shadow duration-200 ease-in rounded shadow-lg hover:shadow-bs">
                 <div className="relative w-full h-210-px md:h-190-px lg:h-210-px xxl-4k:h-480-px">
                     {link ?
                         <Link href={link.href} as={link.as} >
@@ -59,11 +60,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link, search, childre
                 
                 <div className="flex flex-wrap px-5 py-3">
                     {tags.map((tag, i) => (
-                        <Link key={i} href={{ pathname: '/', query: { tags: tag } }} as={`/?tags=${tag}`} shallow={true} >
-                            <a className={`inline-block px-3 py-1 ${(i !== tags.length - 1) && 'mr-2'} my-1 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full`}>
-                                #{tag}
-                            </a>
-                        </Link>
+                        <Tag key={i} length={tags.length} tag={tag} i={i} />
                     ))}
                 </div>
 
