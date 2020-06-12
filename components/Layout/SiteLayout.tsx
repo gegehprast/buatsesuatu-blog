@@ -63,6 +63,18 @@ const SiteLayout = ({ children }: Props): JSX.Element => {
 
                 <link key="canonical" rel="canonical" href={process.env.NEXT_PUBLIC_CANONICAL} />
                 <link rel="search" type="application/opensearchdescription+xml" title={process.env.NEXT_PUBLIC_TITLE} href="/opensearch.xml" />
+
+                <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116660263-2"></script>
+
+                <script
+                    dangerouslySetInnerHTML={{
+                        __html: `window.dataLayer = window.dataLayer || [];
+                            function gtag(){dataLayer.push(arguments);}
+                            gtag('js', new Date());
+
+                            gtag('config', 'UA-116660263-2');`
+                    }}
+                />
             </Head>
 
             <div className={`${darkMode && 'dark-mode'}`}>
