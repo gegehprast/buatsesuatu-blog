@@ -24,6 +24,10 @@ const Article = ({ initial }: Props): React.ReactElement => {
     const router = useRouter()
     const { article, loading } = useArticle({ slug: router.query.slug as string, initial})
 
+    if (!loading && article.status === 'preview') {
+        router.push('/', '/', { shallow: true })
+    }
+
     return (
         <div className="w-full">
             <Head>
