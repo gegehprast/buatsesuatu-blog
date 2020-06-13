@@ -30,12 +30,22 @@ body {
     transform: scale(1);
 }
 
+.prevent-headbutting {
+    margin-top: -105px;
+    padding-bottom:105px;
+}
+
 @screen md {
     .footer-logo {
         position: absolute;
         top: 0;
         left: 50%;
         transform: scale(1.5);
+    }
+
+    .prevent-headbutting {
+        margin-top: -50px;
+        padding-bottom: 50px;
     }
 }
 
