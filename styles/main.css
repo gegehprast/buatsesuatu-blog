@@ -84,6 +84,11 @@ body {
 /* SimpleMDE */
 
 /* Markdown */
+.markdown-body ol,
+.markdown-body ul {
+    list-style: inherit;
+}
+
 .markdown-body h3 a {
     color: inherit;
 }
