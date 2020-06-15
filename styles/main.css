@@ -84,7 +84,7 @@ body {
 /* SimpleMDE */
 
 /* Markdown */
-.markdown-body a {
+.markdown-body h3 a {
     color: inherit;
 }
 
