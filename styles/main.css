@@ -7,6 +7,17 @@ body {
     @apply font-sans;
 }
 
+
+.search-bar {
+    border-bottom-width: 3px;
+    @apply border-b-gray-300;
+    transition: border-color;
+}
+
+.search-bar:focus {
+    @apply border-b-gray-700;
+}
+
 .markdown-body {
     @apply font-sans;
 }

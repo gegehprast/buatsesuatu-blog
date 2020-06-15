@@ -47,7 +47,7 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
 
                     <div className="flex w-1/2 mt-3 mb-2 mr-2 lg:self-stretch md:mb-0 md:mt-1 md:mx-4 lg:mt-0">
                         <input type="text" 
-                            className="w-full px-3 py-1 border-b-4 border-b-gray-300 focus:outline-none focus:border-b-gray-900" 
+                            className="w-full px-3 py-1 duration-200 ease-in focus:outline-none search-bar" 
                             onChange={(e) => setSearch(e.target.value)} 
                             onKeyUp={handleKeyUp}
                             value={search} 
