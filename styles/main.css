@@ -84,8 +84,17 @@ body {
 /* SimpleMDE */
 
 /* Markdown */
-.markdown-body h2 a:hover {
+.markdown-body a {
+    color: inherit;
+}
+
+.markdown-body h2 a:hover,
+.markdown-body h3 a:hover {
     @apply no-underline;
+}
+
+.markdown-body blockquote {
+    padding: 1em 1em;
 }
 /* Markdown */
 

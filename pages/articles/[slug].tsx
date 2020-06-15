@@ -8,7 +8,7 @@ import ArticlePlaceHolder from '../../components/ArticlePlaceholder'
 import ReactPlaceholder from 'react-placeholder/lib'
 import { getOneArticle } from '../../utils/articles'
 import { GetServerSideProps, GetServerSidePropsContext } from 'next'
-import Heading2 from '../../components/MarkdownRenderes/Heading2'
+import Heading from '../../components/MarkdownRenderes/Heading'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
 import { DiscussionEmbed } from 'disqus-react'
 import Head from 'next/head'
@@ -61,7 +61,7 @@ const Article = ({ initial }: Props): React.ReactElement => {
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </div>
                         {article.caption && <figcaption className="text-sm text-center text-gray-700">
-                            <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading2, link: Anchor }}>
+                            <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading, link: Anchor }}>
                                 {article.caption}
                             </ReactMarkdown>
                         </figcaption>}
@@ -74,7 +74,7 @@ const Article = ({ initial }: Props): React.ReactElement => {
                     </div>
 
                     <div className="w-full mt-8 markdown-body">
-                        <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading2, link: Anchor }}>
+                        <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading, link: Anchor }}>
                             {article.content}
                         </ReactMarkdown>
                     </div>
