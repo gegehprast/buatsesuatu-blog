@@ -6,23 +6,15 @@ import { handleImageError } from '../../utils/util'
 import CodeBlock from '../../components/MarkdownRenderes/CodeBlock'
 import ArticlePlaceHolder from '../../components/ArticlePlaceholder'
 import ReactPlaceholder from 'react-placeholder/lib'
-import { getOneArticle } from '../../utils/articles'
-import { GetServerSideProps, GetServerSidePropsContext } from 'next'
 import Heading from '../../components/MarkdownRenderes/Heading'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
 import { DiscussionEmbed } from 'disqus-react'
 import Head from 'next/head'
 import Tag from '../../components/Tag'
 
-interface Props {
-    initial: {
-        article: Article
-    }
-}
-
-const Article = ({ initial }: Props): React.ReactElement => {
+const Article = (): React.ReactElement => {
     const router = useRouter()
-    const { article, loading } = useArticle({ slug: router.query.slug as string, initial})
+    const { article, loading } = useArticle({ slug: router.query.slug as string })
 
     if (!loading && article.status === 'preview') {
         router.push('/', '/', { shallow: true })
@@ -88,7 +80,7 @@ const Article = ({ initial }: Props): React.ReactElement => {
                         </div>
                     </div>
 
-                    <div className="w-full my-10">
+                    <div className="w-full mt-24 mb-10">
                         <DiscussionEmbed shortname="buat-sesuatu" 
                             config={
                                 {
@@ -103,26 +95,6 @@ const Article = ({ initial }: Props): React.ReactElement => {
             </main>
         </div>
     )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-    const res: any = await new Promise(resolve => {
-        getOneArticle({
-            slug: query.slug as string,
-            onSuccess: (res) => {
-                resolve(res.data)
-            },
-            onError: () => {
-                resolve({})
-            }
-        })
-    })
-
-    const initial = {
-        article: res,
-    }
-
-    return { props: { initial } }
 }
 
 export default Article
