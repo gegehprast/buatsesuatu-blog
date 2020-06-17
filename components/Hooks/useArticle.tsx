@@ -15,7 +15,7 @@ type ArticleHook = {
     article: Article,
 }
 
-const initialState = {
+const initialArticle = {
     slug: '',
     title: '',
     desc: '',
@@ -23,9 +23,9 @@ const initialState = {
 }
 
 const useArticle = ({ slug, initial }: Props): ArticleHook => {
-    const [loading, setLoading] = useState(true)
+    const [loading, setLoading] = useState(initial ? false : true)
     const [error, setError] = useState(false)
-    const [article, setarticle] = useState<Article>(initial ? initial.article : initialState)
+    const [article, setarticle] = useState<Article>(initial ? initial.article : initialArticle)
 
     useEffect(() => {
         let cancel: () => void

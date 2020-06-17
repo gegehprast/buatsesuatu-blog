@@ -11,15 +11,23 @@ import Anchor from '../../components/MarkdownRenderes/Anchor'
 import { DiscussionEmbed } from 'disqus-react'
 import Head from 'next/head'
 import Tag from '../../components/Tag'
+import { NextPage } from 'next'
+import { getOneArticle } from '../../utils/articles'
 
-const Article = (): React.ReactElement => {
+interface Props {
+    initial?: {
+        article: Article
+    }
+}
+
+const Article: NextPage<Props> = ({ initial }) => {
     const router = useRouter()
-    const { article, loading } = useArticle({ slug: router.query.slug as string })
+    const { article, loading } = useArticle({ slug: router.query.slug as string, initial })
 
     if (!loading && article.status === 'preview') {
         router.push('/', '/', { shallow: true })
     }
-
+ 
     return (
         <div className="w-full">
             <Head>
@@ -95,6 +103,31 @@ const Article = (): React.ReactElement => {
             </main>
         </div>
     )
+}
+
+Article.getInitialProps = async ({ req, query }) => {
+    let initial = undefined
+
+    if (req) {
+        const res: any = await new Promise(resolve => {
+            getOneArticle({
+                slug: query.slug as string,
+                onSuccess: (res) => {
+                    resolve(res.data)
+                },
+                onError: () => {
+                    resolve({})
+                }
+            })
+        })
+
+        initial = {
+            article: res,
+        }
+    }
+    
+
+    return { initial: initial }
 }
 
 export default Article
