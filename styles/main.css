@@ -1,4 +1,3 @@
-/* purgecss start ignore */
 @tailwind base;
 
 @tailwind components;
@@ -16,10 +15,6 @@ body {
 
 .search-bar:focus {
     @apply border-b-gray-700;
-}
-
-.markdown-body {
-    @apply font-sans font-medium leading-relaxed text-gray-800;
 }
 
 .pagination-cursor-pointer {
@@ -95,6 +90,14 @@ body {
 /* SimpleMDE */
 
 /* Markdown */
+.markdown-body {
+    @apply font-sans font-medium leading-relaxed text-gray-800;
+}
+
+.markdown-body strong {
+    font-weight: 700;
+}
+
 .markdown-body ol,
 .markdown-body ul {
     list-style: inherit;
@@ -119,6 +122,5 @@ body {
     @apply text-white bg-indigo-700;
 }
 /* selected text start */
-/* purgecss end ignore */
 
 @tailwind utilities;

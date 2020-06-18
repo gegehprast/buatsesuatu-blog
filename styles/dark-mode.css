@@ -79,6 +79,14 @@
     @apply border-b-gray-400;
 }
 
+.dark-mode .markdown-body code {
+    background-color: rgba(177, 182, 187, 0.33);
+}
+
+.dark-mode .markdown-body pre code {
+    background-color: initial;
+}
+
 .darkModeButton:active {
     @apply outline-none;
     transform: scale(1.2);
