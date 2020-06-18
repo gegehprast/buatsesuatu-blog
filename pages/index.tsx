@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import { GetServerSidePropsContext, GetServerSideProps } from 'next'
+import { NextPage } from 'next'
 import Link from 'next/link'
 import ReactPlaceholder from 'react-placeholder'
 import Card from '../components/Card'
@@ -15,30 +15,21 @@ import CardsPlaceHolder from '../components/CardsPlaceHolder'
 const limit = 12
 
 interface Props {
-    initial: {
+    initial?: {
         articles: Article[]
         total: number
         totalPage: number
     }
 }
 
-const Home = ({ initial }: Props): React.ReactElement => {
+const Home: NextPage<Props> = ({ initial }) => {
     const router = useRouter()
-    const [firstTime, setFirstTime] = useState(true)
     const [search, setSearch] = useState<string>(router.query.search ? router.query.search as string : '')
     const [tags, setTags] = useState<string>(router.query.tags ? router.query.tags as string : '')
     const [page, setPage] = useState(router.query.page ? parseInt(router.query.page as string) : 1)
     const { articles, total, loading, removeArticle, totalPage, updateArticle } = useArticles({ page, limit, search, tags, initial })
     const { setPageLoading } = useContext(LoadingProgressContext)
     const { user } = useContext(AuthContext)
-
-    useEffect(() => {
-        setFirstTime(true)
-
-        setTimeout(() => {
-            setFirstTime(false)
-        }, 1000)
-    }, [initial])
 
     useEffect(() => {
         setSearch(router.query.search ? router.query.search as string : '')
@@ -106,7 +97,7 @@ const Home = ({ initial }: Props): React.ReactElement => {
                 </h1>
 
                 {/* Container */}
-                <ReactPlaceholder ready={firstTime || !loading} customPlaceholder={<CardsPlaceHolder />}>
+                <ReactPlaceholder ready={!loading} customPlaceholder={<CardsPlaceHolder />}>
                     <div className="flex flex-wrap w-full min-h-full mt-6">
                         {articles.length < 1 && <div className="w-full mt-4 text-lg font-bold text-center">Belum ada postingan.</div>}
 
@@ -164,29 +155,33 @@ const Home = ({ initial }: Props): React.ReactElement => {
     )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }: GetServerSidePropsContext) => {
-    const res: any = await new Promise(resolve => {
-        getArticles({
-            page: query.page ? parseInt(query.page as string) : 1,
-            search: query.search ? query.search as string : '',
-            tags: query.tags ? query.tags as string : '',
-            limit,
-            onSuccess: (res) => {
-                resolve(res.data)
-            },
-            onError: () => {
-                resolve({})
-            }
-        })
-    })
+Home.getInitialProps = async ({ req, query }) => {
+    let initial = undefined
 
-    const initial = {
-        articles: res.docs,
-        total: res.totalDocs,
-        totalPage: res.totalPages
+    if (req) {
+        const res: any = await new Promise(resolve => {
+            getArticles({
+                page: query.page ? parseInt(query.page as string) : 1,
+                search: query.search ? query.search as string : '',
+                tags: query.tags ? query.tags as string : '',
+                limit,
+                onSuccess: (res) => {
+                    resolve(res.data)
+                },
+                onError: () => {
+                    resolve({})
+                }
+            })
+        })
+
+        initial = {
+            articles: res.docs,
+            total: res.totalDocs,
+            totalPage: res.totalPages
+        }
     }
 
-    return { props: { initial } }
+    return { initial }
 }
 
 export default Home

@@ -8,7 +8,7 @@ interface Props {
     limit: number
     search: string
     tags: string
-    initial: {
+    initial?: {
         articles: Article[]
         total: number
         totalPage: number
@@ -27,12 +27,12 @@ type ArticlesHook = {
 }
 
 const useArticles = ({ page, limit, search, tags, initial }: Props): ArticlesHook => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(initial ? false : true)
     const [error, setError] = useState(false)
-    const [articles, setArticles] = useState<Article[]>(initial.articles)
+    const [articles, setArticles] = useState<Article[]>(initial ? initial.articles : [])
     const [hasMore, setHasMore] = useState(false)
-    const [total, setTotal] = useState(initial.total)
-    const [totalPage, setTotalPage] = useState(initial.totalPage)
+    const [total, setTotal] = useState(initial ? initial.total : 0)
+    const [totalPage, setTotalPage] = useState(initial ? initial.totalPage : 0)
 
     useEffect(() => {
         let cancel: () => void
