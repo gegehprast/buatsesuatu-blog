@@ -1,6 +1,6 @@
 {
   "name": "buatsesuatu",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "A simple blog with Next.js",
   "scripts": {
     "dev": "next",
@@ -21,7 +21,8 @@
     "react-placeholder": "^4.0.2",
     "react-simplemde-editor": "^4.1.2",
     "react-slugify": "^2.0.1",
-    "react-syntax-highlighter": "^12.2.1"
+    "react-syntax-highlighter": "^12.2.1",
+    "tailwindcss": "^1.4.6"
   },
   "devDependencies": {
     "@types/js-cookie": "^2.2.6",
@@ -33,10 +34,8 @@
     "eslint": "^7.1.0",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^4.0.4",
-    "postcss-preset-env": "^6.7.0",
     "stylelint": "^13.6.0",
     "stylelint-config-recommended": "^3.0.0",
-    "tailwindcss": "^1.4.6",
     "typescript": "^3.9.3"
   }
 }
