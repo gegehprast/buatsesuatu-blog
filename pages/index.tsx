@@ -98,53 +98,56 @@ const Home: NextPage<Props> = ({ initial }) => {
 
                 {/* Container */}
                 <ReactPlaceholder ready={!loading} customPlaceholder={<CardsPlaceHolder />}>
-                    <div className="flex flex-wrap w-full min-h-full mt-6">
-                        {articles.length < 1 && <div className="w-full mt-4 text-lg font-bold text-center">Belum ada postingan.</div>}
-
-                        {/* Cards */}
-                        {articles.map((article) => (
-                            <Card key={article._id}
-                                title={article.title}
-                                cover={article.cover}
-                                text={article.desc}
-                                tags={article.tags || []}
-                                link={{ href: '/articles/[slug]', as: `/articles/${article.slug}` }}
-                                search={search}
-                            >
-                                <div className="bg-gray-500">
-                                    {user && <div className="p-2">
-                                        <div className="flex">
-                                            <Link href="/articles/[slug]/edit" as={`/articles/${article.slug}/edit`}>
-                                                <a className="p-2 leading-none text-white bg-indigo-500 rounded hover:bg-indigo-600 active:bg-indigo-700">
-                                                    Edit
-                                                </a>
-                                            </Link>
-                                            
-                                            <button 
-                                                className={
-                                                    `p-2 ml-2 leading-none text-white rounded ${
-                                                        article.status === 'published' ? 
-                                                            'bg-orange-500 hover:bg-orange-600 active:bg-orange-700' : 
-                                                            'bg-green-500 hover:bg-green-600 active:bg-green-700'
-                                                    }`
-                                                }
-                                                onClick={() => handlePublishArticle(article, article.status === 'published' ? 'preview' : 'published')}
-                                            >
-                                                {article.status === 'published' ? 'Unpublish' : 'Publish'}
-                                            </button>
-
-                                            <button className="p-2 ml-2 leading-none text-white bg-red-600 rounded hover:bg-red-700 active:bg-red-500" 
-                                                onClick={() => handleDeleteArticle(article._id as string)}
-                                            >
-                                                Delete
-                                            </button>
-                                        </div>
-                                    </div>}
-                                </div>
-                            </Card>
-                        ))}
-                    </div>
+                    <>
+                    </>
                 </ReactPlaceholder>
+
+                <div className={`flex flex-wrap w-full min-h-full mt-6 ${loading && 'hidden'}`}>
+                    {articles.length < 1 && <div className="w-full mt-4 text-lg font-bold text-center">Belum ada postingan.</div>}
+
+                    {/* Cards */}
+                    {articles.map((article) => (
+                        <Card key={article._id}
+                            title={article.title}
+                            cover={article.cover}
+                            text={article.desc}
+                            tags={article.tags || []}
+                            link={{ href: '/articles/[slug]', as: `/articles/${article.slug}` }}
+                            search={search}
+                        >
+                            <div className="bg-gray-500">
+                                {user && <div className="p-2">
+                                    <div className="flex">
+                                        <Link href="/articles/[slug]/edit" as={`/articles/${article.slug}/edit`}>
+                                            <a className="p-2 leading-none text-white bg-indigo-500 rounded hover:bg-indigo-600 active:bg-indigo-700">
+                                                Edit
+                                            </a>
+                                        </Link>
+
+                                        <button
+                                            className={
+                                                `p-2 ml-2 leading-none text-white rounded ${
+                                                    article.status === 'published' ?
+                                                        'bg-orange-500 hover:bg-orange-600 active:bg-orange-700' :
+                                                        'bg-green-500 hover:bg-green-600 active:bg-green-700'
+                                                }`
+                                            }
+                                            onClick={() => handlePublishArticle(article, article.status === 'published' ? 'preview' : 'published')}
+                                        >
+                                            {article.status === 'published' ? 'Unpublish' : 'Publish'}
+                                        </button>
+
+                                        <button className="p-2 ml-2 leading-none text-white bg-red-600 rounded hover:bg-red-700 active:bg-red-500"
+                                            onClick={() => handleDeleteArticle(article._id as string)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>}
+                            </div>
+                        </Card>
+                    ))}
+                </div>
 
                 {/* Secondary container */}
                 {totalPage > 1 && <div className="flex flex-wrap w-full min-h-full mt-6">

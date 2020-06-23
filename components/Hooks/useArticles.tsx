@@ -27,7 +27,7 @@ type ArticlesHook = {
 }
 
 const useArticles = ({ page, limit, search, tags, initial }: Props): ArticlesHook => {
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [articles, setArticles] = useState<Article[]>(initial ? initial.articles : [])
     const [hasMore, setHasMore] = useState(false)

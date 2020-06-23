@@ -23,7 +23,7 @@ const initialArticle = {
 }
 
 const useArticle = ({ slug, initial }: Props): ArticleHook => {
-    const [loading, setLoading] = useState(initial ? false : true)
+    const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
     const [article, setarticle] = useState<Article>(initial ? initial.article : initialArticle)
 
