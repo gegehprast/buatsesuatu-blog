@@ -94,7 +94,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                                 shortname="buat-sesuatu"
                                 config={
                                     {
-                                        url: `https://buatsesuatu.dev/article/${article.slug}`,
+                                        url: `https://buatsesuatu.dev/articles/${article.slug}`,
                                         identifier: article._id + article.slug,
                                         title: article.title,
                                     }
