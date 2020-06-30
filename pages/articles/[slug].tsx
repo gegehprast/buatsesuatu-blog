@@ -94,7 +94,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                                 config={
                                     {
                                         url: `https://buatsesuatu.dev/${router.pathname}`,
-                                        identifier: article.slug,
+                                        identifier: article._id + article.slug,
                                         title: article.title,
                                     }
                                 }
