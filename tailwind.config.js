@@ -85,10 +85,5 @@ module.exports = {
 
             addUtilities(utilities, variants('borderColor'))
         }
-    ],
-    corePlugins: {
-        backgroundOpacity: false,
-        textOpacity: false,
-        borderOpacity: false,
-    }
+    ]
 }
