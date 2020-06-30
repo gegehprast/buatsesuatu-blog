@@ -23,6 +23,12 @@ interface Props {
 const Article: NextPage<Props> = ({ initial }) => {
     const router = useRouter()
     const { article, loading } = useArticle({ slug: router.query.slug as string, initial })
+    const disqusShortname = 'buat-sesuatu'
+    const disqusConfig = {
+        url: `https://buatsesuatu.dev/articles/${article.slug}`,
+        identifier: article._id + article.slug,
+        title: article.title,
+    }
 
     if (!loading && article.status === 'preview') {
         router.push('/', '/', { shallow: true })
@@ -91,14 +97,8 @@ const Article: NextPage<Props> = ({ initial }) => {
                     <div className="w-full mt-24 mb-10">
                         {
                             !loading && <DiscussionEmbed key={article._id} 
-                                shortname="buat-sesuatu"
-                                config={
-                                    {
-                                        url: `https://buatsesuatu.dev/articles/${article.slug}`,
-                                        identifier: article._id + article.slug,
-                                        title: article.title,
-                                    }
-                                }
+                                shortname={disqusShortname}
+                                config={disqusConfig}
                             />
                         }
                     </div>
