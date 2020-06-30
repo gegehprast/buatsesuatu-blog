@@ -115,6 +115,20 @@ body {
 .markdown-body blockquote {
     padding: 1em 1em;
 }
+
+.markdown-body pre {
+    margin: 1.25rem 0 !important;
+}
+
+.markdown-body img {
+    margin: 0 auto;
+}
+
+@screen md {
+    .markdown-body img {
+        max-width: 70%;
+    }
+}
 /* Markdown */
 
 /* selected text start */
