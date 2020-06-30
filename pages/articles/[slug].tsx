@@ -89,15 +89,17 @@ const Article: NextPage<Props> = ({ initial }) => {
                     </div>
 
                     <div className="w-full mt-24 mb-10">
-                        <DiscussionEmbed shortname="buat-sesuatu" 
-                            config={
-                                {
-                                    url: `https://buatsesuatu.dev/${router.pathname}`,
-                                    identifier: article.slug,
-                                    title: article.title,	
+                        {
+                            !loading && <DiscussionEmbed shortname="buat-sesuatu"
+                                config={
+                                    {
+                                        url: `https://buatsesuatu.dev/${router.pathname}`,
+                                        identifier: article.slug,
+                                        title: article.title,
+                                    }
                                 }
-                            }
-                        />
+                            />
+                        }
                     </div>
                 </div>
             </main>
