@@ -9,9 +9,11 @@ interface Props {
     }
 }
 
+type Error = null | { status: number, message: string }
+
 type ArticleHook = {
     loading: boolean,
-    error: boolean,
+    error: Error,
     article: Article,
 }
 
@@ -24,30 +26,33 @@ const initialArticle = {
 
 const useArticle = ({ slug, initial }: Props): ArticleHook => {
     const [loading, setLoading] = useState(true)
-    const [error, setError] = useState(false)
-    const [article, setarticle] = useState<Article>(initial ? initial.article : initialArticle)
+    const [error, setError] = useState<Error>(null)
+    const [article, setArticle] = useState<Article>(initial ? initial.article : initialArticle)
 
     useEffect(() => {
         let cancel: () => void
 
         setLoading(true)
 
-        setError(false)
+        setError(null)
 
         getOneArticle({
             slug,
             cancelToken: new axios.CancelToken(c => cancel = c),
             onSuccess: (res) => {
-                setarticle(res.data)
+                setArticle(res.data)
 
                 setTimeout(() => {
                     setLoading(false)
                 }, 200)
             },
-            onError: () => {
+            onError: (e) => {
                 setLoading(false)
 
-                setError(true)
+                setError({
+                    status: e.response.status,
+                    message: e.message,
+                })
             }
         })
 

@@ -22,12 +22,16 @@ interface Props {
 
 const Article: NextPage<Props> = ({ initial }) => {
     const router = useRouter()
-    const { article, loading } = useArticle({ slug: router.query.slug as string, initial })
+    const { article, loading, error } = useArticle({ slug: router.query.slug as string, initial })
     const disqusShortname = 'buat-sesuatu'
     const disqusConfig = {
         url: `https://buatsesuatu.dev/articles/${article.slug}`,
-        identifier: article._id + article.slug,
+        identifier: article.slug,
         title: article.title,
+    }
+
+    if (error && error.status === 404) {
+        router.replace('/404', '/404')
     }
 
     if (!loading && article.status === 'preview') {
@@ -119,13 +123,15 @@ Article.getInitialProps = async ({ req, query }) => {
                     resolve(res.data)
                 },
                 onError: () => {
-                    resolve({})
+                    resolve({ error: true })
                 }
             })
         })
 
-        initial = {
-            article: res,
+        if (!res.error) {
+            initial = {
+                article: res,
+            }
         }
     }
     
