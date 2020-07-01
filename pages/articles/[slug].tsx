@@ -99,12 +99,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                     </div>
 
                     <div className="w-full mt-24 mb-10">
-                        {
-                            !loading && <DiscussionEmbed key={article._id} 
-                                shortname={disqusShortname}
-                                config={disqusConfig}
-                            />
-                        }
+                        {!loading && <DiscussionEmbed shortname={disqusShortname} config={disqusConfig} />}
                     </div>
                 </div>
             </main>
