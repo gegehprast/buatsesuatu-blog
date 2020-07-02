@@ -10,7 +10,7 @@ const Anchor = (props: Props): JSX.Element => {
     if (props.href?.startsWith('https://buatsesuatu.dev/articles')) {
         const slug = props.href.replace('https://buatsesuatu.dev/articles/', '')
         
-        return <Link href="/articles/[slug]" as={`/articles/${slug}`}>
+        return <Link href="/articles/[slug]" as={`/articles/${slug}`} shallow={true}>
             <a href={props.href} className="text-indigo-600 visited:text-purple-600 hover:text-indigo-800">
                 {props.children}
             </a>
