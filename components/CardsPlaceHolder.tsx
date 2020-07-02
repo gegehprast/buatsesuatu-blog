@@ -7,7 +7,7 @@ const CardsPlaceHolder = (): React.ReactElement => {
     return (
         <div className="flex flex-wrap w-full min-h-full mt-6">
             {items.map(item => <div key={item} className="flex w-full px-1 mb-3 md:w-1/2 lg:w-1/3">
-                <RectShape color="#E0E0E0" style={{ width: 300, height: 500 }} />
+                <RectShape color="#E0E0E0" style={{ width: '100%', height: 500, margin: '0' }} />
             </div>)}
         </div>
     )
