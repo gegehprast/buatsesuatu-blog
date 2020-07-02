@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/dist/client/router'
 import useArticle from '../../components/Hooks/useArticle'
@@ -29,6 +29,14 @@ const Article: NextPage<Props> = ({ initial }) => {
         identifier: article.slug,
         title: article.title,
     }
+
+    useEffect(() => {
+        if (!loading && window.location.hash !== '') {
+            setTimeout(() => {
+                document.getElementById(window.location.hash.substr(1))?.scrollIntoView()
+            }, 500)
+        }
+    }, [loading, router])
 
     if (error && error.status === 404) {
         router.replace('/404', '/404')
