@@ -36,7 +36,7 @@ const About = ({ content }: { content: string }): JSX.Element => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-    const content = readFileSync(path.join('static/about.md')).toString()
+    const content = readFileSync(path.join('public/static/about.md')).toString()
 
     return {
         props: {
