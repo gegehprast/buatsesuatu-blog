@@ -159,7 +159,11 @@ const Home: NextPage<Props> = ({ initial }) => {
 }
 
 Home.getInitialProps = async ({ req, query }) => {
-    let initial = undefined
+    let initial = {
+        articles: [],
+        total: 0,
+        totalPage: 0
+    }
 
     if (req) {
         const res: any = await new Promise(resolve => {
@@ -178,11 +182,13 @@ Home.getInitialProps = async ({ req, query }) => {
         })
 
         initial = {
-            articles: res.docs,
-            total: res.totalDocs,
-            totalPage: res.totalPages
+            articles: res.docs || [],
+            total: res.totalDocs || 0,
+            totalPage: res.totalPages || 0
         }
     }
+
+    console.log(initial)
 
     return { initial }
 }
