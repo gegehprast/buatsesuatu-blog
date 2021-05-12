@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import ReactMarkdown from 'react-markdown'
 import CodeBlock from '../components/MarkdownRenderes/CodeBlock'
-import Heading from '../components/MarkdownRenderes/Heading'
+import { H1, H2, H3 } from '../components/MarkdownRenderes/Heading'
 import Anchor from '../components/MarkdownRenderes/Anchor'
 
 const About = ({ content }: { content: string }): JSX.Element => {
@@ -26,7 +26,7 @@ const About = ({ content }: { content: string }): JSX.Element => {
                 </div>
 
                 <div className="w-full mt-8 markdown-body">
-                    <ReactMarkdown escapeHtml={false} renderers={{ code: CodeBlock, heading: Heading, link: Anchor }}>
+                    <ReactMarkdown skipHtml={false} components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                         {content}
                     </ReactMarkdown>
                 </div>

@@ -6,13 +6,13 @@ import { handleImageError } from '../../utils/util'
 import CodeBlock from '../../components/MarkdownRenderes/CodeBlock'
 import ArticlePlaceHolder from '../../components/ArticlePlaceholder'
 import ReactPlaceholder from 'react-placeholder/lib'
-import Heading from '../../components/MarkdownRenderes/Heading'
 import Anchor from '../../components/MarkdownRenderes/Anchor'
 import { DiscussionEmbed } from 'disqus-react'
 import Head from 'next/head'
 import Tag from '../../components/Tag'
 import { NextPage } from 'next'
 import { getOneArticle } from '../../utils/articles'
+import { H1, H2, H3 } from '../../components/MarkdownRenderes/Heading'
 
 interface Props {
     initial?: {
@@ -79,7 +79,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </div>
                         {article.caption && <figcaption className="text-sm text-center text-gray-700">
-                            <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading, link: Anchor }}>
+                            <ReactMarkdown components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                                 {article.caption}
                             </ReactMarkdown>
                         </figcaption>}
@@ -92,7 +92,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                     </div>
 
                     <div className="w-full mt-8 markdown-body">
-                        <ReactMarkdown renderers={{ code: CodeBlock, heading: Heading, link: Anchor }}>
+                        <ReactMarkdown components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                             {article.content}
                         </ReactMarkdown>
                     </div>
