@@ -188,8 +188,6 @@ Home.getInitialProps = async ({ req, query }) => {
         }
     }
 
-    console.log(initial)
-
     return { initial }
 }
 

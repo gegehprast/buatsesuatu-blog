@@ -36,7 +36,6 @@ const Create = (): React.ReactElement | null => {
 
             setSubmitting(false)
         } catch (error) {
-            console.log(error)
             setSubmitting(false)
         }
     }
