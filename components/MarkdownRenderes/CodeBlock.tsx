@@ -1,17 +1,19 @@
 import React from 'react'
+import { CodeComponent } from 'react-markdown/src/ast-to-react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
 import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
-interface Props {
-    value: string
-    language?: string
-}
+const CodeBlock: CodeComponent = ({ inline, className, children, ...props }) => {
+    const match = /language-(\w+)/.exec(className || '')
 
-const CodeBlock = ({ language, value }: Props): JSX.Element => {
-    return (
-        <SyntaxHighlighter language={language} style={atomDark}>
-            {value}
+    return !inline && match ? (
+        <SyntaxHighlighter style={atomDark} language={match[1]} PreTag="div" {...props}>
+            {String(children).replace(/\n$/, '')}
         </SyntaxHighlighter>
+    ) : (
+        <code className={className} {...props}>
+            {String(children).replace(/\n$/, '')}
+        </code>
     )
 }
 

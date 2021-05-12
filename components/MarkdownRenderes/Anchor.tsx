@@ -1,24 +1,24 @@
 import React from 'react'
 import Link from 'next/link'
+import { NormalComponent, ReactBaseProps, ReactMarkdownProps } from 'react-markdown/src/ast-to-react'
 
-interface Props {
-    children: string
+type Prop = {
     href?: string
-}
+} & ReactBaseProps & ReactMarkdownProps
 
-const Anchor = (props: Props): JSX.Element => {
-    if (props.href?.startsWith('https://buatsesuatu.dev/articles')) {
-        const slug = props.href.replace('https://buatsesuatu.dev/articles/', '')
+const Anchor: NormalComponent = ({ children, href }: Prop) => {
+    if (href?.startsWith('https://buatsesuatu.dev/articles')) {
+        const slug = href.replace('https://buatsesuatu.dev/articles/', '')
         
-        return <Link href="/articles/[slug]" as={`/articles/${slug}`} shallow={true}>
-            <a href={props.href} className="text-indigo-600 visited:text-purple-600 hover:text-indigo-800">
-                {props.children}
+        return <Link href="/articles/[slug]" as={`/articles/${slug}`} scroll={true}>
+            <a href={href} className="text-indigo-600 visited:text-purple-600 hover:text-indigo-800">
+                {children}
             </a>
         </Link>
     }
 
-    return <a href={props.href} className="text-indigo-600 visited:text-purple-600 hover:text-indigo-800" target="_blank" rel="noreferrer">
-        {props.children}
+    return <a href={href} className="text-indigo-600 visited:text-purple-600 hover:text-indigo-800" target="_blank" rel="noreferrer">
+        {children}
     </a>
 }
 
