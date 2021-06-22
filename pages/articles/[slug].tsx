@@ -13,6 +13,7 @@ import Tag from '../../components/Tag'
 import { NextPage } from 'next'
 import { getOneArticle } from '../../utils/articles'
 import { H1, H2, H3 } from '../../components/MarkdownRenderes/Heading'
+import remarkGfm from 'remark-gfm'
 
 interface Props {
     initial?: {
@@ -79,7 +80,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </div>
                         {article.caption && <figcaption className="text-sm text-center text-gray-700">
-                            <ReactMarkdown components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
+                            <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                                 {article.caption}
                             </ReactMarkdown>
                         </figcaption>}
@@ -92,7 +93,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                     </div>
 
                     <div className="w-full mt-8 markdown-body">
-                        <ReactMarkdown components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                             {article.content}
                         </ReactMarkdown>
                     </div>

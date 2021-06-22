@@ -7,6 +7,7 @@ import ReactMarkdown from 'react-markdown'
 import CodeBlock from '../components/MarkdownRenderes/CodeBlock'
 import { H1, H2, H3 } from '../components/MarkdownRenderes/Heading'
 import Anchor from '../components/MarkdownRenderes/Anchor'
+import remarkGfm from 'remark-gfm'
 
 const About = ({ content }: { content: string }): JSX.Element => {
     return (
@@ -26,7 +27,7 @@ const About = ({ content }: { content: string }): JSX.Element => {
                 </div>
 
                 <div className="w-full mt-8 markdown-body">
-                    <ReactMarkdown skipHtml={false} components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]} skipHtml={false} components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                         {content}
                     </ReactMarkdown>
                 </div>
