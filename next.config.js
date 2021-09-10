@@ -15,6 +15,10 @@ const nextConfig = {
                 source: '/sesuatu/:customPage/js/:jsFile',
                 destination: '/sesuatu/:customPage/js/:jsFile',
             },
+            {
+                source: '/sesuatu/:customPage/img/:imgFile',
+                destination: '/sesuatu/:customPage/img/:imgFile',
+            },
         ]
     }
 }
