@@ -92,4 +92,6 @@ window.addEventListener('DOMContentLoaded', ()=>{
     setup()
 
     window.requestAnimationFrame(draw)
+
+    window.addEventListener('resize', () => setCanvasDimension(window.innerWidth, window.innerHeight))
 })
