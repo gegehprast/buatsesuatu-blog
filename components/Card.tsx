@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { handleImageError } from '../utils/util'
 import SearchRenderer from './SearchRenderer'
 import Tag from './Tag'
+import Image from 'next/image'
 
 interface Props {
     title: string
@@ -22,19 +23,21 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link, search, childre
                     {link ?
                         <Link href={link.href} as={link.as} >
                             <a tabIndex={-1}>
-                                <img className="absolute object-cover w-full h-full bg-white" 
-                                    src={cover ? cover : '/logo-fit.png'} 
+                                <Image className="absolute object-cover w-full h-full bg-white" 
+                                    src={cover ? cover : '/logo-fit.png'}
                                     alt={title} 
                                     onError={handleImageError} 
+                                    layout="fill" 
                                 />
                                 <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                             </a>
                         </Link> :
                         <>
-                            <img className="absolute object-cover w-full h-full bg-white" 
+                            <Image className="absolute object-cover w-full h-full bg-white"
                                 src={cover ? cover : '/logo-fit.png'} 
                                 alt={title} 
                                 onError={handleImageError} 
+                                layout="fill"
                             />
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </>

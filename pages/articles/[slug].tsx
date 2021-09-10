@@ -14,6 +14,7 @@ import { NextPage } from 'next'
 import { getOneArticle } from '../../utils/articles'
 import { H1, H2, H3 } from '../../components/MarkdownRenderes/Heading'
 import remarkGfm from 'remark-gfm'
+import Image from 'next/image'
 
 interface Props {
     initial?: {
@@ -73,8 +74,8 @@ const Article: NextPage<Props> = ({ initial }) => {
                     <figure>
                         <div className="relative w-full min-h-full h-210-px md:h-480-px">
                             {loading ?
-                                <img className="absolute object-cover w-full h-full bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} /> :
-                                <img className="absolute object-cover w-full h-full bg-white" src={article.cover} alt={article.title} onError={handleImageError} />
+                                <Image className="absolute object-cover w-full h-full bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} layout="fill" /> :
+                                <Image className="absolute object-cover w-full h-full bg-white" src={article.cover} alt={article.title} onError={handleImageError} layout="fill" />
                             }
 
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
