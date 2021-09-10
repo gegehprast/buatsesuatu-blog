@@ -39,6 +39,8 @@ function updateControlPoints(vectors) {
 }
 
 function setup () {
+    setCanvasDimension(window.innerWidth, window.innerHeight)
+
     r = canvas.height / 2 - 16
     
     for (let i = 0; i < total - 1; i++) {
