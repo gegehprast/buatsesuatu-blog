@@ -14,15 +14,15 @@
 function map(number, inMin, inMax, outMin, outMax, withinBounds = false) {
     const newval = (number - inMin) / (inMax - inMin) * (outMax - outMin) + outMin
 
-    if (!withinBounds) {
-        return newval
+    if (withinBounds) {
+        if (outMin < outMax) {
+            return constrain(newval, outMin, outMax)
+        } else {
+            return constrain(newval, outMax, outMin)
+        }
     }
-
-    if (start2 < stop2) {
-        return constrain(newval, start2, stop2)
-    } else {
-        return constrain(newval, stop2, start2)
-    }
+    
+    return newval
 }
 
 /**
