@@ -62,17 +62,7 @@ class Bezier {
     }
 
     draw() {
-        // this.midpoints = this.calculateMidPoints(this.points, [])
-
-        // this.updateControlPoints()
-
         this.drawCurve()
-
-        // this.drawMidPoints()
-
-        // this.drawLines()
-        
-        // this.drawControlPoints()
     }
 
     updateControlPoints() {
@@ -96,41 +86,12 @@ class Bezier {
             const y = bezier(this.yPoints, t)
 
             stroke(`hsl(${t * 360}, 100%, 50%)`)
-            // fill(`hsl(${t * 360}, 100%, 50%)`)
-            // point(x, y, 2)
 
             line(x, y, prevX, prevY, 1)
 
             prevX = x
             prevY = y
         }
-
-        // for (let t = 0; t < 1.0001; t += this.delta) {
-        //     const x = qubicB(this.xPoints[0], this.xPoints[1], this.xPoints[2], this.xPoints[3], t, this.weights, this.ratios)
-        //     const y = qubicB(this.yPoints[0], this.yPoints[1], this.yPoints[2], this.yPoints[3], t, this.weights, this.ratios)
-
-        //     stroke(`hsl(${t * 360}, 100%, 50%)`)
-        //     // fill(`hsl(${t * 360}, 100%, 50%)`)
-        //     // point(x, y, 2)
-
-        //     line(x, y, prevX, prevY, 1)
-
-        //     prevX = x
-        //     prevY = y
-        // }
-
-        // for (let t = 0; t < 1.0001; t += this.delta) {
-        //     const {q1, q2, vector} = qubic(this.points[0], this.points[1], this.points[2], this.points[3], t)
-
-        //     stroke(`hsl(${t * 360}, 100%, 50%)`)
-        //     // fill(`hsl(${t * 360}, 100%, 50%)`)
-        //     // point(x, y, 2)
-
-        //     line(vector.x, vector.y, prevX, prevY, 1)
-
-        //     prevX = vector.x
-        //     prevY = vector.y
-        // }
     }
 
     /**
