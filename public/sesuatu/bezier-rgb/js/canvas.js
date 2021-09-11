@@ -53,28 +53,32 @@ function background(color) {
 }
 
 /**
+ * Draw a point (filled circle).
  * 
  * @param {Number} x 
  * @param {Number} y 
  * @param {Number} size 
  */
-function point(x, y, size = 5) {
-    ctx.beginPath()
-    ctx.strokeStyle = strokeColor
-    ctx.fillStyle = fillColor
-    ctx.arc(x, y, size, 0, 2 * Math.PI)
-    ctx.stroke()
+function point(x, y, size = 5, lineWidth = 1) {
+    circle(x, y, size, lineWidth, true)
     ctx.fill()
 }
 
 /**
+ * Draw a circle.
  * 
  * @param {Number} x 
  * @param {Number} y 
  * @param {Number} size 
+ * @param {Number} lineWidth 
  */
-function circle(x, y, size = 5, lineWidth = 1) {
+function circle(x, y, size = 5, lineWidth = 1, fill = false) {
     ctx.beginPath()
+    
+    if (fill) {
+        ctx.fillStyle = fillColor
+    }
+
     ctx.strokeStyle = strokeColor
     ctx.lineWidth = lineWidth
     ctx.arc(x, y, size, 0, 2 * Math.PI)
