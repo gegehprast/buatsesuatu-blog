@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
                     <div className="w-full h-auto mt-8 xl:w-9/12 sm:mt-0 md:mt-8 xl:mt-0">
                         <div className="mb-1 text-lg font-bold md:text-xl">Kata Bijak</div>
                         <div className="text-sm italic font-light leading-normal text-gray-100 md:text-base">
-                            <p className="leading-loose">&quot;Waiting doesn&apos;t get you love or help you finding an octopus.&quot; - Sakata Gintoki</p>
+                            <p className="leading-loose">&quot;No.&quot; - Doom Slayer</p>
                         </div>
                     </div>
                 </div>
