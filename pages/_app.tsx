@@ -8,7 +8,7 @@ import '../styles/inter.css'
 import '../styles/main.css'
 import '../styles/dark-mode.css'
 
-type MyNextComponentType = NextComponentType & {
+export type MyNextComponentType = NextComponentType & {
     getLayout?: (page: JSX.Element) => JSX.Element
 }
 
