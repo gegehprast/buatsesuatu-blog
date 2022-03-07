@@ -4,10 +4,10 @@ import Link from 'next/link'
 const Footer: React.FC = () => {
     return (
         <>
-            <div className="relative w-full mt-10 bg-indigo-900 min-h-400-px md:min-h-480-px">
+            <div className="relative w-full mt-10 bg-indigo-900 dark-bg-indigo-900 min-h-400-px md:min-h-480-px">
                 <Logo />
 
-                <div className="relative z-10 flex flex-col justify-center w-full px-3 py-8 text-white xl:justify-between md:px-4 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3 md:mx-auto xl:flex-row">
+                <div className="relative z-10 flex flex-col justify-center w-full px-3 py-8 text-white dark-text-white xl:justify-between md:px-4 md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3 md:mx-auto xl:flex-row">
                     <div className="w-full h-auto xl:w-3/12">
                         <div className="mb-1 text-lg font-bold md:text-xl">Halo, pengunjung!</div>
                         <ul className="font-semibold leading-normal">

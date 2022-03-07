@@ -74,13 +74,13 @@ const Article: NextPage<Props> = ({ initial }) => {
                     <figure>
                         <div className="relative w-full min-h-full h-210-px md:h-480-px">
                             {loading ?
-                                <Image className="absolute object-cover w-full h-full bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} layout="fill" /> :
-                                <Image className="absolute object-cover w-full h-full bg-white" src={article.cover} alt={article.title} onError={handleImageError} layout="fill" />
+                                <Image className="absolute object-cover w-full h-full bg-white dark-bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} layout="fill" /> :
+                                <Image className="absolute object-cover w-full h-full bg-white dark-bg-white" src={article.cover} alt={article.title} onError={handleImageError} layout="fill" />
                             }
 
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
                         </div>
-                        {article.caption && <figcaption className="text-sm text-center text-gray-700">
+                        {article.caption && <figcaption className="text-sm text-center text-gray-700 dark-text-gray-700">
                             <ReactMarkdown remarkPlugins={[remarkGfm]} components={{ code: CodeBlock, h1: H1, h2: H2, h3: H3, a: Anchor }}>
                                 {article.caption}
                             </ReactMarkdown>

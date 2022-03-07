@@ -174,7 +174,7 @@ const ArticleForm = (
                 <div className="flex flex-col items-center justify-start w-full mb-3">
                     <div className="w-full">
                         <button type="submit" 
-                            className="px-4 py-3 leading-none text-white bg-indigo-700 border rounded hover:bg-indigo-800 active:bg-indigo-900"
+                            className="px-4 py-3 leading-none text-white bg-indigo-700 border rounded dark-text-white hover:bg-indigo-800 active:bg-indigo-900 dark-bg-indigo-900"
                         >
                             {ready ? 'Tunggu sebentar...' : buttonText}
                         </button>

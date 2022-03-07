@@ -23,7 +23,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link, search, childre
                     {link ?
                         <Link href={link.href} as={link.as} >
                             <a tabIndex={-1}>
-                                <Image className="absolute object-cover w-full h-full bg-white" 
+                                <Image className="absolute object-cover w-full h-full bg-white dark-bg-white" 
                                     src={cover ? cover : '/logo-fit.png'}
                                     alt={title} 
                                     onError={handleImageError} 
@@ -33,7 +33,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link, search, childre
                             </a>
                         </Link> :
                         <>
-                            <Image className="absolute object-cover w-full h-full bg-white"
+                            <Image className="absolute object-cover w-full h-full bg-white dark-bg-white"
                                 src={cover ? cover : '/logo-fit.png'} 
                                 alt={title} 
                                 onError={handleImageError} 
@@ -56,7 +56,7 @@ const Card: React.FC<Props> = ({ title, text, cover, tags, link, search, childre
                         }
                     </div>
                     
-                    <p className="text-sm text-gray-700">
+                    <p className="text-sm text-gray-700 dark-text-gray-700">
                         {search && text ? <SearchRenderer search={search} text={text} /> : text}
                     </p>
                 </div>

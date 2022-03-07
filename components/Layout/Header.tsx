@@ -33,8 +33,8 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
 
     return (
         <>
-            <div className="sticky top-0 z-50 w-full bg-white border-b shadow">
-                <div className={`w-full ${pageLoading && 'bg-indigo-900'}`} style={{ height: '0.1rem' }}></div>
+            <div className="sticky top-0 z-50 w-full bg-white border-b shadow dark-bg-white">
+                <div className={`w-full ${pageLoading && 'bg-indigo-900 dark-bg-indigo-900'}`} style={{ height: '0.1rem' }}></div>
 
                 <div className="flex flex-wrap items-center justify-center w-full px-3 py-2 mx-auto md:justify-between md:w-3/4 lg:w-5/6 xl:w-1/2 xxl-1344:w-4/6 xxl-1920:w-1/2 xxl-4k:w-1/3">
                     <div className="w-full py-1 mt-1 text-center lg:mt-0 md:w-auto md:text-left">
@@ -57,7 +57,7 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
 
                     <div className="flex items-center py-1 mt-3 md:mb-0 md:mt-1 lg:mt-0">
                         <div className="flex items-end ml-8">
-                            <button className={`darkModeButton ${darkMode ? 'text-white' : 'text-gray-900'}`} onClick={setDarkMode} title="Mode malam">
+                            <button className={`darkModeButton ${darkMode ? 'text-white dark-text-white' : 'text-gray-900 dark-text-gray-900'}`} onClick={setDarkMode} title="Mode malam">
                                 <svg className="w-6 h-6 leading-none fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                     <path d="M10 2v16a8 8 0 1 0 0-16zm0 18a10 10 0 1 1 0-20 10 10 0 0 1 0 20z" />
                                 </svg>

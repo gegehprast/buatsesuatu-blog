@@ -66,13 +66,13 @@ const Login = (): React.ReactElement => {
                 </div>
             </div>
             <div className="flex items-center justify-end mb-2">
-                <button className="p-2 text-white bg-indigo-700 border rounded hover:bg-indigo-800 active:bg-indigo-900" onClick={handleSubmit}>{submitting ? 'Please wait...' : 'Login'}</button>
+                <button className="p-2 text-white dark-text-white bg-indigo-700 border rounded hover:bg-indigo-800 active:bg-indigo-900 dark-bg-indigo-900" onClick={handleSubmit}>{submitting ? 'Please wait...' : 'Login'}</button>
             </div>
 
             {(loginSucess !== undefined) && <div className="flex items-center w-full mb-2">
-                {(loginSucess === true) && <span className="w-full p-2 text-white bg-green-600 border rounded">Login sucess. Redirecting...</span>}
+                {(loginSucess === true) && <span className="w-full p-2 text-white dark-text-white bg-green-600 border rounded">Login sucess. Redirecting...</span>}
 
-                {(loginSucess === false) && <span className="w-full p-2 text-white bg-red-600 border rounded">Login failed. Please try again.</span>}
+                {(loginSucess === false) && <span className="w-full p-2 text-white dark-text-white bg-red-600 border rounded">Login failed. Please try again.</span>}
             </div>}
         </div>
     )

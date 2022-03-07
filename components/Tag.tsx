@@ -11,7 +11,7 @@ interface Props {
 const Tag = ({ length, tag, i }: Props): JSX.Element => {
     const router = useRouter()
 
-    const bg = router.query.tags && (router.query.tags as string).includes(tag) ? 'text-gray-100 bg-indigo-400 hover:bg-indigo-500' : 'text-gray-700 bg-gray-200 hover:bg-gray-400'
+    const bg = router.query.tags && (router.query.tags as string).includes(tag) ? 'text-gray-100 bg-indigo-400 hover:bg-indigo-500' : 'text-gray-700 dark-text-gray-700 bg-gray-200 dark-bg-gray-200 hover:bg-gray-400'
 
     return (
         <Link href={{ pathname: '/', query: { tags: tag } }} as={`/?tags=${tag}`} shallow={true} >

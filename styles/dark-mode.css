@@ -14,27 +14,27 @@
     @apply text-white bg-gray-900;
 }
 
-.dark-mode .text-white {
+.dark-mode .dark-text-white {
     @apply text-gray-200;
 }
 
-.dark-mode .bg-white {
+.dark-mode .dark-bg-white {
     @apply bg-gray-900;
 }
 
-.dark-mode .text-gray-700 {
+.dark-mode .dark-text-gray-700 {
     @apply text-gray-200;
 }
 
-.dark-mode .bg-gray-200 {
+.dark-mode .dark-bg-gray-200 {
     @apply bg-gray-700;
 }
 
-.dark-mode .text-gray-900 {
+.dark-mode .dark-text-gray-900 {
     @apply text-gray-200;
 }
 
-.dark-mode .bg-indigo-900 {
+.dark-mode .dark-bg-indigo-900 {
     background-color: #272342;
 }
 
@@ -58,7 +58,7 @@
     border-left-color: #2d3748;
 }
 
-.dark-mode .bg-gray-100 {
+.dark-mode .dark-bg-gray-100 {
     @apply bg-gray-700;
 }
 
