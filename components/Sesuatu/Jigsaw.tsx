@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { DndProvider, useDrag, useDrop } from 'react-dnd'
-import { TouchBackend } from 'react-dnd-touch-backend'
+import { DndProvider, DragPreviewImage, useDrag, useDrop } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 import { shuffle2 } from '../../utils/array'
 import LockClosed from '../Icons/LockClosed'
 
@@ -30,7 +30,7 @@ const Jigsaw = (): JSX.Element => {
         setImages(images)
     }, [])
     
-    return <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
+    return <DndProvider backend={HTML5Backend} options={{ enableMouseEvents: true }}>
         <div className="grid grid-cols-4 gap-0 aspect-[1080/1620] max-h-[90vh] w-full mx-auto">
             {images.map(item => <div key={item.id} className="aspect-square drop-shadow">
                 <Picture images={images} imageId={item.id} canDragDrop={item.id !== anchorImage.id} />
@@ -42,7 +42,7 @@ const Jigsaw = (): JSX.Element => {
 const Picture = ({ images, imageId, canDragDrop }: { images: Item[], imageId: number, canDragDrop: boolean }): JSX.Element => {
     const imageIdRef = useRef(imageId)
     
-    const [{ isDragging }, drag] = useDrag<{ id: number }, { id: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
+    const [{ isDragging }, drag, preview] = useDrag<{ id: number }, { id: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
         type: 'IMAGE',
         canDrag: canDragDrop,
         item: () => ({ id: imageIdRef.current }),
@@ -80,23 +80,27 @@ const Picture = ({ images, imageId, canDragDrop }: { images: Item[], imageId: nu
         hoveredStyle = draggedStyle = 'border-0 cursor-not-allowed '
     }
 
-    return <div ref={drop} className={hoveredStyle}>
-        <div ref={drag} className={`relative ${draggedStyle}`}>
-            <Image src={images[imageIdRef.current - 1].url} 
-                width={270} 
-                height={270} 
-                layout="responsive" 
-                alt={`image ${images[imageIdRef.current - 1].id}`}
-                className={canDragDrop ? 'grayscale' : 'grayscale-0'}
-            />
+    return <>
+        <div ref={drop} className={hoveredStyle}>
+            <DragPreviewImage connect={preview} src={images[imageIdRef.current - 1].url} />
+            
+            <div ref={drag} className={`relative ${draggedStyle}`}>
+                <Image src={images[imageIdRef.current - 1].url} 
+                    width={270} 
+                    height={270} 
+                    layout="responsive" 
+                    alt={`image ${images[imageIdRef.current - 1].id}`}
+                    className={`${canDragDrop ? 'grayscale' : 'grayscale-0'} ${isDragging ? 'opacity-40' : 'opacity-100'}`}
+                />
 
-            {!canDragDrop && <div className='absolute top-0 left-0 z-10 w-full h-full'>
-                <div className='absolute w-5 h-5 text-white md:w-10 md:h-10 right-1 top-1 drop-shadow-xl shadow-pink-500'>
-                    <LockClosed/>
-                </div>    
-            </div>}
+                {!canDragDrop && <div className='absolute top-0 left-0 z-10 w-full h-full'>
+                    <div className='absolute w-5 h-5 text-white md:w-10 md:h-10 right-1 top-1 drop-shadow-xl shadow-pink-500'>
+                        <LockClosed/>
+                    </div>    
+                </div>}
+            </div>
         </div>
-    </div>
+    </>
 }
 
 export default Jigsaw
