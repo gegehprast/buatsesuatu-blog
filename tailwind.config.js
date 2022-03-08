@@ -4,10 +4,9 @@ const _ = require('lodash')
 var flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
 
 module.exports = {
-    purge: {
-        enabled: process.env.NODE_ENV === 'production',
-        content: ['./components/**/*.tsx', './pages/**/*.tsx'],
-    },
+    content: [
+        './components/**/*.tsx', './pages/**/*.tsx',
+    ],
     theme: {
         extend: {
             fontFamily: {
