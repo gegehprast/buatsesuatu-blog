@@ -80,13 +80,14 @@ const Picture = ({ images, imageId, canDragDrop }: { images: Item[], imageId: nu
         hoveredStyle = draggedStyle = 'border-0 cursor-not-allowed '
     }
 
-    return <div ref={drop} className={`${canDragDrop ? 'grayscale' : 'grayscale-0'} ${hoveredStyle}`}>
+    return <div ref={drop} className={hoveredStyle}>
         <div ref={drag} className={`relative ${draggedStyle}`}>
             <Image src={images[imageIdRef.current - 1].url} 
                 width={270} 
                 height={270} 
                 layout="responsive" 
                 alt={`image ${images[imageIdRef.current - 1].id}`}
+                className={canDragDrop ? 'grayscale' : 'grayscale-0'}
             />
 
             {!canDragDrop && <div className='absolute top-0 left-0 z-10 w-full h-full'>
