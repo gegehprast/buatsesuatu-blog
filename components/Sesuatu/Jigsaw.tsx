@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { DndProvider, DragPreviewImage, useDrag, useDrop } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
 import { shuffle2 } from '../../utils/array'
 import LockClosed from '../Icons/LockClosed'
+import { TouchBackend } from 'react-dnd-touch-backend'
 
 interface Item {
     id: number;
@@ -30,7 +30,7 @@ const Jigsaw = (): JSX.Element => {
         setImages(images)
     }, [])
     
-    return <DndProvider backend={HTML5Backend} options={{ enableMouseEvents: true }}>
+    return <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
         <div className="grid grid-cols-4 gap-0 aspect-[1080/1620] max-h-[90vh] w-full mx-auto">
             {images.map(item => <div key={item.id} className="aspect-square drop-shadow">
                 <Picture images={images} imageId={item.id} canDragDrop={item.id !== anchorImage.id} />
