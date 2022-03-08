@@ -3681,6 +3681,13 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
+"react-dnd-html5-backend@^15.1.2":
+  "integrity" "sha512-mem9QbutUF+aA2YC1y47G3ECjnYV/sCYKSnu5Jd7cbg3fLMPAwbnTf/JayYdnCH5l3eg9akD9dQt+cD0UdF8QQ=="
+  "resolved" "https://registry.npmjs.org/react-dnd-html5-backend/-/react-dnd-html5-backend-15.1.2.tgz"
+  "version" "15.1.2"
+  dependencies:
+    "dnd-core" "15.1.1"
+
 "react-dnd-touch-backend@^15.1.1":
   "integrity" "sha512-3OuPGvt5iCy+UnwL8tLaTH6KZWu71JOoxyUhMTgjJFF08SnAqROydgLIGz6JXiIGjkBGLq8j/rkSvO7jr7050A=="
   "resolved" "https://registry.npmjs.org/react-dnd-touch-backend/-/react-dnd-touch-backend-15.1.1.tgz"
