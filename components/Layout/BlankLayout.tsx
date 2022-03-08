@@ -6,7 +6,7 @@ const BlankLayout = ({ children }: { children: React.ReactNode }): JSX.Element =
         <>
             <HeadTag />
 
-            <div>
+            <div className='relative w-full min-h-screen bg-gray-500'>
                 {children}
             </div>
         </>
