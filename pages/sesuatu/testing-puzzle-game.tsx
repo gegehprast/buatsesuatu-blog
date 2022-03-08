@@ -12,7 +12,15 @@ const TestingPuzzleGame: MyNextComponentType = () => {
             </Head>
             
             <div className='w-full'>
-                <div className='w-full pt-10'>
+                <div className='items-center w-full p-2 leading-none text-center text-white'>
+                    <h1 className='text-lg font-semibold'>Puzzle Game</h1>
+
+                    <span className='text-xs'>
+                        Potongan dengan ikon gembok adalah patokan
+                    </span>
+                </div>
+
+                <div className='w-full mt-2'>
                     <Board />
                 </div>
             </div>

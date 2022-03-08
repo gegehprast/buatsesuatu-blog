@@ -16,7 +16,7 @@ const Board = (): JSX.Element => {
     }
     
     return <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
-        <div className="grid grid-cols-4 gap-0 aspect-[1080/1620] max-h-[90vh] w-full mx-auto content-start">
+        <div className="grid grid-cols-4 gap-0 aspect-[1080/1620] max-h-[85vh] w-full mx-auto content-start">
             {gameRef.current.pieces.map((piece, i) => <div key={i} className="aspect-square drop-shadow">
                 <Panel game={gameRef.current} index={i} />
             </div>)}
