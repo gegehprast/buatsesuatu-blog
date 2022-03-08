@@ -3,8 +3,9 @@ import React from 'react'
 import { DragPreviewImage, useDrag, useDrop } from 'react-dnd'
 import LockClosed from '../../Icons/LockClosed'
 import type { Game } from './Game'
+import { SwapSFX } from './useSwapSfx'
 
-const Panel = ({ game, index }: { game: Game, index: number }): JSX.Element => {
+const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSwapSFX: () => void }): JSX.Element => {
     const canDragDrop = index !== game.anchorIndex
     
     const [{ isDragging }, drag, preview] = useDrag<{ index: number }, { index: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
@@ -22,6 +23,8 @@ const Panel = ({ game, index }: { game: Game, index: number }): JSX.Element => {
         canDrop: () => canDragDrop,
         drop: (DragObject) => {
             game.move(DragObject.index, index)
+
+            playSwapSFX()
 
             return { index }
         },
