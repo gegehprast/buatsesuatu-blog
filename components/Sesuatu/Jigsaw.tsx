@@ -30,7 +30,7 @@ const Jigsaw = (): JSX.Element => {
     }, [])
     
     return <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
-        <div className="grid grid-cols-4 gap-0 aspect-[1080/1620] h-[80vh] w-auto mx-auto">
+        <div className="grid grid-cols-4 gap-0 aspect-[1080/1620] max-h-[90vh] w-full">
             {images.map(item => <div key={item.id} className="aspect-square">
                 <Picture images={images} imageId={item.id} canDragDrop={item.id !== anchorImage.id} />
             </div>)}
