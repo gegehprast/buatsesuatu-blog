@@ -11,7 +11,9 @@ const TestingPuzzleGame: MyNextComponentType = () => {
                 <title key="title">Testing Puzzle Game | {process.env.NEXT_PUBLIC_TITLE}</title>
             </Head>
             
-            <Jigsaw />
+            <div className='w-[95%] mx-auto mt-20'>
+                <Jigsaw />
+            </div>
         </div>
     )
 }
