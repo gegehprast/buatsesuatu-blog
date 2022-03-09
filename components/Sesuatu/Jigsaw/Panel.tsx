@@ -35,8 +35,8 @@ const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSw
         })
     }), [game.pieces, canDragDrop])
 
-    let hoveredStyle = hovered ? 'border-8 border-green-500 cursor-move' : 'border-0 cursor-move'
-    let draggedStyle = isDragging ? 'border-8 border-blue-500 cursor-move' : 'border-0 cursor-move'
+    let hoveredStyle = hovered ? 'border-4 md:border-8 border-green-500 cursor-move' : 'border-0 cursor-move'
+    let draggedStyle = isDragging ? 'border-4 md:border-8 border-blue-500 cursor-move' : 'border-0 cursor-move'
 
     if (!canDragDrop) {
         hoveredStyle = draggedStyle = 'border-0 cursor-not-allowed '
