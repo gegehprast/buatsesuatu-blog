@@ -75,7 +75,7 @@ const Article: NextPage<Props> = ({ initial }) => {
                         <div className="relative w-full min-h-full h-210-px md:h-480-px">
                             {loading ?
                                 <Image className="absolute object-cover w-full h-full bg-white dark-bg-white" src='/logo-fit.png' alt={article.title} onError={handleImageError} layout="fill" /> :
-                                <Image className="absolute object-cover w-full h-full bg-white dark-bg-white" src={article.cover} alt={article.title} onError={handleImageError} layout="fill" />
+                                <Image className="absolute object-cover w-full h-full bg-white dark-bg-white" src={article.cover as string} alt={article.title} onError={handleImageError} layout="fill" />
                             }
 
                             <div className="absolute object-cover w-full h-full bg-black opacity-0" />
