@@ -55,7 +55,7 @@ const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSw
                 />
 
                 {!canDragDrop && <div className='absolute top-0 left-0 z-10 w-full h-full'>
-                    <div className='absolute w-5 h-5 text-white md:w-10 md:h-10 right-1 top-1 drop-shadow-xl shadow-pink-500'>
+                    <div className='absolute w-5 h-5 text-pink-500 md:w-10 md:h-10 right-1 top-1 '>
                         <LockClosed />
                     </div>    
                 </div>}

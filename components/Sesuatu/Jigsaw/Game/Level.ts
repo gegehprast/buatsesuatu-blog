@@ -1,7 +1,7 @@
 import { shuffle2 } from "../../../../utils/array"
 import { Piece } from "../Type"
 
-abstract class Level {
+export abstract class Level {
     /**
      * The completed state of the pieces.
      */
@@ -16,6 +16,10 @@ abstract class Level {
      * Anchor index.
      */
     public anchorIndex: number
+
+    public abstract columns: number
+    
+    public abstract rows: number
 
     constructor() {
         this.completePieces = this._completePieces()
@@ -75,6 +79,9 @@ abstract class Level {
      * @returns 
      */
     public isCorrect(pieceA: Piece, index: number): boolean {
+        if (!pieceA) {
+            console.log(this, pieceA, index)
+        }
         return pieceA.id - 1 === index
     }
 
@@ -89,5 +96,3 @@ abstract class Level {
         })
     }
 }
-
-export default Level

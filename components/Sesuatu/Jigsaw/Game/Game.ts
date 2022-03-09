@@ -1,6 +1,8 @@
 import { Observer } from '../Type'
-import Level from './Level'
-import Easy from './Levels/Easy'
+import { Level } from './Level'
+import { Easy } from './Levels/Easy'
+import { Hard } from './Levels/Hard'
+import { Medium } from './Levels/Medium'
 
 export class Game {
     /**
@@ -8,13 +10,31 @@ export class Game {
      */
     public level: Level
 
+    private levelString: string
+    
+    private levels: Record<string, Level>
+
     /**
      * Observers.
      */
     private observers: Observer[] = []
     
     constructor() {
-        this.level = new Easy
+        this.levels = {
+            easy: new Easy(),
+            medium: new Medium(),
+            hard: new Hard(),
+        }
+
+        this.levelString = 'easy'
+        this.level = this.levels[this.levelString]
+    }
+
+    public toLevel(level: string): void {
+        this.levelString = level
+        this.level = this.levels[this.levelString]
+
+        this.emitChange()
     }
 
     public observe(observer: Observer): () => void {
@@ -34,6 +54,6 @@ export class Game {
     }
 
     private emitChange() {
-        this.observers.forEach(observer => observer && observer(this.level.pieces))
+        this.observers.forEach(observer => observer && observer(this.levelString))
     }
 }

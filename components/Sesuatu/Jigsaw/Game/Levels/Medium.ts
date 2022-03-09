@@ -1,6 +1,6 @@
 import { Level } from '../Level';
 
-export class Hard extends Level {
+export class Medium extends Level {
     public columns = 4
     
     public rows = 6
@@ -10,13 +10,13 @@ export class Hard extends Level {
             .map((item, i) => (
                 {
                     id: i + 1,
-                    url: `/images/jigsaw/hard/image_part_0${(i + 1).toString().length > 1 ? i + 1 : '0' + (i + 1)}.png`,
+                    url: `/images/jigsaw/medium/image_part_0${(i + 1).toString().length > 1 ? i + 1 : '0' + (i + 1)}.png`,
                 }
             ))
     }
 
     protected _anchorIndex() {
-        const anchorIndexProbs: number[] = [0, 2, 3, 5, 10, 12, 19]
+        const anchorIndexProbs: number[] = [0, 2, 3, 5, 10, 12, 19, 23]
         
         return anchorIndexProbs[Math.floor(Math.random() * anchorIndexProbs.length)]
     }

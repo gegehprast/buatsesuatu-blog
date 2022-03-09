@@ -1,8 +1,10 @@
-import Head from 'next/head'
 import React from 'react'
+import dynamic from 'next/dynamic'
+import Head from 'next/head'
 import BlankLayout from '../../components/Layout/BlankLayout'
-import Board from '../../components/Sesuatu/Jigsaw/Board'
 import { MyNextComponentType } from '../_app'
+
+const Container = dynamic( () => import('../../components/Sesuatu/Jigsaw/Container'), { ssr: false } )
 
 const TestingPuzzleGame: MyNextComponentType = () => {
     return (
@@ -12,7 +14,7 @@ const TestingPuzzleGame: MyNextComponentType = () => {
             </Head>
             
             <div className='w-full'>
-                <div className='items-center w-full p-2 leading-none text-center text-white'>
+                <div className='items-center w-full p-1 leading-none text-center text-white'>
                     <h1 className='text-lg font-semibold'>Puzzle Game</h1>
 
                     <span className='text-xs'>
@@ -20,9 +22,7 @@ const TestingPuzzleGame: MyNextComponentType = () => {
                     </span>
                 </div>
 
-                <div className='w-full mt-2'>
-                    <Board />
-                </div>
+                <Container />
             </div>
         </>
     )
