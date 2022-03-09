@@ -8,7 +8,7 @@ const HeadTag = (): JSX.Element => {
             <Head>
                 <title key="title">{process.env.NEXT_PUBLIC_TITLE}</title>
                 <meta charSet="utf-8" />
-                <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                <meta name="viewport" content="minimal-ui, width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"></meta>
 
                 <meta key="description" name="description" content={process.env.NEXT_PUBLIC_DESCRIPTION} />
                 <meta key="keywords" name="keywords" content={process.env.NEXT_PUBLIC_KEYWORDS} />
