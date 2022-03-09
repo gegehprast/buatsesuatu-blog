@@ -6,24 +6,30 @@ export type Observer = ((pieces: Piece[]) => void) | null
 export class Game {
     private completePieces: Piece[]
 
-    public pieces: Piece[]
-
-    public anchorIndex: number
+    private anchorIndexProbs = [0, 2, 3, 5, 10, 12, 19, 23]
 
     private observers: Observer[] = []
 
+    public pieces: Piece[]
+
+    public anchorIndex: number
+    
     constructor() {
         this.completePieces = [...Array(24)]
             .map((item, i) => (
                 {
                     id: i + 1,
-                    url: `/images/jigsaw/image_part_0${(i + 1).toString().length > 1 ? i + 1 : '0' + (i + 1)}.png`
+                    url: `/images/jigsaw/image_part_0${(i + 1).toString().length > 1 ? i + 1 : '0' + (i + 1)}.png`,
+                    correct: false,
                 }
             ))
 
-        this.anchorIndex = Math.floor(Math.random() * this.completePieces.length)
+        this.anchorIndex = this.anchorIndexProbs[Math.floor(Math.random() * this.anchorIndexProbs.length)]
 
         this.pieces = shuffle2([...this.completePieces], [this.anchorIndex])
+        this.pieces = this.pieces.map((piece, index) => {
+            return {...piece, ...{ correct: this.isCorrect(piece, index) }}
+        })
     }
 
     public observe(observer: Observer): () => void {
@@ -41,6 +47,9 @@ export class Game {
 
         [tempPieces[pieceIndexA], tempPieces[pieceIndexB]] = [tempPieces[pieceIndexB], tempPieces[pieceIndexA]]
 
+        tempPieces[pieceIndexA].correct = this.isCorrect(tempPieces[pieceIndexA], pieceIndexA)
+        tempPieces[pieceIndexB].correct = this.isCorrect(tempPieces[pieceIndexB], pieceIndexB)
+
         this.pieces = tempPieces
 
         if (this.isComplete()) {
@@ -50,6 +59,10 @@ export class Game {
         }
 
         this.emitChange()
+    }
+
+    private isCorrect(pieceA: Piece, index: number): boolean {
+        return pieceA.id - 1 === index
     }
 
     private emitChange() {

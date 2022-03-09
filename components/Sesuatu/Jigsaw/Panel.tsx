@@ -7,6 +7,7 @@ import { SwapSFX } from './useSwapSfx'
 
 const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSwapSFX: () => void }): JSX.Element => {
     const canDragDrop = index !== game.anchorIndex
+    const piece = game.pieces[index]
     
     const [{ isDragging }, drag, preview] = useDrag<{ index: number }, { index: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
         type: 'IMAGE',
@@ -43,15 +44,15 @@ const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSw
 
     return <>
         <div ref={drop} className={hoveredStyle}>
-            <DragPreviewImage connect={preview} src={game.pieces[index].url} />
+            <DragPreviewImage connect={preview} src={piece.url} />
             
             <div ref={drag} className={`relative ${draggedStyle}`}>
-                <Image src={game.pieces[index].url} 
+                <Image src={piece.url} 
                     width={270} 
                     height={270} 
                     layout="responsive" 
-                    alt={`image ${game.pieces[index].id}`}
-                    className={`${canDragDrop ? 'grayscale' : 'grayscale-0'} ${isDragging ? 'opacity-40' : 'opacity-100'}`}
+                    alt={`image ${piece.id}`}
+                    className={`${piece.correct ? '' : (canDragDrop ? 'grayscale' : 'grayscale-0')} ${isDragging ? 'opacity-40' : 'opacity-100'}`}
                 />
 
                 {!canDragDrop && <div className='absolute top-0 left-0 z-10 w-full h-full'>
