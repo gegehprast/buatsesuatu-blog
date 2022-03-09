@@ -2,12 +2,11 @@ import Image from 'next/image'
 import React from 'react'
 import { DragPreviewImage, useDrag, useDrop } from 'react-dnd'
 import LockClosed from '../../Icons/LockClosed'
-import type { Game } from './Game'
-import { SwapSFX } from './useSwapSfx'
+import type { Game } from './Game/Game'
 
 const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSwapSFX: () => void }): JSX.Element => {
-    const canDragDrop = index !== game.anchorIndex
-    const piece = game.pieces[index]
+    const canDragDrop = index !== game.level.anchorIndex
+    const piece = game.level.pieces[index]
     
     const [{ isDragging }, drag, preview] = useDrag<{ index: number }, { index: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
         type: 'IMAGE',
@@ -17,7 +16,7 @@ const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSw
             isDragging: monitor.isDragging(),
             canDrag: monitor.canDrag(),
         })
-    }), [game.pieces, canDragDrop])
+    }), [game.level.pieces, canDragDrop])
 
     const [{ hovered }, drop] = useDrop<{ index: number }, { index: number }, { hovered: boolean; canDrop: boolean }>(() => ({
         accept: 'IMAGE',
@@ -33,13 +32,13 @@ const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSw
             hovered: monitor.isOver() && index !== monitor.getItem().index,
             canDrop: monitor.canDrop(),
         })
-    }), [game.pieces, canDragDrop])
+    }), [game.level.pieces, canDragDrop])
 
     let hoveredStyle = hovered ? 'border-4 md:border-8 border-green-500 cursor-move' : 'border-0 cursor-move'
     let draggedStyle = isDragging ? 'border-4 md:border-8 border-blue-500 cursor-move' : 'border-0 cursor-move'
 
     if (!canDragDrop) {
-        hoveredStyle = draggedStyle = 'border-0 cursor-not-allowed '
+        hoveredStyle = draggedStyle = 'border-0 cursor-not-allowed'
     }
 
     return <>
