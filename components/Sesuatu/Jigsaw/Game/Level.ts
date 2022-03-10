@@ -84,9 +84,6 @@ export abstract class Level extends EventEmitter {
      * @returns 
      */
     public isCorrect(pieceA: Piece, index: number): boolean {
-        if (!pieceA) {
-            console.log(this, pieceA, index)
-        }
         return pieceA.id - 1 === index
     }
 

@@ -74,7 +74,6 @@ export class Game extends EventEmitter {
     }
 
     private onLevelComplete() {
-        console.log('level compl emititng')
         this.emit('LEVEL_COMPLETE')
     }
 
