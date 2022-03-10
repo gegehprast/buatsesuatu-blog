@@ -1,18 +1,25 @@
+import EventEmitter from 'eventemitter3'
 import { Observer } from '../Type'
 import { Level } from './Level'
 import { Easy } from './Levels/Easy'
 import { Hard } from './Levels/Hard'
 import { Medium } from './Levels/Medium'
 
-export class Game {
+export class Game extends EventEmitter {
     /**
      * Current level.
      */
-    public level: Level
+    public level!: Level
 
-    private levelString: string
+    /**
+     * Current level index.
+     */
+    public levelIndex!: number
     
-    private levels: Record<string, Level>
+    /**
+     * Available levels.
+     */
+    public levels!: Level[]
 
     /**
      * Observers.
@@ -20,19 +27,16 @@ export class Game {
     private observers: Observer[] = []
     
     constructor() {
-        this.levels = {
-            easy: new Easy(),
-            medium: new Medium(),
-            hard: new Hard(),
-        }
+        super()
+        
+        this.onLevelComplete = this.onLevelComplete.bind(this)
 
-        this.levelString = 'easy'
-        this.level = this.levels[this.levelString]
+        this.setLevels()
     }
 
-    public toLevel(level: string): void {
-        this.levelString = level
-        this.level = this.levels[this.levelString]
+    public toLevel(index: number): void {
+        this.levelIndex = index
+        this.level = this.levels[this.levelIndex]
 
         this.emitChange()
     }
@@ -53,7 +57,28 @@ export class Game {
         this.emitChange()
     }
 
+    private setLevels() {
+        this.levels = [
+            new Easy(),
+            new Medium(),
+            new Hard(),
+        ]
+
+        for (let i = 0; i < this.levels.length; i++) {
+            const level = this.levels[i];
+            level.on('COMPLETE', this.onLevelComplete)
+        }
+
+        this.levelIndex = 0
+        this.level = this.levels[this.levelIndex]
+    }
+
+    private onLevelComplete() {
+        console.log('level compl emititng')
+        this.emit('LEVEL_COMPLETE')
+    }
+
     private emitChange() {
-        this.observers.forEach(observer => observer && observer(this.levelString))
+        this.observers.forEach(observer => observer && observer(this))
     }
 }

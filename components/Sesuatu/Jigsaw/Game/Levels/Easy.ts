@@ -1,6 +1,8 @@
 import { Level } from '../Level';
 
 export class Easy extends Level {
+    public completePictureUrl = '/images/jigsaw/easy/easy.webp'
+    
     public columns = 2
     
     public rows = 3

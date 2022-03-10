@@ -1,6 +1,8 @@
 import { Level } from '../Level';
 
 export class Hard extends Level {
+    public completePictureUrl = '/images/jigsaw/hard/hard.webp'
+
     public columns = 4
     
     public rows = 6

@@ -1,6 +1,8 @@
 import { Level } from '../Level';
 
 export class Medium extends Level {
+    public completePictureUrl = '/images/jigsaw/medium/medium.webp'
+
     public columns = 4
     
     public rows = 6

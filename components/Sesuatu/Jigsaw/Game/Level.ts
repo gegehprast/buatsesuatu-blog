@@ -1,7 +1,8 @@
-import { shuffle2 } from "../../../../utils/array"
-import { Piece } from "../Type"
+import EventEmitter from 'eventemitter3'
+import { shuffle2 } from '../../../../utils/array'
+import { Piece } from '../Type'
 
-export abstract class Level {
+export abstract class Level extends EventEmitter {
     /**
      * The completed state of the pieces.
      */
@@ -20,8 +21,12 @@ export abstract class Level {
     public abstract columns: number
     
     public abstract rows: number
+    
+    public abstract completePictureUrl: string
 
     constructor() {
+        super()
+
         this.completePieces = this._completePieces()
 
         this.anchorIndex = this._anchorIndex()
@@ -65,7 +70,7 @@ export abstract class Level {
 
         // is complete?
         if (this.isComplete()) {
-            console.log('COMPLETOOOO')
+            this.emit('COMPLETE')
         } else {
             console.log('NOT COMPLETOOOO')
         }
