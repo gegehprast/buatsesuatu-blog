@@ -10,14 +10,25 @@ const Container: React.FC = () => {
     const game = useMemo(() => new Game(), [])
     const [levelIndex, setLevelIndex] = useState(0)
     const [isComplete, setIsComplete] = useState(false)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         game.observe(observer)
     })
-    
+
+    useEffect(() => {
+        const t = setTimeout(() => {
+            setLoading(false)
+        }, 700);
+
+        return () => {
+            clearTimeout(t)
+        }
+    }, [levelIndex])
 
     const observer: Observer = (game: Game) => {
         setIsComplete(game.level.isCompleted)
+
         setLevelIndex(game.levelIndex)
     }
 
@@ -28,7 +39,12 @@ const Container: React.FC = () => {
 
         if (next >= game.levels.length) return
 
-        game.toLevel(next)
+        setLoading(true)
+
+        setTimeout(() => {
+            game.toLevel(next)
+        }, 100);
+        
     }
     
     return <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
@@ -43,9 +59,15 @@ const Container: React.FC = () => {
                     alt={`image ${game.level.completePictureUrl}`}
                 />
             </div>}
+
+            {game && <div className={`aspect-[1080/1620] max-h-[85vh] w-full content-start absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 z-50 ${loading ? 'pointer-events-auto opacity-100 transition-opacity ease-out duration-200' : 'pointer-events-none opacity-0'}`}>
+                <div className='absolute text-xl font-semibold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+                    Loading...
+                </div>
+            </div>}
         </div>
 
-        {(game && (levelIndex < game.levels.length - 1) && isComplete) && <div className='items-center w-full mt-1 leading-none text-center text-white'>
+        {game && <div className='items-center w-full mt-1 leading-none text-center text-white'>
             <div className='flex items-center justify-center w-full mx-auto md:w-2/12'>
                 <button className='px-2 py-1 text-xs bg-blue-600 border border-blue-500 rounded hover:bg-blue-500' onClick={() => changeLevel(1)}>Next Level</button>
             </div>
