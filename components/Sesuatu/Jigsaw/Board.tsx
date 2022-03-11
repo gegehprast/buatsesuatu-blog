@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { DndProvider, } from 'react-dnd'
-import { TouchBackend } from 'react-dnd-touch-backend'
 import Panel from './Panel'
 import { Game } from './Game/Game'
 import useSwapSfx from './Hooks/useSwapSfx'

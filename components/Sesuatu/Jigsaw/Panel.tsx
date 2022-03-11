@@ -4,10 +4,14 @@ import { DragPreviewImage, useDrag, useDrop } from 'react-dnd'
 import LockClosed from '../../Icons/LockClosed'
 import type { Game } from './Game/Game'
 
-const Panel = ({ game, index, playSwapSFX }: { game: Game, index: number, playSwapSFX: () => void }): JSX.Element => {
+const Panel: React.FC<{ game: Game, index: number, playSwapSFX: () => void }> = ({ game, index, playSwapSFX }) => {
     const canDragDrop = index !== game.level.anchorIndex
     const piece = game.level.pieces[index]
     
+    if (!piece) {
+        return null
+    }
+
     const [{ isDragging }, drag, preview] = useDrag<{ index: number }, { index: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
         type: 'IMAGE',
         canDrag: canDragDrop,
