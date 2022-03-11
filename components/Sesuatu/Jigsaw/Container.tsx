@@ -6,7 +6,7 @@ import Board from './Board'
 import { Game } from './Game/Game'
 import { Observer } from './Type'
 
-const Container: React.FC = () => {
+const Container: React.FC<{ setShowFinal: React.Dispatch<React.SetStateAction<boolean>>}> = ({ setShowFinal }) => {
     const game = useMemo(() => new Game(), [])
     const [levelIndex, setLevelIndex] = useState(0)
     const [isComplete, setIsComplete] = useState(false)
@@ -27,6 +27,10 @@ const Container: React.FC = () => {
     }, [levelIndex])
 
     const observer: Observer = (game: Game) => {
+        if ((game.levelIndex === game.levels.length - 1) && game.level.isCompleted) {
+            setShowFinal(true)
+        }
+        
         setIsComplete(game.level.isCompleted)
 
         setLevelIndex(game.levelIndex)
@@ -44,7 +48,6 @@ const Container: React.FC = () => {
         setTimeout(() => {
             game.toLevel(next)
         }, 100);
-        
     }
     
     return <DndProvider backend={TouchBackend} options={{ enableMouseEvents: true }}>
