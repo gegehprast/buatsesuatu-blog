@@ -4,6 +4,7 @@ export interface Piece {
     id: number;
     url: string;
     correct?: boolean;
+    currentIndex?: number;
 }
 
-export type Observer = ((levelString: string) => void) | null
+export type Observer = ((game: Game) => void) | null

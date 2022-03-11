@@ -57,6 +57,16 @@ export class Game extends EventEmitter {
         this.emitChange()
     }
 
+    public completeLevel() {
+        while (!this.level.isCompleted) {
+            for (let i = 0; i < this.level.pieces.length; i++) {
+                const piece = this.level.pieces[i];
+                
+                this.move(piece.currentIndex!, piece.id - 1)
+            }
+        }
+    }
+
     private setLevels() {
         this.levels = [
             new Easy(),
@@ -75,6 +85,8 @@ export class Game extends EventEmitter {
 
     private onLevelComplete() {
         this.emit('LEVEL_COMPLETE')
+
+        this.emitChange()
     }
 
     private emitChange() {

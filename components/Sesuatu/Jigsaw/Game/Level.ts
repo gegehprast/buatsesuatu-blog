@@ -18,6 +18,11 @@ export abstract class Level extends EventEmitter {
      */
     public anchorIndex: number
 
+    /**
+     * Is the level completed.
+     */
+    public isCompleted: boolean = false
+
     public abstract columns: number
     
     public abstract rows: number
@@ -34,7 +39,10 @@ export abstract class Level extends EventEmitter {
         // shuffle the pieces
         this.pieces = shuffle2([...this.completePieces], [this.anchorIndex])
         this.pieces = this.pieces.map((piece, index) => {
-            return {...piece, ...{ correct: this.isCorrect(piece, index) }}
+            const newPiece = {...piece, ...{ currentIndex: index }}
+            newPiece.correct = this.isCorrect(piece)
+
+            return newPiece
         })
     }
 
@@ -61,15 +69,21 @@ export abstract class Level extends EventEmitter {
         // swap
         [tempPieces[pieceIndexA], tempPieces[pieceIndexB]] = [tempPieces[pieceIndexB], tempPieces[pieceIndexA]]
 
+        // set current index
+        tempPieces[pieceIndexA].currentIndex = pieceIndexA
+        tempPieces[pieceIndexB].currentIndex = pieceIndexB
+
         // set `correct`
-        tempPieces[pieceIndexA].correct = this.isCorrect(tempPieces[pieceIndexA], pieceIndexA)
-        tempPieces[pieceIndexB].correct = this.isCorrect(tempPieces[pieceIndexB], pieceIndexB)
+        tempPieces[pieceIndexA].correct = this.isCorrect(tempPieces[pieceIndexA])
+        tempPieces[pieceIndexB].correct = this.isCorrect(tempPieces[pieceIndexB])
 
         // set new pieces state
         this.pieces = tempPieces
 
         // is complete?
-        if (this.isComplete()) {
+        this.isCompleted = this.isComplete()
+
+        if (this.isCompleted) {
             this.emit('COMPLETE')
         } else {
             console.log('NOT COMPLETOOOO')
@@ -83,8 +97,8 @@ export abstract class Level extends EventEmitter {
      * @param index 
      * @returns 
      */
-    public isCorrect(pieceA: Piece, index: number): boolean {
-        return pieceA.id - 1 === index
+    public isCorrect(pieceA: Piece): boolean {
+        return pieceA.id - 1 === pieceA.currentIndex
     }
 
     /**
@@ -96,5 +110,12 @@ export abstract class Level extends EventEmitter {
         return (this.completePieces.length == this.pieces.length) && this.completePieces.every((element, index) => {
             return element.id === this.pieces[index].id 
         })
+    }
+
+    public completeLevel() {
+        console.log('level cl')
+        this.pieces = this.completePieces
+
+        this.emit('COMPLETE')
     }
 }
