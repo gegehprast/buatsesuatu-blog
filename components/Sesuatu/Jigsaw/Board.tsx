@@ -21,7 +21,7 @@ const Board: React.FC<{ game: Game }> = ({ game }) => {
         '4': 'grid-cols-4',
     }
     
-    return <div className={`grid ${gridCols[game.level.columns]} gap-0 aspect-[1080/1620] max-h-[85vh] w-full mx-auto content-start`}>
+    return <div className={`grid ${gridCols[game.level.columns]} gap-0 aspect-[1080/1620] max-h-[85vh] w-full content-start absolute left-1/2 transform -translate-x-1/2`}>
         {pieces.map((piece, i) => <div key={i} className="aspect-square">
             <Panel game={game as Game} playSwapSFX={play} index={i} />
         </div>)}
