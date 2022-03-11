@@ -60,18 +60,24 @@ const Container: React.FC = () => {
                 />
             </div>}
 
+            {game && <div className={`aspect-[1080/1620] max-h-[85vh] w-full content-start absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 z-50 ${isComplete ? 'pointer-events-auto opacity-100 transition-opacity ease-out duration-200' : 'pointer-events-none opacity-0'}`}>
+                <div className='absolute flex flex-col items-center justify-center text-xl font-semibold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
+                    <div className=''>
+                        Level Completed
+                    </div>
+                    
+                    {levelIndex < game.levels.length - 1 && <button className='px-2 py-1 text-xs text-white bg-blue-600 border border-blue-500 rounded hover:bg-blue-500' onClick={() => changeLevel(1)}>
+                        Next Level
+                    </button>}
+                </div>
+            </div>}
+
             {game && <div className={`aspect-[1080/1620] max-h-[85vh] w-full content-start absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-300 z-50 ${loading ? 'pointer-events-auto opacity-100 transition-opacity ease-out duration-200' : 'pointer-events-none opacity-0'}`}>
                 <div className='absolute text-xl font-semibold transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2'>
                     Loading...
                 </div>
             </div>}
         </div>
-
-        {game && <div className='items-center w-full mt-1 leading-none text-center text-white'>
-            <div className='flex items-center justify-center w-full mx-auto md:w-2/12'>
-                <button className='px-2 py-1 text-xs bg-blue-600 border border-blue-500 rounded hover:bg-blue-500' onClick={() => changeLevel(1)}>Next Level</button>
-            </div>
-        </div>}
 
         {game && <div className='items-center w-full mt-1 leading-none text-center text-white'>
             <div className='flex items-center justify-center w-full mx-auto md:w-2/12'>
