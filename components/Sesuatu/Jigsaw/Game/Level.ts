@@ -39,8 +39,8 @@ export abstract class Level extends EventEmitter {
         // shuffle the pieces
         this.pieces = shuffle2([...this.completePieces], [this.anchorIndex])
         this.pieces = this.pieces.map((piece, index) => {
-            const newPiece = {...piece, ...{ currentIndex: index }}
-            newPiece.correct = this.isCorrect(piece)
+            const newPiece: Piece = {...piece, ...{ currentIndex: index }}
+            newPiece.correct = this.isCorrect(newPiece)
 
             return newPiece
         })
@@ -94,7 +94,6 @@ export abstract class Level extends EventEmitter {
      * Is a piece in correct position index?
      * 
      * @param pieceA 
-     * @param index 
      * @returns 
      */
     public isCorrect(pieceA: Piece): boolean {
