@@ -17,7 +17,7 @@ const configs = [...Array(30)].map((item, i) => {
 const Final = () => {
     return (
         <div className='w-full h-full bg-pink-300'>
-            <div className='raining-heart'>
+            <div className='pointer-events-none raining-heart'>
                 <div className='raining-heart-container ts-preserve3d'>
                     {configs.map((config, key) => (
                         <div key={key} className='absolute heart ts-preserve3d' style={{ transform: `translateX(${config.heartTranslateX}px) translateZ(${config.heartTranslateZ}px) scale3d(0.5, 0.5, 0.5)` }}>
