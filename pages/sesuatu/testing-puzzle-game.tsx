@@ -1,19 +1,21 @@
-import React from 'react'
+import React, { useState } from 'react'
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 import BlankLayout from '../../components/Layout/BlankLayout'
 import { MyNextComponentType } from '../_app'
 
 const Container = dynamic( () => import('../../components/Sesuatu/Jigsaw/Container'), { ssr: false } )
+const Final = dynamic( () => import('../../components/Sesuatu/Jigsaw/Final'), { ssr: false } )
 
 const TestingPuzzleGame: MyNextComponentType = () => {
+    const [showFinal, setShowFinal] = useState(false)
     return (
         <>
             <Head>
                 <title key="title">Testing Puzzle Game | {process.env.NEXT_PUBLIC_TITLE}</title>
             </Head>
             
-            <div className='w-full'>
+            <div className={`absolute top-0 left-0 w-full h-screen`}>
                 <div className='items-center w-full p-1 leading-none text-center text-white'>
                     <h1 className='text-lg font-semibold'>Puzzle Game</h1>
 
@@ -22,7 +24,11 @@ const TestingPuzzleGame: MyNextComponentType = () => {
                     </span>
                 </div>
 
-                <Container />
+                <Container setShowFinal={setShowFinal} />
+            </div>
+            
+            <div className={`absolute top-0 left-0 w-full h-screen transition-opacity z-50 ${showFinal ? 'pointer-events-auto opacity-100 ease-in-out duration-[5000ms]' : 'pointer-events-none opacity-0'}`}>
+                <Final />
             </div>
         </>
     )

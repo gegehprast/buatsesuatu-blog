@@ -9,6 +9,45 @@ module.exports = {
     ],
     theme: {
         extend: {
+            keyframes: {
+                drop: {
+                    '0%': {
+                        transform: 'translateY(-1000px)',
+                        opacity: 3,
+                    },
+                    '80%': {
+                        transform: 'translateY(0)',
+                        opacity: 3,
+                    },
+                    '100%': {
+                        transform: 'translateY(-40px)',
+                        opacity: 3,
+                    },
+                },
+                ripple: {
+                    '0%': {
+                        transform: 'translate(-50%, -50%) rotateX(90deg) scale(0) translateZ(-37px)',
+                        opacity: 2,
+                    },
+                    '100%': {
+                        transform: 'translate(-50%, -50%) rotateX(90deg) scale(2) translateZ(-37px)',
+                        opacity: 0,
+                    }
+                },
+                rotation: {
+                    '0%': {
+                        transform: 'rotateY(0deg)'
+                    },
+                    '100%': {
+                        transform: 'rotateY(360deg)'
+                    }
+                }
+            },
+            animation: {
+                drop: 'drop 5000ms linear infinite',
+                ripple: 'ripple 5000ms ease-out infinite',
+                rotation: 'rotation linear infinite',
+            },
             fontFamily: {
                 sans: [
                     'Inter',

@@ -7,6 +7,7 @@ import 'react-placeholder/lib/reactPlaceholder.css'
 import '../styles/inter.css'
 import '../styles/main.css'
 import '../styles/dark-mode.css'
+import '../styles/jigsaw.css'
 
 export type MyNextComponentType = NextComponentType & {
     getLayout?: (page: JSX.Element) => JSX.Element
