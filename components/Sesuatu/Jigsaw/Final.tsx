@@ -3,7 +3,7 @@ import { random } from '../../../utils/number'
 import ArrowSmRight from '../../Icons/ArrowSmRight'
 import { TextScramble } from './TextScramble/TextScramble'
 
-const configs = [...Array(30)].map((item, i) => {
+const randomizeRain = () => [...Array(30)].map((item, i) => {
     const delay = random(0, 5000) - 3000
 
     return {
@@ -16,18 +16,40 @@ const configs = [...Array(30)].map((item, i) => {
     }
 })
 
-const forMyLove = [
-    'Halo, Al!',
-    'Makasih ya, wes bersedia jadi bahan survei. 😀 ',
-    'Tapi iku mek boongan, hahaha. 🤣😛'
-]
+const rainConfigs = randomizeRain()
 
 const Final: React.FC<{ show: boolean }> = ({ show }) => {
+    const [texts, setTexts] = useState([])
+
+    useEffect(() => {
+        const get = async () => {
+            const resp = await fetch('https://cdn.shallty.moe/json/formylove.json', {
+                method: 'get'
+            })
+            .then(resp => resp.json())
+            .then(data => data)
+
+            setTexts(resp)
+        }
+
+        get()
+    }, [])
+
+    if (texts.length < 1) {
+        return null
+    }
+
+    return <TheElement show={show} texts={texts} />
+}
+
+const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts }) => {
     const fx = useMemo(() => new TextScramble(), [])
     const [cooldown, setCooldown] = useState(false)
     const [textIndex, setTextIndex] = useState<number | null>(null)
     const [textRef, setText] = useState('')
-
+    
+    const configRef = useRef(rainConfigs)
+    
     useEffect(() => {
         fx.observe((text: string) => {
             setText(text)
@@ -50,11 +72,8 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
     
 
     useEffect(() => {
-        console.log('textIndex', textIndex)
-        
         if (textIndex !== null) {
-            console.log('setting ', forMyLove[textIndex])
-            fx.setText(textRef, forMyLove[textIndex])
+            fx.setText(textRef, texts[textIndex])
         }
     }, [textIndex])
     
@@ -74,16 +93,13 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
     }, [cooldown])
 
     const nextText = () => {
-        console.log('next', cooldown)
         if (cooldown) {
             return
         }
 
         const nextIndex = textIndex !== null ? (textIndex + 1) : 0
 
-        console.log(nextIndex, forMyLove.length)
-
-        if (nextIndex >= forMyLove.length) {
+        if (nextIndex >= texts.length) {
             return
         }
         
@@ -96,7 +112,7 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
         <div className='relative w-full h-full bg-pink-200'>
             <div className='pointer-events-none raining-heart'>
                 <div className='raining-heart-container ts-preserve3d'>
-                    {configs.map((config, key) => (
+                    {configRef.current.map((config, key) => (
                         <div key={key} className='absolute heart ts-preserve3d' style={{ transform: `translateX(${config.heartTranslateX}px) translateZ(${config.heartTranslateZ}px) scale3d(0.5, 0.5, 0.5)` }}>
                             <div className='ripple ts-preserve3d' style={{ animation: `wave 5000ms ${config.rippleWaveDelay}ms ease-out infinite` }}></div>
                             
