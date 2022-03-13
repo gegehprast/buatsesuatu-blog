@@ -6,9 +6,9 @@
     --color-quinary: #db2777;
 
     --shadow-size-1: 2px;
-    --shadow-size-2: 5px;
-    --shadow-size-3: 8px;
-    --shadow-size-4: 11px;
+    --shadow-size-2: 4px;
+    --shadow-size-3: 6px;
+    --shadow-size-4: 8px;
 
     --move-translate: -8px;
 }
@@ -51,14 +51,11 @@
         var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary),
         var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary), 
         var(--shadow-size-4) var(--shadow-size-4) 0 var(--color-quinary);
-    font-weight: 400;
-    text-transform: uppercase;
     font-size: calc(2rem + 5vw);
     text-align: center;
     margin: 0;
     color: var(--color-primary);
     animation: shadows 2s ease-in-out infinite, move 2s ease-in-out infinite;
-    letter-spacing: 0.4rem;
 }
 
 @keyframes rotation {

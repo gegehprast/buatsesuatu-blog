@@ -109,6 +109,7 @@ module.exports = {
         fontFamily: {
             'lovely': ['lovely'],
             'ayuku': ['ayuku'],
+            'LoveConchetta': ['"Love Conchetta"'],
         }
     },
     variants: {
