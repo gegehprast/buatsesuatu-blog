@@ -16,7 +16,7 @@ const configs = [...Array(30)].map((item, i) => {
 
 const Final = () => {
     return (
-        <div className='w-full h-full bg-pink-300'>
+        <div className='relative w-full h-full bg-pink-300'>
             <div className='pointer-events-none raining-heart'>
                 <div className='raining-heart-container ts-preserve3d'>
                     {configs.map((config, key) => (
@@ -30,6 +30,12 @@ const Final = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </div>
+
+            <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen overflow-hidden'>
+                <div className='flex content-center justify-center'>
+                    <h2 className='text_shadows font-ayuku'>Halo, Al!</h2>
                 </div>
             </div>
         </div>
