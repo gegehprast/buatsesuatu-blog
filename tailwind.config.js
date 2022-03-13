@@ -105,6 +105,11 @@ module.exports = {
                 'bs': '0 0px 15px 0px rgba(0, 0, 0, 0.20), 0 5px 10px 0px rgba(0, 0, 0, 0.20)',
             }
         },
+
+        fontFamily: {
+            'lovely': ['lovely'],
+            'ayuku': ['ayuku'],
+        }
     },
     variants: {
         backgroundColor: ['responsive', 'hover', 'focus', 'active'],

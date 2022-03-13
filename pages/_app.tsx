@@ -5,9 +5,11 @@ import 'easymde/dist/easymde.min.css'
 import 'github-markdown-css/github-markdown.css'
 import 'react-placeholder/lib/reactPlaceholder.css'
 import '../styles/inter.css'
+import '../styles/lovely.css'
+import '../styles/ayuku.css'
 import '../styles/main.css'
 import '../styles/dark-mode.css'
-import '../styles/jigsaw.css'
+import '../styles/jigsaw.scss'
 
 export type MyNextComponentType = NextComponentType & {
     getLayout?: (page: JSX.Element) => JSX.Element

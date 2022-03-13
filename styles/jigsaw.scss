@@ -1,0 +1,173 @@
+:root {
+    --color-primary: #F06095;
+    --color-secondary: #f9a8d4;
+    --color-tertiary: #f472b6;
+    --color-quaternary: #ec4899;
+    --color-quinary: #db2777;
+
+    --shadow-size-1: 2px;
+    --shadow-size-2: 5px;
+    --shadow-size-3: 8px;
+    --shadow-size-4: 11px;
+
+    --move-translate: -8px;
+}
+
+.ts-preserve3d {
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.raining-heart {
+    /* background: #fff; */
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    /* font-family: 'Anton', */
+    /* sans-serif; */
+    justify-content: center;
+    align-items: center;
+    perspective: 1300px;
+}
+
+.raining-heart-container {
+    transform: rotateX(-15deg);
+}
+
+.ripple {
+    width: 300px;
+    height: 300px;
+    border-radius: 100%;
+    opacity: 0;
+    border: 1px solid rgba(255, 0, 0, 1);
+}
+
+.movable {
+    opacity: 0;
+}
+
+.text_shadows {
+    text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary), 
+        var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary),
+        var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary), 
+        var(--shadow-size-4) var(--shadow-size-4) 0 var(--color-quinary);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: calc(2rem + 5vw);
+    text-align: center;
+    margin: 0;
+    color: var(--color-primary);
+    animation: shadows 2s ease-in-out infinite, move 2s ease-in-out infinite;
+    letter-spacing: 0.4rem;
+}
+
+@keyframes rotation {
+    0% {
+        transform: translateX(-50%) rotateY(0deg);
+    }
+
+    100% {
+        transform: translateX(-50%) rotateY(360deg);
+    }
+}
+
+@keyframes drop {
+    0% {
+        transform: translateY(-1000px);
+        opacity: 0;
+    }
+
+    80% {
+        transform: translateY(0);
+        opacity: 3;
+    }
+
+    100% {
+        transform: translateY(-40px);
+        opacity: 0;
+    }
+}
+
+@keyframes wave {
+    0% {
+        transform: translate(-50%, -50%) rotateX(90deg) scale(0) translateZ(-37px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotateX(90deg) scale(2) translateZ(-37px);
+        opacity: 0;
+    }
+}
+
+@keyframes shadows {
+    0% {
+        text-shadow: none;
+    }
+
+    10% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary);
+    }
+
+    20% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary),
+            var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary);
+    }
+
+    30% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary),
+            var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary), 
+            var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary);
+    }
+
+    40% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary),
+            var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary), 
+            var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary),
+            var(--shadow-size-4) var(--shadow-size-4) 0 var(--color-quinary);
+    }
+
+    60% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary),
+            var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary), 
+            var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary),
+            var(--shadow-size-4) var(--shadow-size-4) 0 var(--color-quinary);
+    }
+
+    70% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary),
+            var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary), 
+            var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary);
+    }
+
+    80% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary),
+            var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary);
+    }
+
+    90% {
+        text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary);
+    }
+
+    100% {
+        text-shadow: none;
+    }
+}
+
+@keyframes move {
+    0% {
+        transform: translate(0px, 0px);
+    }
+
+    40% {
+        transform: translate(var(--move-translate), var(--move-translate));
+    }
+
+    60% {
+        transform: translate(var(--move-translate), var(--move-translate));
+    }
+
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
