@@ -9,6 +9,9 @@ module.exports = {
     ],
     theme: {
         extend: {
+            colors: {
+                'jigsaw-pink-main': '#F06095',
+            },
             keyframes: {
                 drop: {
                     '0%': {
@@ -41,12 +44,27 @@ module.exports = {
                     '100%': {
                         transform: 'rotateY(360deg)'
                     }
+                },
+                'bounce-right': {
+                    '0%': {
+                        transform: 'translateX(10%)',
+                        'animation-timing-function': 'cubic-bezier(0.8,0,1,1)',
+                    },
+                    '50%': {
+                        transform: 'translateX(-10%)',
+                        'animation-timing-function': 'cubic-bezier(0,0,0.2,1)',
+                    },
+                    '100%': {
+                        transform: 'translateX(10%)',
+                        'animation-timing-function': 'cubic-bezier(0.8,0,1,1)',
+                    }
                 }
             },
             animation: {
                 drop: 'drop 5000ms linear infinite',
                 ripple: 'ripple 5000ms ease-out infinite',
                 rotation: 'rotation linear infinite',
+                'bounce-right': 'bounce-right 1s infinite'
             },
             fontFamily: {
                 sans: [

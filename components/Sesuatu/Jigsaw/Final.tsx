@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { random } from '../../../utils/number'
+import ArrowSmRight from '../../Icons/ArrowSmRight'
 
 const configs = [...Array(30)].map((item, i) => {
     const delay = random(0, 5000) - 3000
@@ -14,7 +15,40 @@ const configs = [...Array(30)].map((item, i) => {
     }
 })
 
+const forMyLove = [
+    'Halo, Al!',
+    'Makasih ya, wes bersedia jadi bahan survei. 😀 ',
+    'Tapi iku mek boongan, hahaha. 🤣😛'
+]
+
 const Final = () => {
+    const [cooldown, setCooldown] = useState(false)
+    const [textIndex, setTextIndex] = useState(0)
+
+    useEffect(() => {
+        let t: ReturnType<typeof setTimeout>
+
+        if (cooldown) {
+            t = setTimeout(() => {
+                setCooldown(false)
+            }, 3000);
+        }
+    
+      return () => {
+          clearTimeout(t)
+      }
+    }, [cooldown])
+    
+
+    const nextText = () => {
+        if (cooldown) {
+            return
+        }
+
+        setTextIndex(curr => curr + 1)
+        setCooldown(true)
+    }
+
     return (
         <div className='relative w-full h-full bg-pink-300'>
             <div className='pointer-events-none raining-heart'>
@@ -35,7 +69,23 @@ const Final = () => {
 
             <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen overflow-hidden'>
                 <div className='flex content-center justify-center'>
-                    <h2 className='text_shadows font-ayuku'>Halo, Al!</h2>
+                    <span className='font-semibold leading-loose text_shadows font-ayuku'>
+                        {forMyLove[textIndex]}
+                    </span>
+                </div>
+            </div>
+
+            <div className='absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden'>
+                <div className='relative flex content-center justify-center p-4'>
+                    <div className='relative flex content-center justify-center w-12 h-12'>
+                        <div className={`absolute w-full h-full p-2 rounded-full bg-jigsaw-pink-main ${cooldown ? 'cursor-wait' : 'animate-ping'}`}></div>
+                        
+                        <button className='relative flex items-center justify-center w-12 h-12 p-2 text-pink-200 rounded-full bg-jigsaw-pink-main' onClick={nextText}>
+                            <span className={`${cooldown ? 'cursor-wait' : 'animate-bounce-right'}`}>
+                                <ArrowSmRight />
+                            </span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
