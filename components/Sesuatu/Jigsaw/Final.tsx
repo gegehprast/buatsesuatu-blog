@@ -135,7 +135,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             </div>
 
             {textIndex !== null && <div className='absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden'>
-                <div className='relative flex content-center justify-center p-4'>
+                <div className='relative flex content-center justify-center p-4 pb-24'>
                     <div className='relative flex content-center justify-center w-12 h-12'>
                         <div className={`absolute w-full h-full p-2 rounded-full bg-jigsaw-pink-main ${cooldown ? 'cursor-wait' : 'animate-ping'}`}></div>
                         

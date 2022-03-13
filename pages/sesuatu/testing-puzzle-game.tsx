@@ -8,7 +8,7 @@ const Container = dynamic( () => import('../../components/Sesuatu/Jigsaw/Contain
 const Final = dynamic( () => import('../../components/Sesuatu/Jigsaw/Final'), { ssr: false } )
 
 const TestingPuzzleGame: MyNextComponentType = () => {
-    const [showFinal, setShowFinal] = useState(true)
+    const [showFinal, setShowFinal] = useState(false)
     return (
         <>
             <Head>
