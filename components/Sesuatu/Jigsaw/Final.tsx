@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { random } from '../../../utils/number'
 import ArrowSmRight from '../../Icons/ArrowSmRight'
+import { TextScramble } from './TextScramble/TextScramble'
 
 const configs = [...Array(30)].map((item, i) => {
     const delay = random(0, 5000) - 3000
@@ -21,9 +22,42 @@ const forMyLove = [
     'Tapi iku mek boongan, hahaha. 🤣😛'
 ]
 
-const Final = () => {
+const Final: React.FC<{ show: boolean }> = ({ show }) => {
+    const fx = useMemo(() => new TextScramble(), [])
     const [cooldown, setCooldown] = useState(false)
-    const [textIndex, setTextIndex] = useState(0)
+    const [textIndex, setTextIndex] = useState<number | null>(null)
+    const [textRef, setText] = useState('')
+
+    useEffect(() => {
+        fx.observe((text: string) => {
+            setText(text)
+        })
+    })
+
+    useEffect(() => {
+        let t: ReturnType<typeof setTimeout>
+
+        if (show) {
+            t = setTimeout(() => {
+                nextText()
+            }, 2500);
+        }
+    
+        return () => {
+            clearTimeout(t)
+        }
+    }, [show])
+    
+
+    useEffect(() => {
+        console.log('textIndex', textIndex)
+        
+        if (textIndex !== null) {
+            console.log('setting ', forMyLove[textIndex])
+            fx.setText(textRef, forMyLove[textIndex])
+        }
+    }, [textIndex])
+    
 
     useEffect(() => {
         let t: ReturnType<typeof setTimeout>
@@ -31,26 +65,35 @@ const Final = () => {
         if (cooldown) {
             t = setTimeout(() => {
                 setCooldown(false)
-            }, 3000);
+            }, 1000);
         }
     
-      return () => {
-          clearTimeout(t)
-      }
+        return () => {
+            clearTimeout(t)
+        }
     }, [cooldown])
-    
 
     const nextText = () => {
+        console.log('next', cooldown)
         if (cooldown) {
             return
         }
 
-        setTextIndex(curr => curr + 1)
+        const nextIndex = textIndex !== null ? (textIndex + 1) : 0
+
+        console.log(nextIndex, forMyLove.length)
+
+        if (nextIndex >= forMyLove.length) {
+            return
+        }
+        
+        setTextIndex(nextIndex)
+        
         setCooldown(true)
     }
 
     return (
-        <div className='relative w-full h-full bg-pink-300'>
+        <div className='relative w-full h-full bg-pink-200'>
             <div className='pointer-events-none raining-heart'>
                 <div className='raining-heart-container ts-preserve3d'>
                     {configs.map((config, key) => (
@@ -67,15 +110,15 @@ const Final = () => {
                 </div>
             </div>
 
-            <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen overflow-hidden'>
+            <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen p-2 overflow-hidden'>
                 <div className='flex content-center justify-center'>
-                    <span className='font-semibold leading-loose text_shadows font-ayuku'>
-                        {forMyLove[textIndex]}
+                    <span className='leading-loose font-ayuku text_shadows'>
+                        {textRef}
                     </span>
                 </div>
             </div>
 
-            <div className='absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden'>
+            {textIndex !== null && <div className='absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden'>
                 <div className='relative flex content-center justify-center p-4'>
                     <div className='relative flex content-center justify-center w-12 h-12'>
                         <div className={`absolute w-full h-full p-2 rounded-full bg-jigsaw-pink-main ${cooldown ? 'cursor-wait' : 'animate-ping'}`}></div>
@@ -87,7 +130,7 @@ const Final = () => {
                         </button>
                     </div>
                 </div>
-            </div>
+            </div>}
         </div>
     )
 }

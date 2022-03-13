@@ -8,7 +8,7 @@ const Container = dynamic( () => import('../../components/Sesuatu/Jigsaw/Contain
 const Final = dynamic( () => import('../../components/Sesuatu/Jigsaw/Final'), { ssr: false } )
 
 const TestingPuzzleGame: MyNextComponentType = () => {
-    const [showFinal, setShowFinal] = useState(true)
+    const [showFinal, setShowFinal] = useState(false)
     return (
         <>
             <Head>
@@ -28,7 +28,7 @@ const TestingPuzzleGame: MyNextComponentType = () => {
             </div>
             
             <div className={`absolute top-0 left-0 w-full h-screen transition-opacity z-50 ${showFinal ? 'pointer-events-auto opacity-100 ease-in-out duration-[5000ms]' : 'pointer-events-none opacity-0'}`}>
-                <Final />
+                <Final show={showFinal} />
             </div>
         </>
     )
