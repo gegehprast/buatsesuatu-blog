@@ -7,10 +7,6 @@ import type { Game } from './Game/Game'
 const Panel: React.FC<{ game: Game, index: number, playSwapSFX: () => void }> = ({ game, index, playSwapSFX }) => {
     const canDragDrop = index !== game.level.anchorIndex
     const piece = game.level.pieces[index]
-    
-    if (!piece) {
-        return null
-    }
 
     const [{ isDragging }, drag, preview] = useDrag<{ index: number }, { index: number }, { isDragging: boolean; canDrag: boolean }>(() => ({
         type: 'IMAGE',
@@ -37,6 +33,10 @@ const Panel: React.FC<{ game: Game, index: number, playSwapSFX: () => void }> = 
             canDrop: monitor.canDrop(),
         })
     }), [game.level.pieces, canDragDrop])
+
+    if (!piece) {
+        return null
+    }
 
     let hoveredStyle = hovered ? 'border-4 md:border-8 border-green-500 cursor-move' : 'border-0 cursor-move'
     let draggedStyle = isDragging ? 'border-4 md:border-8 border-blue-500 cursor-move' : 'border-0 cursor-move'
