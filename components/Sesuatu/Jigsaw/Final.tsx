@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { random } from '../../../utils/number'
 import ArrowSmRight from '../../Icons/ArrowSmRight'
 import { TextScramble } from './TextScramble/TextScramble'
-import formylove from './formylove.json'
+// import formylove from './formylove.json'
 import RingBox from './RingBox'
 
 const randomizeRain = () => [...Array(30)].map((item, i) => {
@@ -25,7 +25,15 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
 
     useEffect(() => {
         const get = async () => {
-            setTexts(formylove)
+            // setTexts(formylove)
+
+            const resp = await fetch('https://cdn.shallty.moe/json/formylove.json', {
+                method: 'get'
+            })
+            .then(resp => resp.json())
+            .then(data => data)
+
+            setTexts(resp)
         }
 
         get()
