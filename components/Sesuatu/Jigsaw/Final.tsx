@@ -2,6 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { random } from '../../../utils/number'
 import ArrowSmRight from '../../Icons/ArrowSmRight'
 import { TextScramble } from './TextScramble/TextScramble'
+import formylove from './formylove.json'
 
 const randomizeRain = () => [...Array(30)].map((item, i) => {
     const delay = random(0, 5000) - 3000
@@ -19,17 +20,11 @@ const randomizeRain = () => [...Array(30)].map((item, i) => {
 const rainConfigs = randomizeRain()
 
 const Final: React.FC<{ show: boolean }> = ({ show }) => {
-    const [texts, setTexts] = useState([])
+    const [texts, setTexts] = useState<string[]>([])
 
     useEffect(() => {
         const get = async () => {
-            const resp = await fetch('https://cdn.shallty.moe/json/formylove.json', {
-                method: 'get'
-            })
-            .then(resp => resp.json())
-            .then(data => data)
-
-            setTexts(resp)
+            setTexts(formylove)
         }
 
         get()
@@ -45,15 +40,19 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
 const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts }) => {
     const fx = useMemo(() => new TextScramble(), [])
     const [cooldown, setCooldown] = useState(false)
-    const [textIndex, setTextIndex] = useState<number | null>(null)
-    const [textRef, setText] = useState('')
+    const [textIndex, setTextIndex] = useState<number | null>(53)
+    const [text, setText] = useState('')
+    const [hideText, setHideText] = useState(false)
+    const [showLastText, setShowLastText] = useState(false)
     
     const configRef = useRef(rainConfigs)
     
     useEffect(() => {
-        fx.observe((text: string) => {
-            setText(text)
-        })
+        fx.observe(observer)
+
+        return () => {
+            fx.unobserve(observer)
+        }
     })
 
     useEffect(() => {
@@ -72,8 +71,11 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
     
 
     useEffect(() => {
-        if (textIndex !== null) {
-            fx.setText(textRef, texts[textIndex])
+        if (textIndex !== null && textIndex < (texts.length - 1)) {
+            fx.setText(text, texts[textIndex])
+        } else {
+            console.log('hide')
+            setHideText(true)
         }
     }, [textIndex])
     
@@ -91,6 +93,30 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             clearTimeout(t)
         }
     }, [cooldown])
+
+    useEffect(() => {
+        let t: ReturnType<typeof setTimeout>
+
+        if (hideText) {
+            t = setTimeout(() => {
+                setText(texts[texts.length - 1])
+                setShowLastText(true)
+            }, 1050);
+        }
+        
+        return () => {
+            clearTimeout(t)
+        }
+    }, [hideText])
+    
+
+    const observer = (text: string) => {
+        if (textIndex !== null && textIndex === (texts.length - 1)) {
+            return
+        }
+
+        setText(text)
+    }
 
     const nextText = () => {
         if (cooldown) {
@@ -127,14 +153,23 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             </div>
 
             <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen p-2 overflow-hidden'>
-                <div className='flex content-center justify-center'>
-                    <span className='leading-loose font-ayuku text_shadows'>
-                        {textRef}
+                <div className='relative flex content-center justify-center'>
+                    {/* invisible */}
+                    <span className={`invisible leading-loose font-ayuku text_shadows`}>
+                        {text}
+                    </span>
+
+                    <span className={`${hideText ? 'opacity-0' : 'opacity-100'} absolute top-0 transition-opacity duration-1000 ease-in leading-loose font-ayuku text_shadows`}>
+                        {text}
+                    </span>
+
+                    <span className={`${showLastText ? 'opacity-100' : 'opacity-0'} absolute top-0 transition-opacity duration-[2000ms] ease-in-out leading-loose font-ayuku text_shadows`}>
+                        {text}
                     </span>
                 </div>
             </div>
 
-            {textIndex !== null && <div className='absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden'>
+            {textIndex !== null && <div className={`absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden transition-opacity duration-1000 ease-in-out ${hideText ? 'opacity-0' : 'opacity-100'}`}>
                 <div className='relative flex content-center justify-center p-4 pb-24'>
                     <div className='relative flex content-center justify-center w-12 h-12'>
                         <div className={`absolute w-full h-full p-2 rounded-full bg-jigsaw-pink-main ${cooldown ? 'cursor-wait' : 'animate-ping'}`}></div>

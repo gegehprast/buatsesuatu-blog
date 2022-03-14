@@ -22,14 +22,14 @@ export class TextScramble {
         this.update = this.update.bind(this);
     }
 
-    public observe(observer: Observer): () => void {
+    public observe(observer: Observer) {
         this.observers.push(observer)
 
         this.emitChange()
+    }
 
-        return (): void => {
-            this.observers = this.observers.filter((_observer) => _observer !== observer)
-        }
+    public unobserve(observer: Observer) {
+        this.observers = this.observers.filter((_observer) => _observer !== observer)
     }
 
     public setText(oldText: string, newText: string) {
