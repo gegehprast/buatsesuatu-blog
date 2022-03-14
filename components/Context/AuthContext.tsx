@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
 import React, { useState, useEffect, createContext } from 'react'
 import Axios from 'axios'
 import cookie from 'js-cookie'
