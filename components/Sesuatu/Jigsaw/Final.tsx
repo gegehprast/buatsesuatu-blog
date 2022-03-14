@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useMemo, useRef, useState } from 'react'
 import { random } from '../../../utils/number'
 import ArrowSmRight from '../../Icons/ArrowSmRight'
@@ -49,7 +50,7 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
 const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts }) => {
     const fx = useMemo(() => new TextScramble(), [])
     const [cooldown, setCooldown] = useState(false)
-    const [textIndex, setTextIndex] = useState<number | null>(54)
+    const [textIndex, setTextIndex] = useState<number>(54)
     const [text, setText] = useState('')
     const [hideText, setHideText] = useState(false)
     const [showLastText, setShowLastText] = useState(false)
@@ -63,29 +64,15 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             fx.unobserve(observer)
         }
     })
-
-    useEffect(() => {
-        let t: ReturnType<typeof setTimeout>
-
-        if (show) {
-            t = setTimeout(() => {
-                nextText()
-            }, 2500);
-        }
-    
-        return () => {
-            clearTimeout(t)
-        }
-    }, [show])
     
 
     useEffect(() => {
-        if (textIndex !== null && textIndex < (texts.length - 1)) {
+        if (textIndex < (texts.length - 1)) {
             fx.setText(text, texts[textIndex])
         } else {
-            console.log('hide')
             setHideText(true)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [textIndex])
     
 
@@ -116,6 +103,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
         return () => {
             clearTimeout(t)
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hideText])
     
 
@@ -132,7 +120,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             return
         }
 
-        const nextIndex = textIndex !== null ? (textIndex + 1) : 0
+        const nextIndex = textIndex + 1
 
         if (nextIndex >= texts.length) {
             return
@@ -153,7 +141,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
                             
                             <div className='inner ts-preserve3d' style={{ animation: `rotation ${config.innerRotationDur}ms linear infinite` }}>
                                 <div style={{ width: `${config.heartSize}px`, height: `${config.heartSize}px` }}>
-                                    <img src='/images/jigsaw/heart.png' className='w-full movable ts-preserve3d' style={{ animation: `drop 5000ms ${config.movableDropDelay}ms linear infinite` }} />
+                                    <img src='/images/jigsaw/heart.png' alt="heart" className='w-full movable ts-preserve3d' style={{ animation: `drop 5000ms ${config.movableDropDelay}ms linear infinite` }} />
                                 </div>
                             </div>
                         </div>
@@ -162,23 +150,18 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             </div>
 
             <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen p-2 overflow-hidden'>
-                <div className='relative flex content-center justify-center'>
-                    {/* invisible */}
-                    <span className={`invisible leading-loose font-ayuku text_shadows`}>
+                <div className='relative flex content-center justify-center min-h-[14rem]'>
+                    <span className={`${hideText ? 'opacity-0' : 'opacity-100'} absolute top-0 transition-opacity duration-1000 ease-in leading-loose font-ayuku text-shadows text-shadows-animation`}>
                         {text}
                     </span>
 
-                    <span className={`${hideText ? 'opacity-0' : 'opacity-100'} absolute top-0 transition-opacity duration-1000 ease-in leading-loose font-ayuku text_shadows`}>
-                        {text}
-                    </span>
-
-                    <span className={`${showLastText ? 'opacity-100' : 'opacity-0'} absolute top-0 transition-opacity duration-[2000ms] ease-in-out leading-loose font-ayuku text_shadows`}>
+                    <span className={`${showLastText ? 'opacity-100' : 'opacity-0'} absolute top-0 transition-opacity duration-[3000ms] ease-in-out leading-loose font-ayuku text-shadows`} style={{ animation: 'move 3s ease-in-out infinite' }}>
                         {text}
                     </span>
                 </div>
             </div>
 
-            {textIndex !== null && <div className={`absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden transition-opacity duration-1000 ease-in-out ${hideText ? 'opacity-0' : 'opacity-100'}`}>
+            <div className={`absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden transition-opacity duration-1000 ease-in-out ${hideText ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
                 <div className='relative flex content-center justify-center p-4 pb-24'>
                     <div className='relative flex content-center justify-center w-12 h-12'>
                         <div className={`absolute w-full h-full p-2 rounded-full bg-jigsaw-pink-main ${cooldown ? 'cursor-wait' : 'animate-ping'}`}></div>
@@ -190,13 +173,13 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
                         </button>
                     </div>
                 </div>
-            </div>}
+            </div>
 
-            {textIndex !== null && <div className={`absolute bottom-[5vh] left-0 flex flex-col justify-end w-full overflow-hidden transition-opacity duration-1000 ease-in-out ${showLastText ? 'opacity-100' : 'opacity-0'}`}>
-                <div className='w-[200px] mx-auto'>
+            <div className={`absolute bottom-[5vh] left-0 flex flex-col justify-end w-full transition-opacity duration-[3000ms] ease-in-out ${showLastText ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
+                <div className='w-[200px] mx-auto' style={{ animation: 'move 3s ease-in-out infinite' }}>
                     <RingBox />
                 </div>
-            </div>}
+            </div>
         </div>
     )
 }
