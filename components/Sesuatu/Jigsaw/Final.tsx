@@ -50,8 +50,9 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
 const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts }) => {
     const fx = useMemo(() => new TextScramble(), [])
     const [cooldown, setCooldown] = useState(false)
-    const [textIndex, setTextIndex] = useState<number>(0)
+    const [textIndex, setTextIndex] = useState<number>(-1)
     const [text, setText] = useState('')
+    const [renderMain, setRenderMain] = useState(false)
     const [hideText, setHideText] = useState(false)
     const [showLastText, setShowLastText] = useState(false)
     
@@ -64,9 +65,28 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             fx.unobserve(observer)
         }
     })
-    
 
     useEffect(() => {
+        let t: ReturnType<typeof setTimeout>
+
+        if (show) {
+            t = setTimeout(() => {
+                setTextIndex(0)
+
+                setRenderMain(true)
+            }, 5000);
+        }
+    
+        return () => {
+            clearTimeout(t)
+        }
+    }, [show])
+    
+    useEffect(() => {
+        if (textIndex < 0) {
+            return
+        }
+        
         if (textIndex < (texts.length - 1)) {
             fx.setText(text, texts[textIndex])
         } else {
@@ -75,7 +95,6 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [textIndex])
     
-
     useEffect(() => {
         let t: ReturnType<typeof setTimeout>
 
@@ -106,7 +125,6 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [hideText])
     
-
     const observer = (text: string) => {
         if (textIndex !== null && textIndex === (texts.length - 1)) {
             return
@@ -153,7 +171,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
                 </div>
             </div>
 
-            <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen p-2 overflow-hidden'>
+            {renderMain && <div className='absolute top-0 left-0 flex flex-col justify-center w-full min-h-screen p-2 overflow-hidden'>
                 <div className='relative flex content-center justify-center min-h-[14rem]'>
                     <span className={`${hideText ? 'opacity-0' : 'opacity-100'} absolute top-0 transition-opacity duration-1000 ease-in leading-loose font-ayuku text-shadows text-shadows-animation`}>
                         {text}
@@ -163,9 +181,9 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
                         {text}
                     </span>
                 </div>
-            </div>
+            </div>}
 
-            <div className={`absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden transition-opacity duration-1000 ease-in-out ${hideText ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
+            {renderMain && <div className={`absolute top-0 left-0 flex flex-col justify-end w-full min-h-screen overflow-hidden transition-opacity duration-1000 ease-in-out ${hideText ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
                 <div className='relative flex content-center justify-center p-4 pb-[98px]'>
                     <div className='relative flex content-center justify-center w-12 h-12'>
                         <div className={`absolute w-full h-full p-2 rounded-full bg-jigsaw-pink-main ${cooldown ? 'cursor-wait' : 'animate-ping'}`}></div>
@@ -177,7 +195,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
                         </button>
                     </div>
                 </div>
-            </div>
+            </div>}
 
             <div className={`absolute bottom-[15vh] left-0 flex flex-col justify-end w-full transition-opacity duration-[3000ms] ease-in-out ${showLastText ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
                 <div className='w-[200px] mx-auto cursor-grab' style={{ animation: 'zoominout 3s ease-in-out infinite' }} tabIndex={0} onClick={accept}>
