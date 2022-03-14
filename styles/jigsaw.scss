@@ -46,16 +46,19 @@
     opacity: 0;
 }
 
-.text_shadows {
-    text-shadow: var(--shadow-size-1) var(--shadow-size-1) 0 var(--color-secondary), 
-        var(--shadow-size-2) var(--shadow-size-2) 0 var(--color-tertiary),
-        var(--shadow-size-3) var(--shadow-size-3) var(--color-quaternary), 
-        var(--shadow-size-4) var(--shadow-size-4) 0 var(--color-quinary);
+.text-shadows {
     font-size: calc(2rem + 2vw);
     text-align: center;
     margin: 0;
     color: var(--color-primary);
+}
+
+.text-shadows-animation {
     animation: shadows 2s ease-in-out infinite, move 2s ease-in-out infinite;
+}
+
+.animate-pause {
+    animation-play-state: paused !important;
 }
 
 @keyframes rotation {
