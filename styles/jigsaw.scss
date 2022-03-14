@@ -47,7 +47,7 @@
 }
 
 .text-shadows {
-    font-size: calc(2rem + 2vw);
+    font-size: calc(2rem + 1.5vw);
     text-align: center;
     margin: 0;
     color: var(--color-primary);
@@ -169,5 +169,23 @@
 
     100% {
         transform: translate(0px, 0px);
+    }
+}
+
+@keyframes zoominout {
+    0% {
+        transform: scale(1, 1);
+    }
+
+    40% {
+        transform: scale(1.1, 1.1);
+    }
+
+    60% {
+        transform: scale(1.1, 1.1);
+    }
+
+    100% {
+        transform: scale(1, 1);
     }
 }
