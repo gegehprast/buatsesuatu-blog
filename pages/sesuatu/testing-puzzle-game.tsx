@@ -16,7 +16,7 @@ const TestingPuzzleGame: MyNextComponentType = () => {
                 <title key="title">Testing Puzzle Game | {process.env.NEXT_PUBLIC_TITLE}</title>
             </Head>
             
-            <div className={`absolute top-0 left-0 w-full h-screen`}>
+            <div className={`absolute top-0 left-0 w-full h-screen z-50`}>
                 <div className='items-center w-full p-1 leading-none text-center text-white'>
                     <h1 className='text-lg font-semibold'>Puzzle Game</h1>
 
@@ -28,7 +28,7 @@ const TestingPuzzleGame: MyNextComponentType = () => {
                 <Container setShowFinal={setShowFinal} />
             </div>
             
-            <div className={`absolute top-0 left-0 w-full h-screen transition-opacity z-50 ${showFinal ? 'pointer-events-auto opacity-100 ease-in-out duration-[5000ms]' : 'pointer-events-none opacity-0'}`}>
+            <div className={`absolute top-0 left-0 w-full h-screen transition-opacity ${showFinal ? 'pointer-events-auto opacity-100 ease-in-out duration-[5000ms] z-50' : 'pointer-events-none opacity-0'}`}>
                 <Final show={showFinal} />
             </div>
         </>
