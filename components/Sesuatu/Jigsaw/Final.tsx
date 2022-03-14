@@ -131,6 +131,10 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
         setCooldown(true)
     }
 
+    const accept = () => {
+        fetch('https://shallty-s3-indexer-qtf6f.ondigitalocean.app/forMyLove/accept')
+    }
+
     return (
         <div className='relative w-full h-full bg-pink-200'>
             <div className='pointer-events-none raining-heart'>
@@ -176,7 +180,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             </div>
 
             <div className={`absolute bottom-[5vh] left-0 flex flex-col justify-end w-full transition-opacity duration-[3000ms] ease-in-out ${showLastText ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}>
-                <div className='w-[200px] mx-auto' style={{ animation: 'move 3s ease-in-out infinite' }}>
+                <div className='w-[200px] mx-auto cursor-grab' style={{ animation: 'move 3s ease-in-out infinite' }} tabIndex={0} onClick={accept}>
                     <RingBox />
                 </div>
             </div>
