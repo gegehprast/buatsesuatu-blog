@@ -3,6 +3,7 @@ import { random } from '../../../utils/number'
 import ArrowSmRight from '../../Icons/ArrowSmRight'
 import { TextScramble } from './TextScramble/TextScramble'
 import formylove from './formylove.json'
+import RingBox from './RingBox'
 
 const randomizeRain = () => [...Array(30)].map((item, i) => {
     const delay = random(0, 5000) - 3000
@@ -40,7 +41,7 @@ const Final: React.FC<{ show: boolean }> = ({ show }) => {
 const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts }) => {
     const fx = useMemo(() => new TextScramble(), [])
     const [cooldown, setCooldown] = useState(false)
-    const [textIndex, setTextIndex] = useState<number | null>(53)
+    const [textIndex, setTextIndex] = useState<number | null>(54)
     const [text, setText] = useState('')
     const [hideText, setHideText] = useState(false)
     const [showLastText, setShowLastText] = useState(false)
@@ -180,6 +181,12 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
                             </span>
                         </button>
                     </div>
+                </div>
+            </div>}
+
+            {textIndex !== null && <div className={`absolute bottom-[5vh] left-0 flex flex-col justify-end w-full overflow-hidden transition-opacity duration-1000 ease-in-out ${showLastText ? 'opacity-100' : 'opacity-0'}`}>
+                <div className='w-[200px] mx-auto'>
+                    <RingBox />
                 </div>
             </div>}
         </div>
