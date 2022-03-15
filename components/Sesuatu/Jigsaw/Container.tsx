@@ -81,12 +81,6 @@ const Container: React.FC<{ setShowFinal: React.Dispatch<React.SetStateAction<bo
                 </div>
             </div>}
         </div>
-
-        {game && <div className='absolute items-center w-full mt-1 leading-none text-center text-white bottom-10'>
-            <div className='flex items-center justify-center w-full mx-auto md:w-2/12'>
-                <button className='px-2 py-1 text-xs bg-blue-600 border border-blue-500 rounded hover:bg-blue-500' onClick={() => game.completeLevel()}>Set Complete</button>
-            </div>
-        </div>}
     </DndProvider>
 }
 
