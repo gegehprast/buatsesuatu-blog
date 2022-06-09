@@ -20,7 +20,7 @@ const Create = (): React.ReactElement | null => {
         if (!fetching && (!loggedIn || !user)) {
             router.push('/', '/', { shallow: true })
         }
-    }, [fetching, loggedIn, user])
+    }, [fetching, loggedIn, router, user])
 
     const handleContentChange = (value: string) => {
         setContent(value)
