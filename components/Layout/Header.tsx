@@ -21,7 +21,7 @@ const Header = ({ darkMode, setDarkMode }: { darkMode: boolean, setDarkMode: () 
                 query: { search: debouncedSearch },
             }, `/?search=${debouncedSearch}`, { shallow: true })
         }
-    }, [debouncedSearch])
+    }, [debouncedSearch, router])
 
     const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
