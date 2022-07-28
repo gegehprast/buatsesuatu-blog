@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable no-undef */
 const _ = require('lodash')
 var flattenColorPalette = require('tailwindcss/lib/util/flattenColorPalette').default
