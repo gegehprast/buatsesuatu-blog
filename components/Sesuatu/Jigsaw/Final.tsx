@@ -91,7 +91,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
             fx.setText(text, texts[textIndex])
         } else {
             setHideText(true)
-            fetch('https://shallty-s3-indexer-qtf6f.ondigitalocean.app/forMyLove/willyou')
+            fetch('https://api-buatsesuatu.kyuun.id/formylove/willyou')
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [textIndex])
@@ -151,7 +151,7 @@ const TheElement: React.FC<{ show: boolean; texts: string[] }> = ({ show, texts 
     }
 
     const accept = () => {
-        fetch('https://shallty-s3-indexer-qtf6f.ondigitalocean.app/forMyLove/accept')
+        fetch('https://api-buatsesuatu.kyuun.id/formylove/accept')
     }
 
     return (
