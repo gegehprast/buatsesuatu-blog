@@ -1,9 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react'
-import { fill, loadImage } from './helper'
+import React, { useEffect, useRef } from 'react'
+import { fill, loadImage, sleep } from './helper'
 import { I_Image } from './Types'
+import JSZip from 'JSZip'
+import { saveAs } from 'file-saver'
 
 interface FlipperProps {
     images: I_Image[]
+}
+
+interface Download {
+    filename: string
+    url: string
 }
 
 function flipImage(ctx: CanvasRenderingContext2D, image: HTMLImageElement, width: number, height: number, flipH = false, flipV = false) {
@@ -16,13 +23,36 @@ function flipImage(ctx: CanvasRenderingContext2D, image: HTMLImageElement, width
     ctx.scale(scaleH, scaleV); // Set scale to flip the image
     ctx.drawImage(image, posX, posY, width, height); // draw the image
     ctx.restore(); // Restore the last saved state
-};
+}
+
+async function download(downloads: Download[]) {
+    if (downloads.length === 0) return
+    
+    const zip = new JSZip()
+    const images = zip.folder('images')
+
+    if (!images) return
+
+    for (let i = 0; i < downloads.length; i++) {
+        const download = downloads[i]
+        
+        var idx = download.url.indexOf('base64,') + ('base64,'.length)
+        var content = download.url.substring(idx)
+        
+        images.file(download.filename, content, { base64: true })
+    }
+    
+    zip.generateAsync({ type: 'blob' }).then(function (content) {
+        saveAs(content, 'images.zip');
+    })
+}
 
 const Flipper: React.FC<FlipperProps> = ({ images }) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
     useEffect(() => {
         async function flip() {
+            const downloads: Download[] = []
             const canvas = canvasRef.current
 
             if (!canvas) return
@@ -42,14 +72,14 @@ const Flipper: React.FC<FlipperProps> = ({ images }) => {
                 const img = await loadImage(image.objectUrl)
 
                 flipImage(context, img, context.canvas.width, context.canvas.height, true)
-                
-                const link = document.createElement('a')
-                link.download = image.file.name
-                link.href = canvas.toDataURL()
-                link.target = '_blank'
-                link.click()
-                link.remove()
+
+                downloads.push({
+                    filename: image.file.name,
+                    url: canvas.toDataURL()
+                })
             }
+
+            download(downloads)
         }
 
         flip()

@@ -43,3 +43,9 @@ export const getHeightAndWidthFromObjectUrl = async (objectUrl: string) => {
         width: img.width,
     } as ImageDimension
 }
+
+export const sleep = (ms: number) => new Promise<void>(resolve => {
+    setTimeout(() => {
+        resolve()
+    }, ms);
+})
