@@ -37,7 +37,7 @@ interface UpdateArticleParams extends StoreArticleParams {
 export const getArticles = ({ page, limit, search, tags, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
     Axios({
         method: 'GET',
-        url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
+        url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/`,
         params: { page, limit, search, tags  },
         cancelToken: cancelToken,
         headers: {
@@ -71,7 +71,7 @@ export const storeArticle = ({ title, desc, cover, caption, content, tags, statu
     return new Promise((resolve, reject) => {
         Axios({
             method: 'POST',
-            url: `${process.env.NEXT_PUBLIC_API_HOST}/articles`,
+            url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/`,
             data: { title, desc, cover, caption, content, tags, status },
             headers: {
                 Authorization: cookie.get('loggedinToken')
