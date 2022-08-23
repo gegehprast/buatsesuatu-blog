@@ -47,7 +47,7 @@ const Home: NextPage<Props> = ({ initial }) => {
         if (!loading) {
             setPageLoading(false)
         }
-    }, [loading])
+    }, [loading, setPageLoading])
 
     const handlePageChange = (pageNumber: number) => {
         if (page === pageNumber) {
