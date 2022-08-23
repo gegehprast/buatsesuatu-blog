@@ -35,21 +35,29 @@ interface UpdateArticleParams extends StoreArticleParams {
 
 /** Get paginated article list. */
 export const getArticles = ({ page, limit, search, tags, cancelToken, onSuccess, onError }: GetArticlesParams): void => {
+    let headers = {}
+
+    if (!isServer() && cookie.get('loggedinToken')) {
+        headers = {
+            Authorization: cookie.get('loggedinToken'),
+        }
+    }
+
     Axios({
         method: 'GET',
         url: `${process.env.NEXT_PUBLIC_API_HOST}/articles/`,
-        params: { page, limit, search, tags  },
+        params: { page, limit, search, tags },
         cancelToken: cancelToken,
-        headers: {
-            Authorization: !isServer() ? cookie.get('loggedinToken') : ''
-        }
-    }).then((res: AxiosResponse) => {
-        onSuccess(res)
-    }).catch((e: any) => {
-        if (Axios.isCancel(e)) return
-
-        onError(e)
+        headers: headers,
     })
+        .then((res: AxiosResponse) => {
+            onSuccess(res)
+        })
+        .catch((e: any) => {
+            if (Axios.isCancel(e)) return
+
+            onError(e)
+        })
 }
 
 /** Get one article by slug */
