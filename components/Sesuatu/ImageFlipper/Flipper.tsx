@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { fill, loadImage, sleep } from './helper'
 import { I_Image } from './Types'
-import JSZip from 'JSZip'
+import JSZip from 'jszip'
 import { saveAs } from 'file-saver'
 
 interface FlipperProps {
