@@ -29,7 +29,7 @@
     "react-placeholder": "^4.1.0",
     "react-simplemde-editor": "^4.1.2",
     "react-slugify": "^2.0.1",
-    "react-syntax-highlighter": "^15.4.3",
+    "react-syntax-highlighter": "^16.1.0",
     "remark-gfm": "^1.0.0",
     "sass": "^1.49.9"
   },
